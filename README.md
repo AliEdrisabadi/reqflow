@@ -1,5 +1,10 @@
 # ReqFlow
 
+
+![ReqFlow screenshot](/img.png)
+
+
+
 ReqFlow is a small tool to run **span annotation** on requirements using a **local LLM via Ollama**, render results to **HTML**, and optionally compute a basic **evaluation** (Precision/Recall/F1) against a gold JSON.
 
 It supports two modes:

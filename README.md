@@ -25,7 +25,7 @@ It also includes a **PyQt6 GUI** to:
 This README matches the folder names you currently use: `src/` and `prompts/`.
 
 ```
-llm4se_a3_studyroom/
+project/
   reqflow.py
   .env                      (optional)
   requirements.txt          (recommended)

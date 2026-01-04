@@ -11,236 +11,228 @@
     "items" : [
         {
             "id": "1",
-            "actor": "",
-            "action": "",
-            "system_response": "",
+            "actor": "Student",
+            "action": "Search study rooms",
+            "system_response": "Show study rooms with available seats based on search criteria.",
             "preconditions": [],
-            "constraints": [],
+            "constraints": ["Must filter by campus, date, and time range"],
             "exceptions": []
         },
         {
             "id": "2",
-            "actor": "student",
-            "action": "reserve a seat in a study room",
-            "system_response": "allow reservation for the choosen time slot",
-            "preconditions": [
-                "the study room has available seats",
-                "the student has a valid university ID",
-                "the student is logged into the reservation system"
-            ],
-            "constraints": [
-                "students can only reserve one seat per study room at a time"
-            ],
-            "exceptions": [
-                "the study room is fully booked for the selected time slot"
-            ]
-        },
-        {
-            "id": "3",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
-            "constraints": [],
+            "actor": "Student",
+            "action": "Reserve seats",
+            "system_response": "Allow reservation of one or more seats for the chosen time slot.",
+            "preconditions": ["Student is authenticated"],
+            "constraints": ["Limited to chosen time slot"],
             "exceptions": []
         },
         {
-            "id": "4",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
+            "id": "3",
+            "actor": "Student",
+            "action": "Attempt reservation with insufficient seats",
+            "system_response": "Reject the reservation and suggest the nearest available slots.",
+            "preconditions": ["Selected room has insufficient available seats"],
             "constraints": [],
+            "exceptions": ["Insufficient available seats"]
+        },
+        {
+            "id": "4",
+            "actor": "System",
+            "action": "Create reservation record",
+            "system_response": "Store room identifier, date, start time, end time, and number of seats.",
+            "preconditions": [],
+            "constraints": ["Include all mandatory booking fields"],
             "exceptions": []
         },
         {
             "id": "5",
-            "actor": "",
-            "action": "",
-            "system_response": "",
+            "actor": "Student",
+            "action": "Create a booking",
+            "system_response": "Validate and allow/prevent booking based on daily and weekly limits.",
             "preconditions": [],
-            "constraints": [],
-            "exceptions": []
+            "constraints": ["Max 2 active reservations per day", "Max 6 active reservations per week"],
+            "exceptions": ["Booking limit exceeded"]
         },
         {
             "id": "6",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
+            "actor": "Student",
+            "action": "Create booking for same time range",
+            "system_response": "Block the creation of the new booking.",
+            "preconditions": ["Student already has an active booking for the same time range"],
             "constraints": [],
-            "exceptions": []
+            "exceptions": ["Overlapping booking conflict"]
         },
         {
             "id": "7",
-            "actor": "",
-            "action": "",
-            "system_response": "",
+            "actor": "Student",
+            "action": "Cancel a booking",
+            "system_response": "Cancel the booking; mark as late-cancel if done less than 30 mins before start.",
             "preconditions": [],
-            "constraints": [],
-            "exceptions": []
+            "constraints": ["Cancel at least 30 minutes before start time"],
+            "exceptions": ["Late-cancel status applied"]
         },
         {
             "id": "8",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
-            "constraints": [],
+            "actor": "System",
+            "action": "Process cancellation",
+            "system_response": "Release reserved seats and notify waitlisted students.",
+            "preconditions": ["Reservation is canceled"],
+            "constraints": ["Immediate release of seats"],
             "exceptions": []
         },
         {
             "id": "9",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
+            "actor": "Student",
+            "action": "Join a waitlist",
+            "system_response": "Add student to the waitlist for the specific room and date.",
+            "preconditions": ["Room is fully booked"],
             "constraints": [],
             "exceptions": []
         },
         {
             "id": "10",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
-            "constraints": [],
+            "actor": "System",
+            "action": "Notify waitlist",
+            "system_response": "Offer slot to the first student on the list with a confirmation timer.",
+            "preconditions": ["Room becomes available"],
+            "constraints": ["10-minute confirmation window"],
             "exceptions": []
         },
         {
             "id": "11",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
+            "actor": "System",
+            "action": "Process waitlist timeout",
+            "system_response": "Offer the slot to the next student on the list.",
+            "preconditions": ["Current student does not confirm within 10 minutes"],
             "constraints": [],
-            "exceptions": []
+            "exceptions": ["Waitlist confirmation timeout"]
         },
         {
             "id": "12",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
-            "constraints": [],
+            "actor": "System",
+            "action": "Send confirmation",
+            "system_response": "Send email and in-app notification of successful booking.",
+            "preconditions": ["Reservation is successful"],
+            "constraints": ["Sent within 1 minute"],
             "exceptions": []
         },
         {
             "id": "13",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
-            "constraints": [],
+            "actor": "Student",
+            "action": "Check in for reservation",
+            "system_response": "Confirm and record the student's arrival.",
+            "preconditions": ["Valid reservation exists"],
+            "constraints": ["10 mins before to 15 mins after start time"],
             "exceptions": []
         },
         {
             "id": "14",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
+            "actor": "System",
+            "action": "Process missed check-in",
+            "system_response": "Automatically cancel booking and record a no-show.",
+            "preconditions": ["No check-in by 15 minutes after start time"],
             "constraints": [],
-            "exceptions": []
+            "exceptions": ["Automated no-show cancellation"]
         },
         {
             "id": "15",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
-            "constraints": [],
-            "exceptions": []
+            "actor": "System",
+            "action": "Apply penalty",
+            "system_response": "Suspend student booking privileges for 7 days.",
+            "preconditions": ["Three no-shows recorded within 30 days"],
+            "constraints": ["7-day suspension period"],
+            "exceptions": ["Privilege suspension"]
         },
         {
             "id": "16",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
+            "actor": "System",
+            "action": "Display room info",
+            "system_response": "Show capacity, equipment, and accessibility details.",
+            "preconditions": ["Before booking is initiated"],
             "constraints": [],
             "exceptions": []
         },
         {
             "id": "17",
-            "actor": "",
-            "action": "",
-            "system_response": "",
+            "actor": "Student",
+            "action": "Filter rooms",
+            "system_response": "Show rooms matching capacity and equipment requirements.",
             "preconditions": [],
-            "constraints": [],
+            "constraints": ["Minimum capacity", "Required equipment"],
             "exceptions": []
         },
         {
             "id": "18",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
+            "actor": "Student",
+            "action": "Request too many seats",
+            "system_response": "Prevent reservation and explain the capacity limit.",
+            "preconditions": ["Seats requested > seats available"],
             "constraints": [],
-            "exceptions": []
+            "exceptions": ["Capacity constraint error"]
         },
         {
             "id": "19",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
+            "actor": "Student",
+            "action": "Modify reservation",
+            "system_response": "Update booking details if rules allow.",
+            "preconditions": ["Must satisfy booking limits", "Must not overlap existing bookings"],
             "constraints": [],
-            "exceptions": []
+            "exceptions": ["Modification rejected"]
         },
         {
             "id": "20",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
-            "constraints": [],
+            "actor": "System",
+            "action": "Log audit data",
+            "system_response": "Log event details with timestamp and user ID.",
+            "preconditions": ["Booking event occurs (create, modify, cancel, no-show)"],
+            "constraints": ["Immutable log entry"],
             "exceptions": []
         },
         {
             "id": "21",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
+            "actor": "Administrative Staff",
+            "action": "Create/Define room",
+            "system_response": "Save room campus, hours, and max reservation length.",
+            "preconditions": ["Authorized staff access"],
             "constraints": [],
             "exceptions": []
         },
         {
             "id": "22",
-            "actor": "",
-            "action": "",
-            "system_response": "",
+            "actor": "System",
+            "action": "Enforce booking duration",
+            "system_response": "Restrict reservation duration to the room's maximum limit.",
             "preconditions": [],
-            "constraints": [],
-            "exceptions": []
+            "constraints": ["Max reservation length defined per room"],
+            "exceptions": ["Duration limit exceeded"]
         },
         {
             "id": "23",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
+            "actor": "Student",
+            "action": "Book outside hours",
+            "system_response": "Reject the request and display opening hours.",
+            "preconditions": ["Booking time outside room opening hours"],
             "constraints": [],
-            "exceptions": []
+            "exceptions": ["Operating hours violation"]
         },
         {
             "id": "24",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
+            "actor": "Staff",
+            "action": "Block room for maintenance",
+            "system_response": "Hide room from availability search during maintenance.",
+            "preconditions": ["Authorized staff access"],
             "constraints": [],
             "exceptions": []
         },
         {
             "id": "25",
-            "actor": "",
-            "action": "",
-            "system_response": "",
-            "preconditions": [],
-            "constraints": [],
-            "exceptions": []
+            "actor": "System",
+            "action": "Handle maintenance conflict",
+            "system_response": "Notify students and suggest alternative rooms.",
+            "preconditions": ["Maintenance block overlaps existing bookings"],
+            "constraints": ["Alternatives must be of similar capacity"],
+            "exceptions": ["No alternative rooms available"]
         },
         {
             "id": "26",

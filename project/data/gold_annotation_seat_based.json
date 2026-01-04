@@ -1,0 +1,471 @@
+{
+    "schema": [
+        "actor",
+        "action", 
+        "system_response",
+        "preconditions",
+        "constraints",
+        "exceptions"
+    ],
+    
+    "items" : [
+        {
+            "id": "1",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "2",
+            "actor": "student",
+            "action": "reserve a seat in a study room",
+            "system_response": "allow reservation for the choosen time slot",
+            "preconditions": [
+                "the study room has available seats",
+                "the student has a valid university ID",
+                "the student is logged into the reservation system"
+            ],
+            "constraints": [
+                "students can only reserve one seat per study room at a time"
+            ],
+            "exceptions": [
+                "the study room is fully booked for the selected time slot"
+            ]
+        },
+        {
+            "id": "3",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "4",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "5",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "6",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "7",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "8",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "9",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "10",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "11",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "12",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "13",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "14",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "15",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "16",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "17",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "18",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "19",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "20",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "21",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "22",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "23",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "24",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "25",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "26",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "27",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "28",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "29",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "30",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "31",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "32",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "33",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "34",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "35",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "36",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "37",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "38",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "39",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "40",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "41",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "42",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "43",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "44",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "45",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "46",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "47",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "48",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "49",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        },
+        {
+            "id": "50",
+            "actor": "",
+            "action": "",
+            "system_response": "",
+            "preconditions": [],
+            "constraints": [],
+            "exceptions": []
+        }
+    ]
+}

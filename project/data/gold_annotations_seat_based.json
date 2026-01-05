@@ -389,75 +389,75 @@
         },
         {
             "id": "43",
-            "actor": "Student",
-            "action": "Apply accessibility filters",
-            "system_response": "Display only rooms/seats matching the selected accessibility criteria.",
-            "preconditions": ["Accessibility metadata is present in the database"],
-            "constraints": ["Results must strictly match active filters"],
-            "exceptions": ["No rooms/seats matching the selected accessibility criteria"]
+            "actor": "System",
+            "action": "Display room location details",
+            "system_response": "Display building, floor, and a link to the room floor plan before booking confirmation.",
+            "preconditions": ["Before booking is confirmed"],
+            "constraints": ["Must display building", "Must display floor", "Must provide floor plan link"],
+            "exceptions": []
         },
         {
             "id": "44",
             "actor": "Administrative Staff",
-            "action": "Export booking data",
-            "system_response": "Generate a downloadable file (CSV or Excel) for the selected month.",
-            "preconditions": ["Authenticated staff with admin privileges"],
-            "constraints": ["Data must be available in CSV or Excel format", "Data must be available for the selected month"],
-            "exceptions": ["Data not available for the selected month"]
+            "action": "Define cleaning buffer time",
+            "system_response": "Save cleaning buffer time for the room and prevent bookings that violate the buffer period.",
+            "preconditions": ["Authorized staff access"],
+            "constraints": ["Buffer time must be defined per room", "System must prevent bookings that violate the buffer"],
+            "exceptions": []
         },
         {
             "id": "45",
             "actor": "System",
-            "action": "Release expired reservations",
-            "system_response": "Cancel the booking and mark the seat as 'Available' immediately.",
-            "preconditions": ["No check-in recorded 15 minutes after start time"],
-            "constraints": ["Seat must be released for others immediately"],
+            "action": "Automatically record check-in via occupancy sensors",
+            "system_response": "Automatically record check-in when occupancy is detected within the allowed check-in window.",
+            "preconditions": ["Occupancy sensors are available for the room", "Occupancy is detected within the allowed check-in window"],
+            "constraints": ["Must be within the allowed check-in window"],
             "exceptions": []
         },
         {
             "id": "46",
-            "actor": "Student",
-            "action": "Early check-out",
-            "system_response": "End active session and update status to 'Available' for the remaining time.",
-            "preconditions": ["Student has an active, checked-in reservation"],
-            "constraints": ["Availability update must be immediate"],
+            "actor": "System",
+            "action": "Maintain system uptime",
+            "system_response": "Maintain at least 99.5% monthly uptime, excluding scheduled maintenance windows announced in advance.",
+            "preconditions": [],
+            "constraints": ["At least 99.5% monthly uptime", "Excludes scheduled maintenance windows announced in advance"],
             "exceptions": []
         },
         {
             "id": "47",
             "actor": "System",
-            "action": "Maintain audit log",
-            "system_response": "Capture log entry for administrative changes.",
-            "preconditions": ["Admin performs write/delete operation"],
-            "constraints": ["Include timestamp and Admin ID", "Log must be immutable"],
-            "exceptions": []
+            "action": "Enforce API rate limiting",
+            "system_response": "Enforce rate limiting of 60 requests per minute per user on all public API endpoints; return HTTP 429 error with retry-after time if limit is exceeded.",
+            "preconditions": [],
+            "constraints": ["60 requests per minute per user limit", "Applies to all public API endpoints"],
+            "exceptions": ["Rate limit exceeded - HTTP 429 error returned"]
         },
         {
             "id": "48",
-            "actor": "Student",
-            "action": "View booking history",
-            "system_response": "Display list of past, current, and future reservations.",
-            "preconditions": ["Student is logged in"],
-            "constraints": ["Include all data for the current academic year"],
+            "actor": "Unauthenticated User",
+            "action": "View room availability and features",
+            "system_response": "Display room availability and room features while hiding personal booking details and user identifiers.",
+            "preconditions": [],
+            "constraints": ["Must hide personal booking details", "Must hide user identifiers"],
             "exceptions": []
         },
         {
             "id": "49",
-            "actor": "Administrative Staff",
-            "action": "Emergency override",
-            "system_response": "Cancel existing bookings and send automated notifications.",
-            "preconditions": ["Emergency situation identified (maintenance/security)"],
-            "constraints": ["Notification must be sent automatically upon cancellation"],
+            "actor": "System",
+            "action": "Enforce access control and audit logging",
+            "system_response": "Require role-based access control for staff actions that change system state and record them in an immutable audit log.",
+            "preconditions": [],
+            "constraints": ["Role-based access control required", "Audit log must be immutable"],
             "exceptions": []
         },
         {
             "id": "50",
             "actor": "System",
-            "action": "Automated backups/restoration",
-            "system_response": "Execute daily backups and provide recovery mechanism.",
-            "preconditions": ["For restoration: System failure has occurred"],
-            "constraints": ["Backup every 24 hours", "Restore within 4 hours"],
-            "exceptions": ["Catastrophic hardware failure"]
+            "action": "Handle room occupancy conflict",
+            "system_response": "Create a priority ticket for staff and offer alternative rooms of similar capacity when available.",
+            "preconditions": ["Student reports that a booked room is occupied by others at the start time"],
+            "constraints": ["Priority ticket must be created", "Alternative rooms must be of similar capacity", "Alternatives only offered when available"],
+            "exceptions": []
         }
     ]
 }

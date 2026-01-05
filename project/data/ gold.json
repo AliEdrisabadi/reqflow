@@ -1,463 +1,2228 @@
 {
-    "schema": [
-        "actor",
-        "action", 
-        "system_response",
-        "preconditions",
-        "constraints",
-        "exceptions"
-    ],
-    
-    "items" : [
+  "schema": [
+    "Main_actor",
+    "Entity",
+    "Action",
+    "System_response",
+    "Condition",
+    "Precondition",
+    "Constraint",
+    "Exception"
+  ],
+  "items": [
+    {
+      "id": 1,
+      "text": "Student shall Search study rooms. The system shall Show study rooms with available seats based on search criteria. Constraints: Must filter by campus, date, and time range.",
+      "spans": [
         {
-            "id": "1",
-            "actor": "Student",
-            "action": "Search study rooms",
-            "system_response": "Show study rooms with available seats based on search criteria.",
-            "preconditions": [],
-            "constraints": ["Must filter by campus, date, and time range"],
-            "exceptions": []
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 7,
+          "text": "Student"
         },
         {
-            "id": "2",
-            "actor": "Student",
-            "action": "Reserve seats",
-            "system_response": "Allow reservation of one or more seats for the chosen time slot.",
-            "preconditions": ["Student is authenticated"],
-            "constraints": ["Limited to chosen time slot"],
-            "exceptions": []
+          "tag": "Action",
+          "start": 14,
+          "end": 32,
+          "text": "Search study rooms"
         },
         {
-            "id": "3",
-            "actor": "Student",
-            "action": "Attempt reservation with insufficient seats",
-            "system_response": "Reject the reservation and suggest the nearest available slots.",
-            "preconditions": ["Selected room has insufficient available seats"],
-            "constraints": [],
-            "exceptions": ["Insufficient available seats"]
+          "tag": "Entity",
+          "start": 21,
+          "end": 32,
+          "text": "study rooms"
         },
         {
-            "id": "4",
-            "actor": "System",
-            "action": "Create reservation record",
-            "system_response": "Store room identifier, date, start time, end time, and number of seats.",
-            "preconditions": [],
-            "constraints": ["Include all mandatory booking fields"],
-            "exceptions": []
+          "tag": "System_response",
+          "start": 51,
+          "end": 114,
+          "text": "Show study rooms with available seats based on search criteria."
         },
         {
-            "id": "5",
-            "actor": "Student",
-            "action": "Create a booking",
-            "system_response": "Validate and allow/prevent booking based on daily and weekly limits.",
-            "preconditions": [],
-            "constraints": ["Max 2 active reservations per day", "Max 6 active reservations per week"],
-            "exceptions": ["Booking limit exceeded"]
-        },
-        {
-            "id": "6",
-            "actor": "Student",
-            "action": "Create booking for same time range",
-            "system_response": "Block the creation of the new booking.",
-            "preconditions": ["Student already has an active booking for the same time range"],
-            "constraints": [],
-            "exceptions": ["Overlapping booking conflict"]
-        },
-        {
-            "id": "7",
-            "actor": "Student",
-            "action": "Cancel a booking",
-            "system_response": "Cancel the booking; mark as late-cancel if done less than 30 mins before start.",
-            "preconditions": [],
-            "constraints": ["Cancel at least 30 minutes before start time"],
-            "exceptions": ["Late-cancel status applied"]
-        },
-        {
-            "id": "8",
-            "actor": "System",
-            "action": "Process cancellation",
-            "system_response": "Release reserved seats and notify waitlisted students.",
-            "preconditions": ["Reservation is canceled"],
-            "constraints": ["Immediate release of seats"],
-            "exceptions": []
-        },
-        {
-            "id": "9",
-            "actor": "Student",
-            "action": "Join a waitlist",
-            "system_response": "Add student to the waitlist for the specific room and date.",
-            "preconditions": ["Room is fully booked"],
-            "constraints": [],
-            "exceptions": []
-        },
-        {
-            "id": "10",
-            "actor": "System",
-            "action": "Notify waitlist",
-            "system_response": "Offer slot to the first student on the list with a confirmation timer.",
-            "preconditions": ["Room becomes available"],
-            "constraints": ["10-minute confirmation window"],
-            "exceptions": []
-        },
-        {
-            "id": "11",
-            "actor": "System",
-            "action": "Process waitlist timeout",
-            "system_response": "Offer the slot to the next student on the list.",
-            "preconditions": ["Current student does not confirm within 10 minutes"],
-            "constraints": [],
-            "exceptions": ["Waitlist confirmation timeout"]
-        },
-        {
-            "id": "12",
-            "actor": "System",
-            "action": "Send confirmation",
-            "system_response": "Send email and in-app notification of successful booking.",
-            "preconditions": ["Reservation is successful"],
-            "constraints": ["Sent within 1 minute"],
-            "exceptions": []
-        },
-        {
-            "id": "13",
-            "actor": "Student",
-            "action": "Check in for reservation",
-            "system_response": "Confirm and record the student's arrival.",
-            "preconditions": ["Valid reservation exists"],
-            "constraints": ["10 mins before to 15 mins after start time"],
-            "exceptions": []
-        },
-        {
-            "id": "14",
-            "actor": "System",
-            "action": "Process missed check-in",
-            "system_response": "Automatically cancel booking and record a no-show.",
-            "preconditions": ["No check-in by 15 minutes after start time"],
-            "constraints": [],
-            "exceptions": ["Automated no-show cancellation"]
-        },
-        {
-            "id": "15",
-            "actor": "System",
-            "action": "Apply penalty",
-            "system_response": "Suspend student booking privileges for 7 days.",
-            "preconditions": ["Three no-shows recorded within 30 days"],
-            "constraints": ["7-day suspension period"],
-            "exceptions": ["Privilege suspension"]
-        },
-        {
-            "id": "16",
-            "actor": "System",
-            "action": "Display room info",
-            "system_response": "Show capacity, equipment, and accessibility details.",
-            "preconditions": ["Before booking is initiated"],
-            "constraints": [],
-            "exceptions": []
-        },
-        {
-            "id": "17",
-            "actor": "Student",
-            "action": "Filter rooms",
-            "system_response": "Show rooms matching capacity and equipment requirements.",
-            "preconditions": [],
-            "constraints": ["Minimum capacity", "Required equipment"],
-            "exceptions": []
-        },
-        {
-            "id": "18",
-            "actor": "Student",
-            "action": "Request too many seats",
-            "system_response": "Prevent reservation and explain the capacity limit.",
-            "preconditions": ["Seats requested > seats available"],
-            "constraints": [],
-            "exceptions": ["Capacity constraint error"]
-        },
-        {
-            "id": "19",
-            "actor": "Student",
-            "action": "Modify reservation",
-            "system_response": "Update booking details if rules allow.",
-            "preconditions": ["Must satisfy booking limits", "Must not overlap existing bookings"],
-            "constraints": [],
-            "exceptions": ["Modification rejected"]
-        },
-        {
-            "id": "20",
-            "actor": "System",
-            "action": "Log audit data",
-            "system_response": "Log event details with timestamp and user ID.",
-            "preconditions": ["Booking event occurs (create, modify, cancel, no-show)"],
-            "constraints": ["Immutable log entry"],
-            "exceptions": []
-        },
-        {
-            "id": "21",
-            "actor": "Administrative Staff",
-            "action": "Create/Define room",
-            "system_response": "Save room campus, hours, and max reservation length.",
-            "preconditions": ["Authorized staff access"],
-            "constraints": [],
-            "exceptions": []
-        },
-        {
-            "id": "22",
-            "actor": "System",
-            "action": "Enforce booking duration",
-            "system_response": "Restrict reservation duration to the room's maximum limit.",
-            "preconditions": [],
-            "constraints": ["Max reservation length defined per room"],
-            "exceptions": ["Duration limit exceeded"]
-        },
-        {
-            "id": "23",
-            "actor": "Student",
-            "action": "Book outside hours",
-            "system_response": "Reject the request and display opening hours.",
-            "preconditions": ["Booking time outside room opening hours"],
-            "constraints": [],
-            "exceptions": ["Operating hours violation"]
-        },
-        {
-            "id": "24",
-            "actor": "Staff",
-            "action": "Block room for maintenance",
-            "system_response": "Hide room from availability search during maintenance.",
-            "preconditions": ["Authorized staff access"],
-            "constraints": [],
-            "exceptions": []
-        },
-        {
-            "id": "25",
-            "actor": "System",
-            "action": "Handle maintenance conflict",
-            "system_response": "Notify students and suggest alternative rooms.",
-            "preconditions": ["Maintenance block overlaps existing bookings"],
-            "constraints": ["Alternatives must be of similar capacity"],
-            "exceptions": ["No alternative rooms available"]
-        },
-        {
-            "id": "26",
-            "actor": "Student",
-            "action": "Create group booking",
-            "system_response": "Send invitations to all group members; allow them to accept or decline.",
-            "preconditions": ["Room type is designated for groups"],
-            "constraints": ["At least 3 members must be invited"],
-            "exceptions": []
-        },
-        {
-            "id": "27",
-            "actor": "System",
-            "action": "Monitor group acceptance",
-            "system_response": "Prompt organizer student to confirm or cancel the booking.",
-            "preconditions": ["Fewer than 50% of invitees have accepted", "Current time is 2 hours before start"],
-            "constraints": ["Notification must be sent to the organizer"],
-            "exceptions": []
-        },
-        {
-            "id": "28",
-            "actor": "Student",
-            "action": "Remove invited student",
-            "system_response": "Remove student from the group booking and notify them of the change.",
-            "preconditions": ["Action performed before reservation start time"],
-            "constraints": [],
-            "exceptions": []
-        },
-        {
-            "id": "29",
-            "actor": "Student",
-            "action": "View/Export bookings",
-            "system_response": "Provide a calendar view of reservations and allow iCalendar file export.",
-            "preconditions": ["Student is authenticated"],
-            "constraints": ["Export must be compatible with iCalendar (.ics) specification"],
-            "exceptions": []
-        },
-        {
-            "id": "30",
-            "actor": "Unauthenticated User",
-            "action": "View availability",
-            "system_response": "Provide read-only access to room availability and prompt for authentication",
-            "preconditions": [],
-            "constraints": ["university SSO authentication required for full access and booking functionality"],
-            "exceptions": []
-        },
-        {
-            "id": "31",
-            "actor": "System",
-            "action": "Protect personal data",
-            "system_response": "Encrypt student data at rest and use TLS for all transmissions.",
-            "preconditions": [],
-            "constraints": ["Applies to name, email, and student ID", "transmission must uses TLS"],
-            "exceptions": []
-        },
-        {
-            "id": "32",
-            "actor": "Student",
-            "action": "Report room issue",
-            "system_response": "Create a maintenance ticket and notify the administrative staff.",
-            "preconditions": ["Student is logged in"],
-            "constraints": ["Include Room ID and issue description"],
-            "exceptions": []
-        },
-        {
-            "id": "33",
-            "actor": "System",
-            "action": "Handle critical issue",
-            "system_response": "Automatically block the room from future availability.",
-            "preconditions": ["Issue is marked as 'Critical' by administrative staff"],
-            "constraints": ["Room remains hidden until status is updated to 'Resolved'"],
-            "exceptions": []
-        },
-        {
-            "id": "34",
-            "actor": "System",
-            "action": "Enforce fair-use acceptance",
-            "system_response": "Display the fair-use policy and block booking until accepted.",
-            "preconditions": ["User is making their first-ever booking"],
-            "constraints": ["Explicit acceptance (checkbox or button) required", "Policy must be displayed before booking"],
-            "exceptions": ["Policy not accepted"]
-        },
-        {
-            "id": "35",
-            "actor": "System",
-            "action": "Enforce fair-use policy",
-            "system_response": "Issue a warning to the student and escalate to privilege suspension if repeated.",
-            "preconditions": ["System detects a policy violation (e.g., automated scripts)"],
-            "constraints": [],
-            "exceptions": ["Privilege suspension applied"]
-        },
-        {
-            "id": "36",
-            "actor": "Administrative Staff",
-            "action": "Views room utilization reports",
-            "system_response": "Displays summaries of room usage frequency and identifies peak usage times.",
-            "preconditions": [],
-            "constraints": ["Report must cover exactly the previous 30 days of data"],
-            "exceptions": []
-        },
-        {
-            "id": "37",
-            "actor": "System",
-            "action": "Process search queries",
-            "system_response": "Executes search and returns results to the user.",
-            "preconditions": ["Normal system load conditions"],
-            "constraints": ["Response time ≤ 2 seconds for 95% of requests"],
-            "exceptions": []
-        },
-        {
-            "id": "38",
-            "actor": "System",
-            "action": "Manage notification failure",
-            "system_response": "Queue outgoing notifications and attempt redelivery.",
-            "preconditions": ["Internal or external notification service is unavailable"],
-            "constraints": ["Retry for up to 24 hours", "Ensure zero data loss for alerts"],
-            "exceptions": ["Notification service failure"]
-        },
-        {
-            "id": "39",
-            "actor": "User",
-            "action": "Switch language",
-            "system_response": "Update all UI labels, navigation, and messages to selected language.",
-            "preconditions": [],
-            "constraints": ["Must support English and Italian at a minimum"],
-            "exceptions": []
-        },
-        {
-            "id": "40",
-            "actor": "System",
-            "action": "Handle concurrent requests",
-            "system_response": "Perform atomic allocation or return conflict error.",
-            "preconditions": ["Simultaneous requests for same seats", "Insufficient capacity"],
-            "constraints": ["Room capacity must never be exceeded","Seat allocation must be atomic"],
-            "exceptions": ["Reservation conflict error"]
-        },
-        {
-            "id": "41",
-            "actor": "Student",
-            "action": "Create recurring reservation",
-            "system_response": "Generate a series of weekly reservations for up to 4 weeks.",
-            "preconditions": ["Each occurrence satisfies booking limits","Each occurrence satisfies opening hours"],
-            "constraints": ["Maximum of 4 consecutive weeks"],
-            "exceptions": []
-        },
-        {
-            "id": "42",
-            "actor": "System",
-            "action": "Handle late check-in",
-            "system_response": "Record check-in while maintaining the original end time.",
-            "preconditions": ["Student checks in after start time but within 15 minutes"],
-            "constraints": ["No duration extension permitted", "Check-in must be recorded within 15 minutes past start time"],
-            "exceptions": []
-        },
-        {
-            "id": "43",
-            "actor": "System",
-            "action": "Display room location details",
-            "system_response": "Display building, floor, and a link to the room floor plan before booking confirmation.",
-            "preconditions": ["Before booking is confirmed"],
-            "constraints": ["Must display building", "Must display floor", "Must provide floor plan link"],
-            "exceptions": []
-        },
-        {
-            "id": "44",
-            "actor": "Administrative Staff",
-            "action": "Define cleaning buffer time",
-            "system_response": "Save cleaning buffer time for the room and prevent bookings that violate the buffer period.",
-            "preconditions": ["Authorized staff access"],
-            "constraints": ["Buffer time must be defined per room", "System must prevent bookings that violate the buffer"],
-            "exceptions": []
-        },
-        {
-            "id": "45",
-            "actor": "System",
-            "action": "Automatically record check-in via occupancy sensors",
-            "system_response": "Automatically record check-in when occupancy is detected within the allowed check-in window.",
-            "preconditions": ["Occupancy sensors are available for the room", "Occupancy is detected within the allowed check-in window"],
-            "constraints": ["Must be within the allowed check-in window"],
-            "exceptions": []
-        },
-        {
-            "id": "46",
-            "actor": "System",
-            "action": "Maintain system uptime",
-            "system_response": "Maintain at least 99.5% monthly uptime, excluding scheduled maintenance windows announced in advance.",
-            "preconditions": [],
-            "constraints": ["At least 99.5% monthly uptime", "Excludes scheduled maintenance windows announced in advance"],
-            "exceptions": []
-        },
-        {
-            "id": "47",
-            "actor": "System",
-            "action": "Enforce API rate limiting",
-            "system_response": "Enforce rate limiting of 60 requests per minute per user on all public API endpoints; return HTTP 429 error with retry-after time if limit is exceeded.",
-            "preconditions": [],
-            "constraints": ["60 requests per minute per user limit", "Applies to all public API endpoints"],
-            "exceptions": ["Rate limit exceeded - HTTP 429 error returned"]
-        },
-        {
-            "id": "48",
-            "actor": "Unauthenticated User",
-            "action": "View room availability and features",
-            "system_response": "Display room availability and room features while hiding personal booking details and user identifiers.",
-            "preconditions": [],
-            "constraints": ["Must hide personal booking details", "Must hide user identifiers"],
-            "exceptions": []
-        },
-        {
-            "id": "49",
-            "actor": "System",
-            "action": "Enforce access control and audit logging",
-            "system_response": "Require role-based access control for staff actions that change system state and record them in an immutable audit log.",
-            "preconditions": [],
-            "constraints": ["Role-based access control required", "Audit log must be immutable"],
-            "exceptions": []
-        },
-        {
-            "id": "50",
-            "actor": "System",
-            "action": "Handle room occupancy conflict",
-            "system_response": "Create a priority ticket for staff and offer alternative rooms of similar capacity when available.",
-            "preconditions": ["Student reports that a booked room is occupied by others at the start time"],
-            "constraints": ["Priority ticket must be created", "Alternative rooms must be of similar capacity", "Alternatives only offered when available"],
-            "exceptions": []
+          "tag": "Constraint",
+          "start": 128,
+          "end": 171,
+          "text": "Must filter by campus, date, and time range"
         }
-    ]
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Student shall Reserve seats. The system shall Allow reservation of one or more seats for the chosen time slot. Preconditions: Student is authenticated. Constraints: Limited to chosen time slot.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 7,
+          "text": "Student"
+        },
+        {
+          "tag": "Action",
+          "start": 14,
+          "end": 27,
+          "text": "Reserve seats"
+        },
+        {
+          "tag": "Entity",
+          "start": 22,
+          "end": 27,
+          "text": "seats"
+        },
+        {
+          "tag": "System_response",
+          "start": 46,
+          "end": 110,
+          "text": "Allow reservation of one or more seats for the chosen time slot."
+        },
+        {
+          "tag": "Precondition",
+          "start": 126,
+          "end": 150,
+          "text": "Student is authenticated"
+        },
+        {
+          "tag": "Constraint",
+          "start": 165,
+          "end": 192,
+          "text": "Limited to chosen time slot"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "Student shall Attempt reservation with insufficient seats. The system shall Reject the reservation and suggest the nearest available slots. Preconditions: Selected room has insufficient available seats. Exceptions: Insufficient available seats.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 7,
+          "text": "Student"
+        },
+        {
+          "tag": "Action",
+          "start": 14,
+          "end": 57,
+          "text": "Attempt reservation with insufficient seats"
+        },
+        {
+          "tag": "Entity",
+          "start": 22,
+          "end": 57,
+          "text": "reservation with insufficient seats"
+        },
+        {
+          "tag": "System_response",
+          "start": 76,
+          "end": 139,
+          "text": "Reject the reservation and suggest the nearest available slots."
+        },
+        {
+          "tag": "Precondition",
+          "start": 155,
+          "end": 201,
+          "text": "Selected room has insufficient available seats"
+        },
+        {
+          "tag": "Exception",
+          "start": 215,
+          "end": 243,
+          "text": "Insufficient available seats"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "System shall Create reservation record. The system shall Store room identifier, date, start time, end time, and number of seats. Constraints: Include all mandatory booking fields.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 38,
+          "text": "Create reservation record"
+        },
+        {
+          "tag": "Entity",
+          "start": 20,
+          "end": 38,
+          "text": "reservation record"
+        },
+        {
+          "tag": "System_response",
+          "start": 57,
+          "end": 128,
+          "text": "Store room identifier, date, start time, end time, and number of seats."
+        },
+        {
+          "tag": "Constraint",
+          "start": 142,
+          "end": 178,
+          "text": "Include all mandatory booking fields"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "Student shall Create a booking. The system shall Validate and allow/prevent booking based on daily and weekly limits. Constraints: Max 2 active reservations per day; Max 6 active reservations per week. Exceptions: Booking limit exceeded.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 7,
+          "text": "Student"
+        },
+        {
+          "tag": "Action",
+          "start": 14,
+          "end": 30,
+          "text": "Create a booking"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 30,
+          "text": "a booking"
+        },
+        {
+          "tag": "System_response",
+          "start": 49,
+          "end": 117,
+          "text": "Validate and allow/prevent booking based on daily and weekly limits."
+        },
+        {
+          "tag": "Constraint",
+          "start": 131,
+          "end": 164,
+          "text": "Max 2 active reservations per day"
+        },
+        {
+          "tag": "Constraint",
+          "start": 166,
+          "end": 200,
+          "text": "Max 6 active reservations per week"
+        },
+        {
+          "tag": "Exception",
+          "start": 214,
+          "end": 236,
+          "text": "Booking limit exceeded"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "Student shall Create booking for same time range. The system shall Block the creation of the new booking. Preconditions: Student already has an active booking for the same time range. Exceptions: Overlapping booking conflict.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 7,
+          "text": "Student"
+        },
+        {
+          "tag": "Action",
+          "start": 14,
+          "end": 48,
+          "text": "Create booking for same time range"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 48,
+          "text": "booking for same time range"
+        },
+        {
+          "tag": "System_response",
+          "start": 67,
+          "end": 105,
+          "text": "Block the creation of the new booking."
+        },
+        {
+          "tag": "Precondition",
+          "start": 121,
+          "end": 182,
+          "text": "Student already has an active booking for the same time range"
+        },
+        {
+          "tag": "Exception",
+          "start": 196,
+          "end": 224,
+          "text": "Overlapping booking conflict"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "Student shall Cancel a booking. The system shall Cancel the booking; mark as late-cancel if done less than 30 mins before start. Constraints: Cancel at least 30 minutes before start time. Exceptions: Late-cancel status applied.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 7,
+          "text": "Student"
+        },
+        {
+          "tag": "Action",
+          "start": 14,
+          "end": 30,
+          "text": "Cancel a booking"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 30,
+          "text": "a booking"
+        },
+        {
+          "tag": "System_response",
+          "start": 49,
+          "end": 128,
+          "text": "Cancel the booking; mark as late-cancel if done less than 30 mins before start."
+        },
+        {
+          "tag": "Condition",
+          "start": 89,
+          "end": 128,
+          "text": "if done less than 30 mins before start."
+        },
+        {
+          "tag": "Constraint",
+          "start": 142,
+          "end": 186,
+          "text": "Cancel at least 30 minutes before start time"
+        },
+        {
+          "tag": "Exception",
+          "start": 200,
+          "end": 226,
+          "text": "Late-cancel status applied"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "System shall Process cancellation. The system shall Release reserved seats and notify waitlisted students. Preconditions: Reservation is canceled. Constraints: Immediate release of seats.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 33,
+          "text": "Process cancellation"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 33,
+          "text": "cancellation"
+        },
+        {
+          "tag": "System_response",
+          "start": 52,
+          "end": 106,
+          "text": "Release reserved seats and notify waitlisted students."
+        },
+        {
+          "tag": "Precondition",
+          "start": 122,
+          "end": 145,
+          "text": "Reservation is canceled"
+        },
+        {
+          "tag": "Constraint",
+          "start": 160,
+          "end": 186,
+          "text": "Immediate release of seats"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "Student shall Join a waitlist. The system shall Add student to the waitlist for the specific room and date. Preconditions: Room is fully booked.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 7,
+          "text": "Student"
+        },
+        {
+          "tag": "Action",
+          "start": 14,
+          "end": 29,
+          "text": "Join a waitlist"
+        },
+        {
+          "tag": "Entity",
+          "start": 19,
+          "end": 29,
+          "text": "a waitlist"
+        },
+        {
+          "tag": "System_response",
+          "start": 48,
+          "end": 107,
+          "text": "Add student to the waitlist for the specific room and date."
+        },
+        {
+          "tag": "Precondition",
+          "start": 123,
+          "end": 143,
+          "text": "Room is fully booked"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "System shall Notify waitlist. The system shall Offer slot to the first student on the list with a confirmation timer. Preconditions: Room becomes available. Constraints: 10-minute confirmation window.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 28,
+          "text": "Notify waitlist"
+        },
+        {
+          "tag": "Entity",
+          "start": 20,
+          "end": 28,
+          "text": "waitlist"
+        },
+        {
+          "tag": "System_response",
+          "start": 47,
+          "end": 117,
+          "text": "Offer slot to the first student on the list with a confirmation timer."
+        },
+        {
+          "tag": "Precondition",
+          "start": 133,
+          "end": 155,
+          "text": "Room becomes available"
+        },
+        {
+          "tag": "Constraint",
+          "start": 170,
+          "end": 199,
+          "text": "10-minute confirmation window"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "text": "System shall Process waitlist timeout. The system shall Offer the slot to the next student on the list. Preconditions: Current student does not confirm within 10 minutes. Exceptions: Waitlist confirmation timeout.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 37,
+          "text": "Process waitlist timeout"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 37,
+          "text": "waitlist timeout"
+        },
+        {
+          "tag": "System_response",
+          "start": 56,
+          "end": 103,
+          "text": "Offer the slot to the next student on the list."
+        },
+        {
+          "tag": "Precondition",
+          "start": 119,
+          "end": 169,
+          "text": "Current student does not confirm within 10 minutes"
+        },
+        {
+          "tag": "Exception",
+          "start": 183,
+          "end": 212,
+          "text": "Waitlist confirmation timeout"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "text": "System shall Send confirmation. The system shall Send email and in-app notification of successful booking. Preconditions: Reservation is successful. Constraints: Sent within 1 minute.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 30,
+          "text": "Send confirmation"
+        },
+        {
+          "tag": "Entity",
+          "start": 18,
+          "end": 30,
+          "text": "confirmation"
+        },
+        {
+          "tag": "System_response",
+          "start": 49,
+          "end": 106,
+          "text": "Send email and in-app notification of successful booking."
+        },
+        {
+          "tag": "Precondition",
+          "start": 122,
+          "end": 147,
+          "text": "Reservation is successful"
+        },
+        {
+          "tag": "Constraint",
+          "start": 162,
+          "end": 182,
+          "text": "Sent within 1 minute"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "text": "Student shall Check in for reservation. The system shall Confirm and record the student's arrival. Preconditions: Valid reservation exists. Constraints: 10 mins before to 15 mins after start time.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 7,
+          "text": "Student"
+        },
+        {
+          "tag": "Action",
+          "start": 14,
+          "end": 38,
+          "text": "Check in for reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 20,
+          "end": 38,
+          "text": "in for reservation"
+        },
+        {
+          "tag": "System_response",
+          "start": 57,
+          "end": 98,
+          "text": "Confirm and record the student's arrival."
+        },
+        {
+          "tag": "Precondition",
+          "start": 114,
+          "end": 138,
+          "text": "Valid reservation exists"
+        },
+        {
+          "tag": "Constraint",
+          "start": 153,
+          "end": 195,
+          "text": "10 mins before to 15 mins after start time"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "text": "System shall Process missed check-in. The system shall Automatically cancel booking and record a no-show. Preconditions: No check-in by 15 minutes after start time. Exceptions: Automated no-show cancellation.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 36,
+          "text": "Process missed check-in"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 36,
+          "text": "missed check-in"
+        },
+        {
+          "tag": "System_response",
+          "start": 55,
+          "end": 105,
+          "text": "Automatically cancel booking and record a no-show."
+        },
+        {
+          "tag": "Precondition",
+          "start": 121,
+          "end": 163,
+          "text": "No check-in by 15 minutes after start time"
+        },
+        {
+          "tag": "Exception",
+          "start": 177,
+          "end": 207,
+          "text": "Automated no-show cancellation"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "text": "System shall Apply penalty. The system shall Suspend student booking privileges for 7 days. Preconditions: Three no-shows recorded within 30 days. Constraints: 7-day suspension period. Exceptions: Privilege suspension.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 26,
+          "text": "Apply penalty"
+        },
+        {
+          "tag": "Entity",
+          "start": 19,
+          "end": 26,
+          "text": "penalty"
+        },
+        {
+          "tag": "System_response",
+          "start": 45,
+          "end": 91,
+          "text": "Suspend student booking privileges for 7 days."
+        },
+        {
+          "tag": "Precondition",
+          "start": 107,
+          "end": 145,
+          "text": "Three no-shows recorded within 30 days"
+        },
+        {
+          "tag": "Constraint",
+          "start": 160,
+          "end": 183,
+          "text": "7-day suspension period"
+        },
+        {
+          "tag": "Exception",
+          "start": 197,
+          "end": 217,
+          "text": "Privilege suspension"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "text": "System shall Display room info. The system shall Show capacity, equipment, and accessibility details. Preconditions: Before booking is initiated.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 30,
+          "text": "Display room info"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 30,
+          "text": "room info"
+        },
+        {
+          "tag": "System_response",
+          "start": 49,
+          "end": 101,
+          "text": "Show capacity, equipment, and accessibility details."
+        },
+        {
+          "tag": "Precondition",
+          "start": 117,
+          "end": 144,
+          "text": "Before booking is initiated"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "text": "Student shall Filter rooms. The system shall Show rooms matching capacity and equipment requirements. Constraints: Minimum capacity; Required equipment.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 7,
+          "text": "Student"
+        },
+        {
+          "tag": "Action",
+          "start": 14,
+          "end": 26,
+          "text": "Filter rooms"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 26,
+          "text": "rooms"
+        },
+        {
+          "tag": "System_response",
+          "start": 45,
+          "end": 101,
+          "text": "Show rooms matching capacity and equipment requirements."
+        },
+        {
+          "tag": "Constraint",
+          "start": 115,
+          "end": 131,
+          "text": "Minimum capacity"
+        },
+        {
+          "tag": "Constraint",
+          "start": 133,
+          "end": 151,
+          "text": "Required equipment"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "text": "Student shall Request too many seats. The system shall Prevent reservation and explain the capacity limit. Preconditions: Seats requested > seats available. Exceptions: Capacity constraint error.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 7,
+          "text": "Student"
+        },
+        {
+          "tag": "Action",
+          "start": 14,
+          "end": 36,
+          "text": "Request too many seats"
+        },
+        {
+          "tag": "Entity",
+          "start": 22,
+          "end": 36,
+          "text": "too many seats"
+        },
+        {
+          "tag": "System_response",
+          "start": 55,
+          "end": 106,
+          "text": "Prevent reservation and explain the capacity limit."
+        },
+        {
+          "tag": "Precondition",
+          "start": 122,
+          "end": 155,
+          "text": "Seats requested > seats available"
+        },
+        {
+          "tag": "Exception",
+          "start": 169,
+          "end": 194,
+          "text": "Capacity constraint error"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "text": "Student shall Modify reservation. The system shall Update booking details if rules allow. Preconditions: Must satisfy booking limits; Must not overlap existing bookings. Exceptions: Modification rejected.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 7,
+          "text": "Student"
+        },
+        {
+          "tag": "Action",
+          "start": 14,
+          "end": 32,
+          "text": "Modify reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 32,
+          "text": "reservation"
+        },
+        {
+          "tag": "System_response",
+          "start": 51,
+          "end": 89,
+          "text": "Update booking details if rules allow."
+        },
+        {
+          "tag": "Condition",
+          "start": 74,
+          "end": 89,
+          "text": "if rules allow."
+        },
+        {
+          "tag": "Precondition",
+          "start": 105,
+          "end": 132,
+          "text": "Must satisfy booking limits"
+        },
+        {
+          "tag": "Precondition",
+          "start": 134,
+          "end": 168,
+          "text": "Must not overlap existing bookings"
+        },
+        {
+          "tag": "Exception",
+          "start": 182,
+          "end": 203,
+          "text": "Modification rejected"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "text": "System shall Log audit data. The system shall Log event details with timestamp and user ID. Preconditions: Booking event occurs (create, modify, cancel, no-show). Constraints: Immutable log entry.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 27,
+          "text": "Log audit data"
+        },
+        {
+          "tag": "Entity",
+          "start": 17,
+          "end": 27,
+          "text": "audit data"
+        },
+        {
+          "tag": "System_response",
+          "start": 46,
+          "end": 91,
+          "text": "Log event details with timestamp and user ID."
+        },
+        {
+          "tag": "Precondition",
+          "start": 107,
+          "end": 161,
+          "text": "Booking event occurs (create, modify, cancel, no-show)"
+        },
+        {
+          "tag": "Constraint",
+          "start": 176,
+          "end": 195,
+          "text": "Immutable log entry"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "text": "Administrative Staff shall Create/Define room. The system shall Save room campus, hours, and max reservation length. Preconditions: Authorized staff access.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 20,
+          "text": "Administrative Staff"
+        },
+        {
+          "tag": "Action",
+          "start": 27,
+          "end": 45,
+          "text": "Create/Define room"
+        },
+        {
+          "tag": "Entity",
+          "start": 41,
+          "end": 45,
+          "text": "room"
+        },
+        {
+          "tag": "System_response",
+          "start": 64,
+          "end": 116,
+          "text": "Save room campus, hours, and max reservation length."
+        },
+        {
+          "tag": "Precondition",
+          "start": 132,
+          "end": 155,
+          "text": "Authorized staff access"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "text": "System shall Enforce booking duration. The system shall Restrict reservation duration to the room's maximum limit. Constraints: Max reservation length defined per room. Exceptions: Duration limit exceeded.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 37,
+          "text": "Enforce booking duration"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 37,
+          "text": "booking duration"
+        },
+        {
+          "tag": "System_response",
+          "start": 56,
+          "end": 114,
+          "text": "Restrict reservation duration to the room's maximum limit."
+        },
+        {
+          "tag": "Constraint",
+          "start": 128,
+          "end": 167,
+          "text": "Max reservation length defined per room"
+        },
+        {
+          "tag": "Exception",
+          "start": 181,
+          "end": 204,
+          "text": "Duration limit exceeded"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "text": "Student shall Book outside hours. The system shall Reject the request and display opening hours. Preconditions: Booking time outside room opening hours. Exceptions: Operating hours violation.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 7,
+          "text": "Student"
+        },
+        {
+          "tag": "Action",
+          "start": 14,
+          "end": 32,
+          "text": "Book outside hours"
+        },
+        {
+          "tag": "Entity",
+          "start": 19,
+          "end": 32,
+          "text": "outside hours"
+        },
+        {
+          "tag": "System_response",
+          "start": 51,
+          "end": 96,
+          "text": "Reject the request and display opening hours."
+        },
+        {
+          "tag": "Precondition",
+          "start": 112,
+          "end": 151,
+          "text": "Booking time outside room opening hours"
+        },
+        {
+          "tag": "Exception",
+          "start": 165,
+          "end": 190,
+          "text": "Operating hours violation"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "text": "Staff shall Block room for maintenance. The system shall Hide room from availability search during maintenance. Preconditions: Authorized staff access.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 5,
+          "text": "Staff"
+        },
+        {
+          "tag": "Action",
+          "start": 12,
+          "end": 38,
+          "text": "Block room for maintenance"
+        },
+        {
+          "tag": "Entity",
+          "start": 18,
+          "end": 38,
+          "text": "room for maintenance"
+        },
+        {
+          "tag": "System_response",
+          "start": 57,
+          "end": 111,
+          "text": "Hide room from availability search during maintenance."
+        },
+        {
+          "tag": "Precondition",
+          "start": 127,
+          "end": 150,
+          "text": "Authorized staff access"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "text": "System shall Handle maintenance conflict. The system shall Notify students and suggest alternative rooms. Preconditions: Maintenance block overlaps existing bookings. Constraints: Alternatives must be of similar capacity. Exceptions: No alternative rooms available.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 40,
+          "text": "Handle maintenance conflict"
+        },
+        {
+          "tag": "Entity",
+          "start": 20,
+          "end": 40,
+          "text": "maintenance conflict"
+        },
+        {
+          "tag": "System_response",
+          "start": 59,
+          "end": 105,
+          "text": "Notify students and suggest alternative rooms."
+        },
+        {
+          "tag": "Precondition",
+          "start": 121,
+          "end": 165,
+          "text": "Maintenance block overlaps existing bookings"
+        },
+        {
+          "tag": "Constraint",
+          "start": 180,
+          "end": 220,
+          "text": "Alternatives must be of similar capacity"
+        },
+        {
+          "tag": "Exception",
+          "start": 234,
+          "end": 264,
+          "text": "No alternative rooms available"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "text": "Student shall Create group booking. The system shall Send invitations to all group members; allow them to accept or decline. Preconditions: Room type is designated for groups. Constraints: At least 3 members must be invited.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 7,
+          "text": "Student"
+        },
+        {
+          "tag": "Action",
+          "start": 14,
+          "end": 34,
+          "text": "Create group booking"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 34,
+          "text": "group booking"
+        },
+        {
+          "tag": "System_response",
+          "start": 53,
+          "end": 124,
+          "text": "Send invitations to all group members; allow them to accept or decline."
+        },
+        {
+          "tag": "Precondition",
+          "start": 140,
+          "end": 174,
+          "text": "Room type is designated for groups"
+        },
+        {
+          "tag": "Constraint",
+          "start": 189,
+          "end": 223,
+          "text": "At least 3 members must be invited"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "text": "System shall Monitor group acceptance. The system shall Prompt organizer student to confirm or cancel the booking. Preconditions: Fewer than 50% of invitees have accepted; Current time is 2 hours before start. Constraints: Notification must be sent to the organizer.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 37,
+          "text": "Monitor group acceptance"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 37,
+          "text": "group acceptance"
+        },
+        {
+          "tag": "System_response",
+          "start": 56,
+          "end": 114,
+          "text": "Prompt organizer student to confirm or cancel the booking."
+        },
+        {
+          "tag": "Precondition",
+          "start": 130,
+          "end": 170,
+          "text": "Fewer than 50% of invitees have accepted"
+        },
+        {
+          "tag": "Precondition",
+          "start": 172,
+          "end": 208,
+          "text": "Current time is 2 hours before start"
+        },
+        {
+          "tag": "Constraint",
+          "start": 223,
+          "end": 265,
+          "text": "Notification must be sent to the organizer"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "text": "Student shall Remove invited student. The system shall Remove student from the group booking and notify them of the change. Preconditions: Action performed before reservation start time.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 7,
+          "text": "Student"
+        },
+        {
+          "tag": "Action",
+          "start": 14,
+          "end": 36,
+          "text": "Remove invited student"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 36,
+          "text": "invited student"
+        },
+        {
+          "tag": "System_response",
+          "start": 55,
+          "end": 123,
+          "text": "Remove student from the group booking and notify them of the change."
+        },
+        {
+          "tag": "Precondition",
+          "start": 139,
+          "end": 185,
+          "text": "Action performed before reservation start time"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "text": "Student shall View/Export bookings. The system shall Provide a calendar view of reservations and allow iCalendar file export. Preconditions: Student is authenticated. Constraints: Export must be compatible with iCalendar (.ics) specification.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 7,
+          "text": "Student"
+        },
+        {
+          "tag": "Action",
+          "start": 14,
+          "end": 34,
+          "text": "View/Export bookings"
+        },
+        {
+          "tag": "Entity",
+          "start": 26,
+          "end": 34,
+          "text": "bookings"
+        },
+        {
+          "tag": "System_response",
+          "start": 53,
+          "end": 125,
+          "text": "Provide a calendar view of reservations and allow iCalendar file export."
+        },
+        {
+          "tag": "Precondition",
+          "start": 141,
+          "end": 165,
+          "text": "Student is authenticated"
+        },
+        {
+          "tag": "Constraint",
+          "start": 180,
+          "end": 241,
+          "text": "Export must be compatible with iCalendar (.ics) specification"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "text": "Unauthenticated User shall View availability. The system shall Provide read-only access to room availability and prompt for authentication. Constraints: university SSO authentication required for full access and booking functionality.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 20,
+          "text": "Unauthenticated User"
+        },
+        {
+          "tag": "Action",
+          "start": 27,
+          "end": 44,
+          "text": "View availability"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 44,
+          "text": "availability"
+        },
+        {
+          "tag": "System_response",
+          "start": 63,
+          "end": 138,
+          "text": "Provide read-only access to room availability and prompt for authentication"
+        },
+        {
+          "tag": "Constraint",
+          "start": 153,
+          "end": 233,
+          "text": "university SSO authentication required for full access and booking functionality"
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "text": "System shall Protect personal data. The system shall Encrypt student data at rest and use TLS for all transmissions. Constraints: Applies to name, email, and student ID; transmission must uses TLS.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 34,
+          "text": "Protect personal data"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 34,
+          "text": "personal data"
+        },
+        {
+          "tag": "System_response",
+          "start": 53,
+          "end": 116,
+          "text": "Encrypt student data at rest and use TLS for all transmissions."
+        },
+        {
+          "tag": "Constraint",
+          "start": 130,
+          "end": 168,
+          "text": "Applies to name, email, and student ID"
+        },
+        {
+          "tag": "Constraint",
+          "start": 170,
+          "end": 196,
+          "text": "transmission must uses TLS"
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "text": "Student shall Report room issue. The system shall Create a maintenance ticket and notify the administrative staff. Preconditions: Student is logged in. Constraints: Include Room ID and issue description.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 7,
+          "text": "Student"
+        },
+        {
+          "tag": "Action",
+          "start": 14,
+          "end": 31,
+          "text": "Report room issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 31,
+          "text": "room issue"
+        },
+        {
+          "tag": "System_response",
+          "start": 50,
+          "end": 114,
+          "text": "Create a maintenance ticket and notify the administrative staff."
+        },
+        {
+          "tag": "Precondition",
+          "start": 130,
+          "end": 150,
+          "text": "Student is logged in"
+        },
+        {
+          "tag": "Constraint",
+          "start": 165,
+          "end": 202,
+          "text": "Include Room ID and issue description"
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "text": "System shall Handle critical issue. The system shall Automatically block the room from future availability. Preconditions: Issue is marked as 'Critical' by administrative staff. Constraints: Room remains hidden until status is updated to 'Resolved'.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 34,
+          "text": "Handle critical issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 20,
+          "end": 34,
+          "text": "critical issue"
+        },
+        {
+          "tag": "System_response",
+          "start": 53,
+          "end": 107,
+          "text": "Automatically block the room from future availability."
+        },
+        {
+          "tag": "Precondition",
+          "start": 123,
+          "end": 176,
+          "text": "Issue is marked as 'Critical' by administrative staff"
+        },
+        {
+          "tag": "Constraint",
+          "start": 191,
+          "end": 248,
+          "text": "Room remains hidden until status is updated to 'Resolved'"
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "text": "System shall Enforce fair-use acceptance. The system shall Display the fair-use policy and block booking until accepted. Preconditions: User is making their first-ever booking. Constraints: Explicit acceptance (checkbox or button) required; Policy must be displayed before booking. Exceptions: Policy not accepted.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 40,
+          "text": "Enforce fair-use acceptance"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 40,
+          "text": "fair-use acceptance"
+        },
+        {
+          "tag": "System_response",
+          "start": 59,
+          "end": 120,
+          "text": "Display the fair-use policy and block booking until accepted."
+        },
+        {
+          "tag": "Precondition",
+          "start": 136,
+          "end": 175,
+          "text": "User is making their first-ever booking"
+        },
+        {
+          "tag": "Constraint",
+          "start": 190,
+          "end": 239,
+          "text": "Explicit acceptance (checkbox or button) required"
+        },
+        {
+          "tag": "Constraint",
+          "start": 241,
+          "end": 280,
+          "text": "Policy must be displayed before booking"
+        },
+        {
+          "tag": "Exception",
+          "start": 294,
+          "end": 313,
+          "text": "Policy not accepted"
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "text": "System shall Enforce fair-use policy. The system shall Issue a warning to the student and escalate to privilege suspension if repeated. Preconditions: System detects a policy violation (e.g., automated scripts). Exceptions: Privilege suspension applied.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 36,
+          "text": "Enforce fair-use policy"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 36,
+          "text": "fair-use policy"
+        },
+        {
+          "tag": "System_response",
+          "start": 55,
+          "end": 135,
+          "text": "Issue a warning to the student and escalate to privilege suspension if repeated."
+        },
+        {
+          "tag": "Condition",
+          "start": 123,
+          "end": 135,
+          "text": "if repeated."
+        },
+        {
+          "tag": "Precondition",
+          "start": 151,
+          "end": 210,
+          "text": "System detects a policy violation (e.g., automated scripts)"
+        },
+        {
+          "tag": "Exception",
+          "start": 224,
+          "end": 252,
+          "text": "Privilege suspension applied"
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "text": "Administrative Staff shall Views room utilization reports. The system shall Displays summaries of room usage frequency and identifies peak usage times. Constraints: Report must cover exactly the previous 30 days of data.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 20,
+          "text": "Administrative Staff"
+        },
+        {
+          "tag": "Action",
+          "start": 27,
+          "end": 57,
+          "text": "Views room utilization reports"
+        },
+        {
+          "tag": "Entity",
+          "start": 33,
+          "end": 57,
+          "text": "room utilization reports"
+        },
+        {
+          "tag": "System_response",
+          "start": 76,
+          "end": 151,
+          "text": "Displays summaries of room usage frequency and identifies peak usage times."
+        },
+        {
+          "tag": "Constraint",
+          "start": 165,
+          "end": 219,
+          "text": "Report must cover exactly the previous 30 days of data"
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "text": "System shall Process search queries. The system shall Executes search and returns results to the user. Preconditions: Normal system load conditions. Constraints: Response time ≤ 2 seconds for 95% of requests.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 35,
+          "text": "Process search queries"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 35,
+          "text": "search queries"
+        },
+        {
+          "tag": "System_response",
+          "start": 54,
+          "end": 102,
+          "text": "Executes search and returns results to the user."
+        },
+        {
+          "tag": "Precondition",
+          "start": 118,
+          "end": 147,
+          "text": "Normal system load conditions"
+        },
+        {
+          "tag": "Constraint",
+          "start": 162,
+          "end": 207,
+          "text": "Response time ≤ 2 seconds for 95% of requests"
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "text": "System shall Manage notification failure. The system shall Queue outgoing notifications and attempt redelivery. Preconditions: Internal or external notification service is unavailable. Constraints: Retry for up to 24 hours; Ensure zero data loss for alerts. Exceptions: Notification service failure.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 40,
+          "text": "Manage notification failure"
+        },
+        {
+          "tag": "Entity",
+          "start": 20,
+          "end": 40,
+          "text": "notification failure"
+        },
+        {
+          "tag": "System_response",
+          "start": 59,
+          "end": 111,
+          "text": "Queue outgoing notifications and attempt redelivery."
+        },
+        {
+          "tag": "Precondition",
+          "start": 127,
+          "end": 183,
+          "text": "Internal or external notification service is unavailable"
+        },
+        {
+          "tag": "Constraint",
+          "start": 198,
+          "end": 222,
+          "text": "Retry for up to 24 hours"
+        },
+        {
+          "tag": "Constraint",
+          "start": 224,
+          "end": 256,
+          "text": "Ensure zero data loss for alerts"
+        },
+        {
+          "tag": "Exception",
+          "start": 270,
+          "end": 298,
+          "text": "Notification service failure"
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "text": "User shall Switch language. The system shall Update all UI labels, navigation, and messages to selected language. Constraints: Must support English and Italian at a minimum.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 4,
+          "text": "User"
+        },
+        {
+          "tag": "Action",
+          "start": 11,
+          "end": 26,
+          "text": "Switch language"
+        },
+        {
+          "tag": "Entity",
+          "start": 18,
+          "end": 26,
+          "text": "language"
+        },
+        {
+          "tag": "System_response",
+          "start": 45,
+          "end": 113,
+          "text": "Update all UI labels, navigation, and messages to selected language."
+        },
+        {
+          "tag": "Constraint",
+          "start": 127,
+          "end": 172,
+          "text": "Must support English and Italian at a minimum"
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "text": "System shall Handle concurrent requests. The system shall Perform atomic allocation or return conflict error. Preconditions: Simultaneous requests for same seats; Insufficient capacity. Constraints: Room capacity must never be exceeded; Seat allocation must be atomic. Exceptions: Reservation conflict error.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 39,
+          "text": "Handle concurrent requests"
+        },
+        {
+          "tag": "Entity",
+          "start": 20,
+          "end": 39,
+          "text": "concurrent requests"
+        },
+        {
+          "tag": "System_response",
+          "start": 58,
+          "end": 109,
+          "text": "Perform atomic allocation or return conflict error."
+        },
+        {
+          "tag": "Precondition",
+          "start": 125,
+          "end": 161,
+          "text": "Simultaneous requests for same seats"
+        },
+        {
+          "tag": "Precondition",
+          "start": 163,
+          "end": 184,
+          "text": "Insufficient capacity"
+        },
+        {
+          "tag": "Constraint",
+          "start": 199,
+          "end": 235,
+          "text": "Room capacity must never be exceeded"
+        },
+        {
+          "tag": "Constraint",
+          "start": 237,
+          "end": 267,
+          "text": "Seat allocation must be atomic"
+        },
+        {
+          "tag": "Exception",
+          "start": 281,
+          "end": 307,
+          "text": "Reservation conflict error"
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "text": "Student shall Create recurring reservation. The system shall Generate a series of weekly reservations for up to 4 weeks. Preconditions: Each occurrence satisfies booking limits; Each occurrence satisfies opening hours. Constraints: Maximum of 4 consecutive weeks.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 7,
+          "text": "Student"
+        },
+        {
+          "tag": "Action",
+          "start": 14,
+          "end": 42,
+          "text": "Create recurring reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 42,
+          "text": "recurring reservation"
+        },
+        {
+          "tag": "System_response",
+          "start": 61,
+          "end": 120,
+          "text": "Generate a series of weekly reservations for up to 4 weeks."
+        },
+        {
+          "tag": "Precondition",
+          "start": 136,
+          "end": 176,
+          "text": "Each occurrence satisfies booking limits"
+        },
+        {
+          "tag": "Precondition",
+          "start": 178,
+          "end": 217,
+          "text": "Each occurrence satisfies opening hours"
+        },
+        {
+          "tag": "Constraint",
+          "start": 232,
+          "end": 262,
+          "text": "Maximum of 4 consecutive weeks"
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "text": "System shall Handle late check-in. The system shall Record check-in while maintaining the original end time. Preconditions: Student checks in after start time but within 15 minutes. Constraints: No duration extension permitted; Check-in must be recorded within 15 minutes past start time.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 33,
+          "text": "Handle late check-in"
+        },
+        {
+          "tag": "Entity",
+          "start": 20,
+          "end": 33,
+          "text": "late check-in"
+        },
+        {
+          "tag": "System_response",
+          "start": 52,
+          "end": 108,
+          "text": "Record check-in while maintaining the original end time."
+        },
+        {
+          "tag": "Condition",
+          "start": 68,
+          "end": 108,
+          "text": "while maintaining the original end time."
+        },
+        {
+          "tag": "Precondition",
+          "start": 124,
+          "end": 180,
+          "text": "Student checks in after start time but within 15 minutes"
+        },
+        {
+          "tag": "Constraint",
+          "start": 195,
+          "end": 226,
+          "text": "No duration extension permitted"
+        },
+        {
+          "tag": "Constraint",
+          "start": 228,
+          "end": 287,
+          "text": "Check-in must be recorded within 15 minutes past start time"
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "text": "System shall Display room location details. The system shall Display building, floor, and a link to the room floor plan before booking confirmation. Preconditions: Before booking is confirmed. Constraints: Must display building; Must display floor; Must provide floor plan link.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 42,
+          "text": "Display room location details"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 42,
+          "text": "room location details"
+        },
+        {
+          "tag": "System_response",
+          "start": 61,
+          "end": 148,
+          "text": "Display building, floor, and a link to the room floor plan before booking confirmation."
+        },
+        {
+          "tag": "Precondition",
+          "start": 164,
+          "end": 191,
+          "text": "Before booking is confirmed"
+        },
+        {
+          "tag": "Constraint",
+          "start": 206,
+          "end": 227,
+          "text": "Must display building"
+        },
+        {
+          "tag": "Constraint",
+          "start": 229,
+          "end": 247,
+          "text": "Must display floor"
+        },
+        {
+          "tag": "Constraint",
+          "start": 249,
+          "end": 277,
+          "text": "Must provide floor plan link"
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "text": "Administrative Staff shall Define cleaning buffer time. The system shall Save cleaning buffer time for the room and prevent bookings that violate the buffer period. Preconditions: Authorized staff access. Constraints: Buffer time must be defined per room; System must prevent bookings that violate the buffer.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 20,
+          "text": "Administrative Staff"
+        },
+        {
+          "tag": "Action",
+          "start": 27,
+          "end": 54,
+          "text": "Define cleaning buffer time"
+        },
+        {
+          "tag": "Entity",
+          "start": 34,
+          "end": 54,
+          "text": "cleaning buffer time"
+        },
+        {
+          "tag": "System_response",
+          "start": 73,
+          "end": 164,
+          "text": "Save cleaning buffer time for the room and prevent bookings that violate the buffer period."
+        },
+        {
+          "tag": "Precondition",
+          "start": 180,
+          "end": 203,
+          "text": "Authorized staff access"
+        },
+        {
+          "tag": "Constraint",
+          "start": 218,
+          "end": 254,
+          "text": "Buffer time must be defined per room"
+        },
+        {
+          "tag": "Constraint",
+          "start": 256,
+          "end": 308,
+          "text": "System must prevent bookings that violate the buffer"
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "text": "System shall Automatically record check-in via occupancy sensors. The system shall Automatically record check-in when occupancy is detected within the allowed check-in window. Preconditions: Occupancy sensors are available for the room; Occupancy is detected within the allowed check-in window. Constraints: Must be within the allowed check-in window.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 64,
+          "text": "Automatically record check-in via occupancy sensors"
+        },
+        {
+          "tag": "Entity",
+          "start": 27,
+          "end": 64,
+          "text": "record check-in via occupancy sensors"
+        },
+        {
+          "tag": "System_response",
+          "start": 83,
+          "end": 175,
+          "text": "Automatically record check-in when occupancy is detected within the allowed check-in window."
+        },
+        {
+          "tag": "Condition",
+          "start": 113,
+          "end": 175,
+          "text": "when occupancy is detected within the allowed check-in window."
+        },
+        {
+          "tag": "Precondition",
+          "start": 191,
+          "end": 235,
+          "text": "Occupancy sensors are available for the room"
+        },
+        {
+          "tag": "Precondition",
+          "start": 237,
+          "end": 293,
+          "text": "Occupancy is detected within the allowed check-in window"
+        },
+        {
+          "tag": "Constraint",
+          "start": 308,
+          "end": 350,
+          "text": "Must be within the allowed check-in window"
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "text": "System shall Maintain system uptime. The system shall Maintain at least 99.5% monthly uptime, excluding scheduled maintenance windows announced in advance. Constraints: At least 99.5% monthly uptime; Excludes scheduled maintenance windows announced in advance.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 35,
+          "text": "Maintain system uptime"
+        },
+        {
+          "tag": "Entity",
+          "start": 22,
+          "end": 35,
+          "text": "system uptime"
+        },
+        {
+          "tag": "System_response",
+          "start": 54,
+          "end": 155,
+          "text": "Maintain at least 99.5% monthly uptime, excluding scheduled maintenance windows announced in advance."
+        },
+        {
+          "tag": "Constraint",
+          "start": 169,
+          "end": 198,
+          "text": "At least 99.5% monthly uptime"
+        },
+        {
+          "tag": "Constraint",
+          "start": 200,
+          "end": 259,
+          "text": "Excludes scheduled maintenance windows announced in advance"
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "text": "System shall Enforce API rate limiting. The system shall Enforce rate limiting of 60 requests per minute per user on all public API endpoints; return HTTP 429 error with retry-after time if limit is exceeded. Constraints: 60 requests per minute per user limit; Applies to all public API endpoints. Exceptions: Rate limit exceeded - HTTP 429 error returned.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 38,
+          "text": "Enforce API rate limiting"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 38,
+          "text": "API rate limiting"
+        },
+        {
+          "tag": "System_response",
+          "start": 57,
+          "end": 208,
+          "text": "Enforce rate limiting of 60 requests per minute per user on all public API endpoints; return HTTP 429 error with retry-after time if limit is exceeded."
+        },
+        {
+          "tag": "Condition",
+          "start": 187,
+          "end": 208,
+          "text": "if limit is exceeded."
+        },
+        {
+          "tag": "Constraint",
+          "start": 222,
+          "end": 259,
+          "text": "60 requests per minute per user limit"
+        },
+        {
+          "tag": "Constraint",
+          "start": 261,
+          "end": 296,
+          "text": "Applies to all public API endpoints"
+        },
+        {
+          "tag": "Exception",
+          "start": 310,
+          "end": 355,
+          "text": "Rate limit exceeded - HTTP 429 error returned"
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "text": "Unauthenticated User shall View room availability and features. The system shall Display room availability and room features while hiding personal booking details and user identifiers. Constraints: Must hide personal booking details; Must hide user identifiers.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 20,
+          "text": "Unauthenticated User"
+        },
+        {
+          "tag": "Action",
+          "start": 27,
+          "end": 62,
+          "text": "View room availability and features"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 62,
+          "text": "room availability and features"
+        },
+        {
+          "tag": "System_response",
+          "start": 81,
+          "end": 184,
+          "text": "Display room availability and room features while hiding personal booking details and user identifiers."
+        },
+        {
+          "tag": "Condition",
+          "start": 125,
+          "end": 184,
+          "text": "while hiding personal booking details and user identifiers."
+        },
+        {
+          "tag": "Constraint",
+          "start": 198,
+          "end": 232,
+          "text": "Must hide personal booking details"
+        },
+        {
+          "tag": "Constraint",
+          "start": 234,
+          "end": 260,
+          "text": "Must hide user identifiers"
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "text": "System shall Enforce access control and audit logging. The system shall Require role-based access control for staff actions that change system state and record them in an immutable audit log. Constraints: Role-based access control required; Audit log must be immutable.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 53,
+          "text": "Enforce access control and audit logging"
+        },
+        {
+          "tag": "Entity",
+          "start": 21,
+          "end": 53,
+          "text": "access control and audit logging"
+        },
+        {
+          "tag": "System_response",
+          "start": 72,
+          "end": 191,
+          "text": "Require role-based access control for staff actions that change system state and record them in an immutable audit log."
+        },
+        {
+          "tag": "Constraint",
+          "start": 205,
+          "end": 239,
+          "text": "Role-based access control required"
+        },
+        {
+          "tag": "Constraint",
+          "start": 241,
+          "end": 268,
+          "text": "Audit log must be immutable"
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "text": "System shall Handle room occupancy conflict. The system shall Create a priority ticket for staff and offer alternative rooms of similar capacity when available. Preconditions: Student reports that a booked room is occupied by others at the start time. Constraints: Priority ticket must be created; Alternative rooms must be of similar capacity; Alternatives only offered when available.",
+      "spans": [
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 6,
+          "text": "System"
+        },
+        {
+          "tag": "Action",
+          "start": 13,
+          "end": 43,
+          "text": "Handle room occupancy conflict"
+        },
+        {
+          "tag": "Entity",
+          "start": 20,
+          "end": 43,
+          "text": "room occupancy conflict"
+        },
+        {
+          "tag": "System_response",
+          "start": 62,
+          "end": 160,
+          "text": "Create a priority ticket for staff and offer alternative rooms of similar capacity when available."
+        },
+        {
+          "tag": "Condition",
+          "start": 145,
+          "end": 160,
+          "text": "when available."
+        },
+        {
+          "tag": "Precondition",
+          "start": 176,
+          "end": 250,
+          "text": "Student reports that a booked room is occupied by others at the start time"
+        },
+        {
+          "tag": "Constraint",
+          "start": 265,
+          "end": 296,
+          "text": "Priority ticket must be created"
+        },
+        {
+          "tag": "Constraint",
+          "start": 298,
+          "end": 343,
+          "text": "Alternative rooms must be of similar capacity"
+        },
+        {
+          "tag": "Constraint",
+          "start": 345,
+          "end": 385,
+          "text": "Alternatives only offered when available"
+        }
+      ]
+    }
+  ]
 }

@@ -3,7 +3,6 @@ from __future__ import annotations
 import os
 import sys
 import json
-import re
 import html as _html
 from dataclasses import dataclass
 from datetime import datetime
@@ -65,7 +64,6 @@ from ollama import ollama_check
 import baseline as baseline_mod
 import pipeline as pipeline_mod
 
-
 # Load .env (search upward from ROOT)
 load_dotenv(find_dotenv(str(ROOT)))
 
@@ -97,16 +95,63 @@ TAG_COLORS_DEFAULT: Dict[str, str] = {
     "Exception": "#f59e0b",
 }
 
-DEFAULT_DATASET = (ROOT / "data" / "requirements_dataset.csv").resolve()
-DEFAULT_GOLD = (ROOT / "data" / "gold_annotations_seat_based.json").resolve()
 
-RESULTS_DIR = (ROOT / "result_gui").resolve()
+# ----------------------------
+# .env
+# ----------------------------
+def _env_path(key: str, default_rel: str) -> Path:
+    raw = (os.getenv(key) or "").strip()
+    p = Path(raw) if raw else Path(default_rel)
+    if not p.is_absolute():
+        p = ROOT / p
+    return p.resolve()
+
+
+PROMPTS_DIR = _env_path("REQFLOW_PROMPTS_DIR", "prompts")
+RESULTS_DIR = _env_path("REQFLOW_RESULTS_DIR", "result_gui")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
-PROMPTS_DIR = (ROOT / "prompts").resolve()
-BASELINE_PROMPT = (PROMPTS_DIR / "baseline.md").resolve()
+DEFAULT_DATASET = _env_path("REQFLOW_DATASET", "data/requirements_dataset.csv")
+DEFAULT_GOLD = _env_path("REQFLOW_GOLD", "data/gold_annotations_seat_based.json")
 
-HTML_THEME = "dark"
+HTML_THEME = (os.getenv("REQFLOW_HTML_THEME") or "dark").strip() or "dark"
+
+
+def _variant_to_key(v: str) -> str:
+    v = (v or "").strip().lower()
+    if v in ("0", "zero", "zero-shot", "zeroshot"):
+        return "zero"
+    if v in ("1", "one", "one-shot", "oneshot"):
+        return "one"
+    if v in ("few", "few-shot", "fewshot", "kshot"):
+        return "few"
+    return "zero"
+
+
+def _prompt_env_key(kind: str, variant_key: str) -> str:
+    return f"REQFLOW_{kind}_PROMPT_{variant_key.upper()}"
+
+
+def _resolve_prompt_by_variant(kind: str, variant: str) -> Path:
+    """
+    kind: BASELINE | SEGMENT | TAG
+    variant: zero/one/few (and aliases)
+    """
+    vk = _variant_to_key(variant)
+    env_key = _prompt_env_key(kind, vk)
+    name = (os.getenv(env_key) or "").strip()
+    if not name:
+        raise FileNotFoundError(
+            f"Missing {env_key} in .env. Set it to a file under {PROMPTS_DIR} (or absolute path)."
+        )
+
+    p = Path(name)
+    if not p.is_absolute():
+        p = PROMPTS_DIR / p
+    p = p.resolve()
+    if not p.exists():
+        raise FileNotFoundError(f"Prompt not found for {env_key}: {p}")
+    return p
 
 
 # ----------------------------
@@ -160,7 +205,7 @@ def set_table_from_df(table: QTableWidget, df: pd.DataFrame):
 
 
 # ----------------------------
-# Render (merged into GUI; no render.py import)
+# Render 
 # ----------------------------
 def _pct(x: float) -> str:
     return f"{x * 100.0:.2f}%"
@@ -222,7 +267,13 @@ def _render_item(item: Dict[str, Any], tag_colors: Dict[str, str]) -> str:
     """
 
 
-def render_spans_html(pred_json: Path, out_html: Path, *, theme: str = "dark", tag_colors: Optional[Dict[str, str]] = None) -> None:
+def render_spans_html(
+    pred_json: Path,
+    out_html: Path,
+    *,
+    theme: str = "dark",
+    tag_colors: Optional[Dict[str, str]] = None,
+) -> None:
     items = json.loads(pred_json.read_text(encoding="utf-8"))
     tag_colors = tag_colors or dict(TAG_COLORS_DEFAULT)
 
@@ -356,45 +407,11 @@ def render_spans_html(pred_json: Path, out_html: Path, *, theme: str = "dark", t
       </body>
     </html>
     """
-
     out_html.write_text(html_doc, encoding="utf-8")
 
 
 # ----------------------------
-# Run artifacts
-# ----------------------------
-@dataclass
-class RunArtifacts:
-    run_dir: Path
-    baseline_json: Optional[Path] = None
-    baseline_html: Optional[Path] = None
-    pipeline_json: Optional[Path] = None
-    pipeline_html: Optional[Path] = None
-
-
-def detect_run_artifacts(run_dir: Path) -> RunArtifacts:
-    ra = RunArtifacts(run_dir=run_dir)
-    bj = run_dir / "baseline_spans.json"
-    bh = run_dir / "baseline_spans.html"
-    pj = run_dir / "pipeline_spans.json"
-    ph = run_dir / "pipeline_spans.html"
-    if bj.exists():
-        ra.baseline_json = bj
-    if bh.exists():
-        ra.baseline_html = bh
-    if pj.exists():
-        ra.pipeline_json = pj
-    if ph.exists():
-        ra.pipeline_html = ph
-    return ra
-
-
-def read_pred_items(path: Path) -> List[dict]:
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
-# ----------------------------
-# Evaluation logic (internal)
+# Evaluation logic 
 # ----------------------------
 @dataclass(frozen=True)
 class Span:
@@ -623,49 +640,79 @@ class MetricLineChart(QWidget):
 # Worker thread
 # ----------------------------
 class WorkerThread(QThread):
-    finished = pyqtSignal(str, str)
+    # html_path, run_dir, pred_json_path, pred_label
+    finished = pyqtSignal(str, str, str, str)
     error = pyqtSignal(str)
 
-    def __init__(self, mode: str, ids_csv: str, dataset_path: Path, out_dir: Path):
+    def __init__(
+        self,
+        mode: str,
+        ids_csv: str,
+        dataset_path: Path,
+        out_dir: Path,
+        baseline_variant: str,
+        pipeline_variant: str,
+    ):
         super().__init__()
         self.mode = mode
         self.ids_csv = ids_csv
         self.dataset_path = dataset_path
         self.out_dir = out_dir
+        self.baseline_variant = _variant_to_key(baseline_variant)
+        self.pipeline_variant = _variant_to_key(pipeline_variant)
 
     def run(self):
         try:
-            if self.mode in ("Baseline", "Both"):
-                if not BASELINE_PROMPT.exists():
-                    raise FileNotFoundError(f"Missing baseline prompt: {BASELINE_PROMPT}")
+            html_path = ""
+            pred_json_path = ""
+            pred_label = ""
 
-                bj = self.out_dir / "baseline_spans.json"
-                bh = self.out_dir / "baseline_spans.html"
+            if self.mode in ("Baseline", "Both"):
+                b_prompt = _resolve_prompt_by_variant("BASELINE", self.baseline_variant)
+
+                bdir = self.out_dir / "baseline" / self.baseline_variant
+                bdir.mkdir(parents=True, exist_ok=True)
+                bj = bdir / "baseline_spans.json"
+                bh = bdir / "baseline_spans.html"
 
                 baseline_mod.main(
                     str(self.dataset_path),
                     str(bj),
                     None,
-                    str(BASELINE_PROMPT),
+                    str(b_prompt),
                     self.ids_csv,
                 )
                 render_spans_html(bj, bh, theme=HTML_THEME, tag_colors=TAG_COLORS_DEFAULT)
 
+                html_path = str(bh.resolve())
+                pred_json_path = str(bj.resolve())
+                pred_label = f"Baseline ({self.baseline_variant})"
+
             if self.mode in ("Pipeline", "Both"):
-                pj = self.out_dir / "pipeline_spans.json"
-                ph = self.out_dir / "pipeline_spans.html"
+                s_prompt = _resolve_prompt_by_variant("SEGMENT", self.pipeline_variant)
+                t_prompt = _resolve_prompt_by_variant("TAG", self.pipeline_variant)
+
+                pdir = self.out_dir / "pipeline" / self.pipeline_variant
+                pdir.mkdir(parents=True, exist_ok=True)
+                pj = pdir / "pipeline_spans.json"
+                ph = pdir / "pipeline_spans.html"
 
                 pipeline_mod.main(
                     str(self.dataset_path),
                     str(pj),
                     None,
                     self.ids_csv,
+                    segment_prompt_path=str(s_prompt),
+                    tag_prompt_path=str(t_prompt),
                 )
                 render_spans_html(pj, ph, theme=HTML_THEME, tag_colors=TAG_COLORS_DEFAULT)
 
-            ra = detect_run_artifacts(self.out_dir)
-            htmlp = ra.pipeline_html or ra.baseline_html
-            self.finished.emit(str(htmlp.resolve()) if htmlp else "", str(self.out_dir.resolve()))
+                # Prefer pipeline for display/eval if it ran
+                html_path = str(ph.resolve())
+                pred_json_path = str(pj.resolve())
+                pred_label = f"Pipeline ({self.pipeline_variant})"
+
+            self.finished.emit(html_path, str(self.out_dir.resolve()), pred_json_path, pred_label)
 
         except Exception as e:
             self.error.emit(str(e))
@@ -685,6 +732,8 @@ class ReqFlowApp(QMainWindow):
 
         self.gold_path: Path = DEFAULT_GOLD if DEFAULT_GOLD.exists() else Path()
         self.current_run_dir: Optional[Path] = None
+        self.current_pred_json: Optional[Path] = None
+        self.current_pred_label: str = ""
         self.worker: Optional[WorkerThread] = None
 
         self.tag_colors: Dict[str, str] = dict(TAG_COLORS_DEFAULT)
@@ -705,6 +754,7 @@ class ReqFlowApp(QMainWindow):
 
         self._set_eval_empty_state()
         self._refresh_legend_ui()
+        self._on_method_changed()
 
     def _apply_styles(self):
         self.setStyleSheet("""
@@ -873,7 +923,57 @@ class ReqFlowApp(QMainWindow):
         self.method_combo = QComboBox()
         self.method_combo.addItems(["Baseline", "Pipeline", "Both"])
         self.method_combo.setCurrentText("Both")
+        self.method_combo.currentIndexChanged.connect(self._on_method_changed)
         run_layout.addWidget(self.method_combo)
+
+        # ----------------------------
+        # Prompt variants UI 
+        # ----------------------------
+        def _make_variant_combo(default_key: str) -> QComboBox:
+            cb = QComboBox()
+            cb.addItem("Zero-shot", "zero")
+            cb.addItem("One-shot", "one")
+            cb.addItem("Few-shot", "few")
+            dk = _variant_to_key(default_key)
+            idx = cb.findData(dk)
+            cb.setCurrentIndex(idx if idx >= 0 else 0)
+            return cb
+
+        # --- Single variant row 
+        self.single_variant_row = QWidget()
+        sv_lay = QHBoxLayout(self.single_variant_row)
+        sv_lay.setContentsMargins(0, 0, 0, 0)
+        sv_lay.setSpacing(8)
+
+        sv_lay.addWidget(QLabel("Prompt variant:"))
+        self.prompt_variant_combo = _make_variant_combo(os.getenv("REQFLOW_DEFAULT_BASELINE_VARIANT", "zero"))
+        sv_lay.addWidget(self.prompt_variant_combo)
+
+        run_layout.addWidget(self.single_variant_row)
+
+        # --- Baseline row (ONLY for Both)
+        self.baseline_variant_row = QWidget()
+        bv_lay = QHBoxLayout(self.baseline_variant_row)
+        bv_lay.setContentsMargins(0, 0, 0, 0)
+        bv_lay.setSpacing(8)
+
+        bv_lay.addWidget(QLabel("Baseline variant:"))
+        self.baseline_prompt_combo = _make_variant_combo(os.getenv("REQFLOW_DEFAULT_BASELINE_VARIANT", "zero"))
+        bv_lay.addWidget(self.baseline_prompt_combo)
+
+        run_layout.addWidget(self.baseline_variant_row)
+
+        # --- Pipeline row (ONLY for Both)
+        self.pipeline_variant_row = QWidget()
+        pv_lay = QHBoxLayout(self.pipeline_variant_row)
+        pv_lay.setContentsMargins(0, 0, 0, 0)
+        pv_lay.setSpacing(8)
+
+        pv_lay.addWidget(QLabel("Pipeline variant:"))
+        self.pipeline_prompt_combo = _make_variant_combo(os.getenv("REQFLOW_DEFAULT_PIPELINE_VARIANT", "zero"))
+        pv_lay.addWidget(self.pipeline_prompt_combo)
+
+        run_layout.addWidget(self.pipeline_variant_row)
 
         self.run_btn = QPushButton("Analysis")
         self.run_btn.setObjectName("analysisButton")
@@ -923,7 +1023,7 @@ class ReqFlowApp(QMainWindow):
         for t in TAGS:
             r = row0 + (idx // 4)
             c = idx % 4
-            w = self._make_legend_item(t, self.tag_colors.get(t, "#888888"))
+            w = self._make_legend_item(t, TAG_COLORS_DEFAULT.get(t, "#888888"))
             self.legend_layout.addWidget(w, r, c)
             idx += 1
 
@@ -1005,7 +1105,28 @@ class ReqFlowApp(QMainWindow):
 
         splitter.setStretchFactor(0, 0)
         splitter.setStretchFactor(1, 1)
-        splitter.setSizes([380, 1080])
+        splitter.setSizes([420, 1040])
+
+    def _on_method_changed(self, *_):
+        mode = self.method_combo.currentText()
+        is_both = (mode == "Both")
+
+        # Show a single variant selector for Baseline/Pipeline; show two selectors only for Both
+        self.single_variant_row.setVisible(not is_both)
+        self.baseline_variant_row.setVisible(is_both)
+        self.pipeline_variant_row.setVisible(is_both)
+
+        # Sync: when leaving Both, keep the single dropdown aligned with the method's last selection
+        if not is_both:
+            if mode == "Baseline":
+                v = self.baseline_prompt_combo.currentData() or "zero"
+            else:  # Pipeline
+                v = self.pipeline_prompt_combo.currentData() or "zero"
+
+            v = _variant_to_key(str(v))
+            idx = self.prompt_variant_combo.findData(v)
+            if idx >= 0:
+                self.prompt_variant_combo.setCurrentIndex(idx)
 
     def _make_legend_item(self, tag: str, color_hex: str) -> QWidget:
         w = QWidget()
@@ -1035,7 +1156,7 @@ class ReqFlowApp(QMainWindow):
         for t in TAGS:
             sw, _lbl = self.legend_items.get(t, (None, None))
             if sw is not None:
-                col = self.tag_colors.get(t, TAG_COLORS_DEFAULT.get(t, "#888888"))
+                col = TAG_COLORS_DEFAULT.get(t, "#888888")
                 sw.setStyleSheet(
                     f"background: {col}; border-radius: 7px; border: 1px solid rgba(255,255,255,0.18);"
                 )
@@ -1149,12 +1270,30 @@ class ReqFlowApp(QMainWindow):
             QMessageBox.warning(self, "Select IDs", "Tick at least one requirement (checkbox).")
             return
 
-        if self.method_combo.currentText() in ("Baseline", "Both") and not BASELINE_PROMPT.exists():
-            QMessageBox.critical(self, "Missing prompt", f"Missing baseline prompt:\n{BASELINE_PROMPT}")
+        mode = self.method_combo.currentText()
+
+        # If not Both: one dropdown controls the method's prompt variant.
+        # If Both: separate dropdowns exist.
+        if mode == "Both":
+            bvar = self.baseline_prompt_combo.currentData() or "zero"
+            pvar = self.pipeline_prompt_combo.currentData() or "zero"
+        else:
+            v = self.prompt_variant_combo.currentData() or "zero"
+            bvar = v
+            pvar = v
+
+        # Validate prompts exist (fail fast with a clear message)
+        try:
+            if mode in ("Baseline", "Both"):
+                _ = _resolve_prompt_by_variant("BASELINE", str(bvar))
+            if mode in ("Pipeline", "Both"):
+                _ = _resolve_prompt_by_variant("SEGMENT", str(pvar))
+                _ = _resolve_prompt_by_variant("TAG", str(pvar))
+        except Exception as e:
+            QMessageBox.critical(self, "Prompt configuration error", str(e))
             return
 
         ids_csv = ",".join(str(x) for x in checked_ids)
-        mode = self.method_combo.currentText()
 
         run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
         out_dir = (RESULTS_DIR / f"run_{run_id}").resolve()
@@ -1164,16 +1303,25 @@ class ReqFlowApp(QMainWindow):
         self.progress.setRange(0, 0)
         self.progress.setVisible(True)
 
-        self.worker = WorkerThread(mode, ids_csv, self.dataset_path, out_dir)
+        self.worker = WorkerThread(
+            mode,
+            ids_csv,
+            self.dataset_path,
+            out_dir,
+            baseline_variant=str(bvar),
+            pipeline_variant=str(pvar),
+        )
         self.worker.finished.connect(self.on_run_finished)
         self.worker.error.connect(self.on_run_error)
         self.worker.start()
 
-    def on_run_finished(self, html_path: str, run_dir: str):
+    def on_run_finished(self, html_path: str, run_dir: str, pred_json_path: str, pred_label: str):
         self.run_btn.setEnabled(True)
         self.progress.setVisible(False)
 
         self.current_run_dir = Path(run_dir).resolve()
+        self.current_pred_json = Path(pred_json_path).resolve() if pred_json_path else None
+        self.current_pred_label = pred_label or ""
 
         if self.browser is not None and html_path:
             html_file = Path(html_path).resolve()
@@ -1196,28 +1344,19 @@ class ReqFlowApp(QMainWindow):
         mode = self.eval_mode.currentText()
         self.eval_thr.setEnabled(mode != "Exact")
 
-    def _pick_pred_items_for_eval(self) -> Tuple[Optional[List[dict]], str]:
-        if not self.current_run_dir:
-            return None, ""
-        ra = detect_run_artifacts(self.current_run_dir)
-        if ra.pipeline_json:
-            return read_pred_items(ra.pipeline_json), "Pipeline"
-        if ra.baseline_json:
-            return read_pred_items(ra.baseline_json), "Baseline"
-        return None, ""
-
     def compute_evaluation(self):
-        if not self.current_run_dir:
-            QMessageBox.warning(self, "No run", "Run Analysis first.")
+        if not self.current_pred_json or not self.current_pred_json.exists():
+            QMessageBox.warning(self, "No predictions", "Run Analysis first (so prediction JSON exists).")
             return
 
         if not self.gold_path.exists():
             QMessageBox.warning(self, "No gold", "Select a gold JSON first.")
             return
 
-        pred_items, pred_label = self._pick_pred_items_for_eval()
-        if not pred_items:
-            QMessageBox.warning(self, "No predictions", "No predictions found in current run.")
+        try:
+            pred_items = json.loads(self.current_pred_json.read_text(encoding="utf-8"))
+        except Exception as e:
+            QMessageBox.critical(self, "Predictions read error", str(e))
             return
 
         try:
@@ -1236,7 +1375,8 @@ class ReqFlowApp(QMainWindow):
         self.eval_curve.plot_threshold_curve(curve_df, "Threshold sweep (Precision/Recall/F1)")
 
         self.eval_summary.setText(
-            f"Run: {self.current_run_dir.name} | Pred: {pred_label} | Mode: {summ['mode']} | Thr: {summ['threshold']}\n"
+            f"Run: {self.current_run_dir.name if self.current_run_dir else ''} | Pred: {self.current_pred_label} | "
+            f"Mode: {summ['mode']} | Thr: {summ['threshold']}\n"
             f"Common: {summ['common_requirements']} | TP: {summ['TP']} | FP: {summ['FP']} | FN: {summ['FN']} | "
             f"P: {summ['precision']} | R: {summ['recall']} | F1: {summ['f1']}"
         )

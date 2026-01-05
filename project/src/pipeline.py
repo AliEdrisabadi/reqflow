@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import json
 import re
 from pathlib import Path
@@ -35,6 +36,51 @@ def fill(template: str, **kwargs: str) -> str:
     for k, v in kwargs.items():
         out = out.replace("{{" + k + "}}", v)
     return out
+
+
+def _resolve_pipeline_prompts(
+    segment_prompt_path: Optional[str | Path],
+    tag_prompt_path: Optional[str | Path],
+) -> Tuple[Path, Path]:
+    """
+    Resolve pipeline prompt paths.
+
+    Priority for each prompt:
+      1) explicit argument
+      2) .env: REQFLOW_SEGMENT_PROMPT / REQFLOW_TAG_PROMPT (absolute or relative to REQFLOW_PROMPTS_DIR)
+      3) fallback: <root>/<REQFLOW_PROMPTS_DIR or 'prompts'>/segment.md and tag.md
+    """
+    root = _project_root()
+    prompts_dir = root / os.getenv("REQFLOW_PROMPTS_DIR", "prompts")
+
+    def _res(p: Optional[str | Path], env_key: str, fallback: str) -> Path:
+        if p:
+            pp = Path(p)
+            if not pp.is_absolute():
+                pp = prompts_dir / pp
+            pp = pp.resolve()
+            if not pp.exists():
+                raise FileNotFoundError(f"Prompt not found: {pp}")
+            return pp
+
+        env_p = os.getenv(env_key, "").strip()
+        if env_p:
+            pp = Path(env_p)
+            if not pp.is_absolute():
+                pp = prompts_dir / pp
+            pp = pp.resolve()
+            if not pp.exists():
+                raise FileNotFoundError(f"Prompt not found ({env_key}): {pp}")
+            return pp
+
+        pp = (prompts_dir / fallback).resolve()
+        if not pp.exists():
+            raise FileNotFoundError(f"Prompt not found. Set {env_key}. Tried: {pp}")
+        return pp
+
+    p1 = _res(segment_prompt_path, "REQFLOW_SEGMENT_PROMPT", "segment.md")
+    p2 = _res(tag_prompt_path, "REQFLOW_TAG_PROMPT", "tag.md")
+    return p1, p2
 
 
 def validate_clauses(requirement_text: str, clauses: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
@@ -95,7 +141,7 @@ def _normalize_variants(s: str) -> List[str]:
     variants = [s]
     variants.append(s.replace("“", '"').replace("”", '"').replace("’", "'").replace("‘", "'"))
     variants.append(s.replace("\u00a0", " ").replace("\xa0", " "))
-    out = []
+    out: List[str] = []
     for v in variants:
         if v and v not in out:
             out.append(v)
@@ -169,10 +215,17 @@ def _pick_text_column(df: pd.DataFrame) -> str:
     raise ValueError("Dataset CSV must contain a requirement text column (expected: text_en).")
 
 
-def main(dataset_csv: str, out_json: str, model: Optional[str], ids: str = "") -> None:
+def main(
+    dataset_csv: str,
+    out_json: str,
+    model: Optional[str],
+    ids: str = "",
+    segment_prompt_path: Optional[str | Path] = None,
+    tag_prompt_path: Optional[str | Path] = None,
+) -> None:
     root = _project_root()
-    p1 = (root / "prompts" / "segment.md").resolve()
-    p2 = (root / "prompts" / "tag.md").resolve()
+
+    p1, p2 = _resolve_pipeline_prompts(segment_prompt_path, tag_prompt_path)
 
     tmpl1 = load_prompt(p1)
     tmpl2 = load_prompt(p2)

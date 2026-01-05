@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import json
 import re
 from pathlib import Path
@@ -26,6 +27,45 @@ def _project_root() -> Path:
     return Path(__file__).resolve().parents[1]
 
 
+def _resolve_prompt_path(prompt_path: Optional[str | Path]) -> Path:
+    """
+    Resolve baseline prompt path.
+
+    Priority:
+      1) explicit prompt_path argument
+      2) .env: REQFLOW_BASELINE_PROMPT (absolute or relative to REQFLOW_PROMPTS_DIR)
+      3) fallback: <root>/<REQFLOW_PROMPTS_DIR or 'prompts'>/baseline.md
+    """
+    root = _project_root()
+    prompts_dir = root / os.getenv("REQFLOW_PROMPTS_DIR", "prompts")
+
+    if prompt_path:
+        p = Path(prompt_path)
+        if not p.is_absolute():
+            p = prompts_dir / p
+        p = p.resolve()
+        if not p.exists():
+            raise FileNotFoundError(f"Baseline prompt not found: {p}")
+        return p
+
+    env_p = os.getenv("REQFLOW_BASELINE_PROMPT", "").strip()
+    if env_p:
+        p = Path(env_p)
+        if not p.is_absolute():
+            p = prompts_dir / p
+        p = p.resolve()
+        if not p.exists():
+            raise FileNotFoundError(f"Baseline prompt not found (REQFLOW_BASELINE_PROMPT): {p}")
+        return p
+
+    p = (prompts_dir / "baseline.md").resolve()
+    if not p.exists():
+        raise FileNotFoundError(
+            f"Baseline prompt not found. Provide --prompt_path or set REQFLOW_BASELINE_PROMPT. Tried: {p}"
+        )
+    return p
+
+
 def load_prompt(path: str | Path) -> str:
     return Path(path).read_text(encoding="utf-8")
 
@@ -47,7 +87,7 @@ def _normalize_variants(s: str) -> List[str]:
     variants = [s]
     variants.append(s.replace("“", '"').replace("”", '"').replace("’", "'").replace("‘", "'"))
     variants.append(s.replace("\u00a0", " ").replace("\xa0", " "))
-    out = []
+    out: List[str] = []
     for v in variants:
         if v and v not in out:
             out.append(v)
@@ -135,8 +175,7 @@ def main(
         wanted = {int(x) for x in ids.split(",") if x.strip().isdigit()}
         df = df[df["id"].isin(wanted)].copy()
 
-    root = _project_root()
-    prompt_file = Path(prompt_path).resolve() if prompt_path else (root / "prompts" / "baseline.md").resolve()
+    prompt_file = _resolve_prompt_path(prompt_path)
     tmpl = load_prompt(prompt_file)
 
     outputs: List[Dict[str, Any]] = []

@@ -4,7 +4,7 @@ import argparse
 import os
 from datetime import datetime
 from pathlib import Path
-from typing import Tuple
+from typing import Optional, Tuple
 
 from env import load_dotenv, find_dotenv
 from ollama import ollama_check
@@ -69,7 +69,20 @@ def _resolve_prompt_by_variant(root: Path, kind: str, variant: str) -> Path:
     env_key = f"REQFLOW_{kind}_PROMPT_{v.upper()}"
     name = (os.getenv(env_key) or "").strip()
     if not name:
-        raise FileNotFoundError(f"Missing {env_key} in .env (needed for {kind} {v}).")
+        # Fall back to the conventional prompt filename if .env is missing.
+        # e.g. prompts/baseline_zero.md, prompts/tag_few.md, prompts/segment_one.md
+        fallback = f"{kind.lower()}_{v}.md"
+        p = (prompts_dir / fallback).resolve()
+        if p.exists():
+            return p
+        # Legacy fallback (older repos used baseline.md/segment.md/tag.md)
+        legacy = f"{kind.lower()}.md"
+        p2 = (prompts_dir / legacy).resolve()
+        if p2.exists():
+            return p2
+        raise FileNotFoundError(
+            f"Missing {env_key} in .env (needed for {kind} {v}). Also tried: {p} and {p2}"
+        )
 
     p = Path(name)
     if not p.is_absolute():
@@ -276,7 +289,16 @@ def render_spans_html(pred_json: Path, out_html: Path, *, theme: str = "dark", t
     out_html.write_text(html_doc, encoding="utf-8")
 
 
-def run(mode: str, dataset: Path, out_dir: Path, ids: str = "", baseline_variant: str = "zero", pipeline_variant: str = "zero") -> None:
+def run(
+    mode: str,
+    dataset: Path,
+    out_dir: Path,
+    *,
+    model: Optional[str] = None,
+    ids: str = "",
+    baseline_variant: str = "zero",
+    pipeline_variant: str = "zero",
+) -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
 
     ok, msg = ollama_check(timeout=5)
@@ -294,7 +316,7 @@ def run(mode: str, dataset: Path, out_dir: Path, ids: str = "", baseline_variant
         bj = bdir / "baseline_spans.json"
         bh = bdir / "baseline_spans.html"
 
-        baseline.main(str(dataset), str(bj), model=None, prompt_path=str(b_prompt), ids=ids)
+        baseline.main(str(dataset), str(bj), model=model, prompt_path=str(b_prompt), ids=ids)
         render_spans_html(bj, bh, theme=theme)
 
     if mode in ("pipeline", "both"):
@@ -309,7 +331,7 @@ def run(mode: str, dataset: Path, out_dir: Path, ids: str = "", baseline_variant
         pipeline.main(
             str(dataset),
             str(pj),
-            model=None,
+            model=model,
             ids=ids,
             segment_prompt_path=str(s_prompt),
             tag_prompt_path=str(t_prompt),
@@ -321,11 +343,17 @@ def run(mode: str, dataset: Path, out_dir: Path, ids: str = "", baseline_variant
 
 def main() -> None:
     root = project_root()
-    load_dotenv(find_dotenv(str(root)))
+    # Prefer repo-root `reqflow.env` (some environments block `.env` dotfiles).
+    load_dotenv(find_dotenv(str(root), filename="reqflow.env", fallback_filenames=(".env", ".env.example")))
 
     ap = argparse.ArgumentParser(description="ReqFlow CLI runner (Ollama).")
-    ap.add_argument("--dataset", default=str((root / "data" / "requirements_dataset.csv").resolve()))
+    ap.add_argument("--dataset", default=str((root / "data" / "dataset.csv").resolve()))
     ap.add_argument("--mode", choices=["baseline", "pipeline", "both"], default="both")
+    ap.add_argument(
+        "--model",
+        default="",
+        help="Optional model override. If omitted, uses OLLAMA_MODEL (default: meta-llama/Llama-3.1-8B-Instruct).",
+    )
     ap.add_argument("--ids", default="", help="Comma-separated requirement IDs")
     ap.add_argument("--outdir", default="", help="Output folder (default: result_cli/run_<timestamp>)")
     ap.add_argument("--baseline_variant", default=os.getenv("REQFLOW_DEFAULT_BASELINE_VARIANT", "zero"))
@@ -341,7 +369,16 @@ def main() -> None:
         if args.outdir
         else (root / "result_cli" / f"run_{datetime.now().strftime('%Y%m%d_%H%M%S')}").resolve()
     )
-    run(args.mode, dataset, out_dir, ids=args.ids, baseline_variant=args.baseline_variant, pipeline_variant=args.pipeline_variant)
+
+    run(
+        args.mode,
+        dataset,
+        out_dir,
+        model=(args.model.strip() or None),
+        ids=args.ids,
+        baseline_variant=args.baseline_variant,
+        pipeline_variant=args.pipeline_variant,
+    )
 
 
 if __name__ == "__main__":

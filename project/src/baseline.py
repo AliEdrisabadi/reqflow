@@ -8,7 +8,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import pandas as pd
 
-from ollama import ollama_generate
+from ollama import ollama_generate, get_config
 
 
 TAGS = [
@@ -168,6 +168,9 @@ def main(
     prompt_path: Optional[str] = None,
     ids: str = "",
 ) -> None:
+    model_name = (model or get_config().model).strip()
+    print(f"[baseline] model={model_name}", flush=True)
+
     df = pd.read_csv(dataset_csv)
     text_col = _pick_text_column(df)
 
@@ -179,12 +182,14 @@ def main(
     tmpl = load_prompt(prompt_file)
 
     outputs: List[Dict[str, Any]] = []
-    for _, row in df.iterrows():
+    total = len(df)
+    for i, (_, row) in enumerate(df.iterrows(), start=1):
         rid = int(row["id"])
         text = str(row[text_col])
 
         prompt = fill(tmpl, REQUIREMENT_TEXT=text)
         try:
+            print(f"[baseline] {i}/{total} id={rid}", flush=True)
             out = ollama_generate(prompt, model=model)
             spans = out.get("spans", []) if isinstance(out, dict) else []
             spans = validate_spans(text, spans)

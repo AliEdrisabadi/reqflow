@@ -96,7 +96,7 @@ pip install -r requirements.txt
 Make sure Ollama is running, then pull a model:
 
 ```bash
-ollama pull qwen3:4b-instruct
+ollama pull llama3.1:8b
 ```
 
 You may use any instruct-capable model that reliably outputs JSON.
@@ -109,7 +109,7 @@ Create a file named `.env` in the project root (recommended):
 
 ```bash
 OLLAMA_HOST=http://localhost:11434
-OLLAMA_MODEL=qwen3:4b-instruct
+OLLAMA_MODEL=meta-llama/Llama-3.1-8B-Instruct
 OLLAMA_TIMEOUT=120
 OLLAMA_TEMPERATURE=0.2
 OLLAMA_NUM_PREDICT=512

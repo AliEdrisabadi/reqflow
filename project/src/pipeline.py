@@ -8,7 +8,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import pandas as pd
 
-from ollama import ollama_generate
+from ollama import ollama_generate, get_config
 
 
 TAGS = [
@@ -223,6 +223,9 @@ def main(
     segment_prompt_path: Optional[str | Path] = None,
     tag_prompt_path: Optional[str | Path] = None,
 ) -> None:
+    model_name = (model or get_config().model).strip()
+    print(f"[pipeline] model={model_name}", flush=True)
+
     root = _project_root()
 
     p1, p2 = _resolve_pipeline_prompts(segment_prompt_path, tag_prompt_path)
@@ -238,16 +241,19 @@ def main(
         df = df[df["id"].isin(wanted)].copy()
 
     outputs: List[Dict[str, Any]] = []
-    for _, row in df.iterrows():
+    total = len(df)
+    for i, (_, row) in enumerate(df.iterrows(), start=1):
         rid = int(row["id"])
         text = str(row[text_col])
 
         try:
+            print(f"[pipeline] {i}/{total} id={rid} (segment)", flush=True)
             prompt1 = fill(tmpl1, REQUIREMENT_TEXT=text)
             out1 = ollama_generate(prompt1, model=model)
             clauses = out1.get("clauses", []) if isinstance(out1, dict) else []
             clauses = validate_clauses(text, clauses)
 
+            print(f"[pipeline] {i}/{total} id={rid} (tag)", flush=True)
             prompt2 = fill(tmpl2, REQUIREMENT_TEXT=text, CLAUSES_JSON=json.dumps(clauses, ensure_ascii=False))
             out2 = ollama_generate(prompt2, model=model)
             spans = out2.get("spans", []) if isinstance(out2, dict) else []

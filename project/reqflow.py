@@ -16,6 +16,7 @@ from PyQt6.QtCore import Qt, QThread, pyqtSignal, QUrl, QCoreApplication
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import (
     QApplication,
+    QCheckBox,
     QComboBox,
     QFileDialog,
     QFrame,
@@ -64,8 +65,8 @@ from ollama import ollama_check
 import baseline as baseline_mod
 import pipeline as pipeline_mod
 
-# Load .env (search upward from ROOT)
-load_dotenv(find_dotenv(str(ROOT)))
+# Load env config (prefer repo-root `reqflow.env`; fall back to `.env` if present)
+load_dotenv(find_dotenv(str(ROOT), filename="reqflow.env", fallback_filenames=(".env", ".env.example")))
 
 
 # ----------------------------
@@ -512,6 +513,165 @@ def prf(tp: int, fp: int, fn: int) -> Tuple[float, float, float]:
     return p, r, f1
 
 
+def _find_all(haystack: str, needle: str) -> List[int]:
+    if not needle:
+        return []
+    out: List[int] = []
+    start = 0
+    while True:
+        idx = haystack.find(needle, start)
+        if idx < 0:
+            break
+        out.append(idx)
+        start = idx + 1
+    return out
+
+
+def _best_occurrence_by_position(occurrences: List[int], *, pred_pos: float, gold_len: int) -> int:
+    # pick occurrence whose normalized position is closest to predicted normalized position
+    best_i = occurrences[0]
+    best_d = float("inf")
+    for i in occurrences:
+        gpos = (i / gold_len) if gold_len else 0.0
+        d = abs(gpos - pred_pos)
+        if d < best_d:
+            best_d = d
+            best_i = i
+    return best_i
+
+
+def _fuzzy_locate(
+    gold_text: str,
+    target: str,
+    *,
+    pred_pos: float,
+    window: int = 250,
+    len_slack: int = 8,
+) -> Tuple[Optional[int], Optional[int], float]:
+    """
+    Find best-matching substring in gold_text for target using SequenceMatcher ratio,
+    searching near pred_pos (normalized in [0,1]) to keep it fast.
+    """
+    if not gold_text or not target:
+        return None, None, 0.0
+
+    glen = len(gold_text)
+    tlen = len(target)
+    center = int(pred_pos * glen) if glen else 0
+    lo = max(0, center - window)
+    hi = min(glen, center + window)
+
+    best: Tuple[Optional[int], Optional[int], float] = (None, None, 0.0)
+    for L in range(max(1, tlen - len_slack), tlen + len_slack + 1):
+        if lo + L > hi:
+            continue
+        for st in range(lo, hi - L + 1):
+            cand = gold_text[st : st + L]
+            sc = SequenceMatcher(None, target, cand).ratio()
+            if sc > best[2]:
+                best = (st, st + L, sc)
+    return best
+
+
+def _index_by_id(items: List[dict]) -> Dict[int, dict]:
+    out: Dict[int, dict] = {}
+    for it in items:
+        if not isinstance(it, dict) or "id" not in it:
+            continue
+        try:
+            rid = int(it.get("id"))
+        except Exception:
+            continue
+        out[rid] = it
+    return out
+
+
+def pct_text_match(pred_items: List[dict], gold_map: Dict[int, dict]) -> Tuple[int, int]:
+    pred_map = _index_by_id(pred_items)
+    common = sorted(set(pred_map.keys()) & set(gold_map.keys()))
+    same = 0
+    for rid in common:
+        ptxt = pred_map[rid].get("text")
+        gtxt = gold_map[rid].get("text")
+        if isinstance(ptxt, str) and isinstance(gtxt, str) and ptxt == gtxt:
+            same += 1
+    return same, len(common)
+
+
+def remap_pred_items_to_gold_text(
+    pred_items: List[dict],
+    gold_map: Dict[int, dict],
+    *,
+    min_fuzzy_ratio: float,
+) -> Tuple[List[dict], Dict[str, Any]]:
+    """
+    Remap predicted spans onto gold text by locating each pred span's text inside gold text
+    (exact match preferred, else fuzzy local search). This makes evaluation possible when
+    pred item 'text' differs from gold item 'text'.
+    """
+    pred_map = _index_by_id(pred_items)
+    common_ids = sorted(set(pred_map.keys()) & set(gold_map.keys()))
+
+    total_spans = 0
+    remapped_spans = 0
+    dropped_spans = 0
+
+    out_items: List[dict] = []
+    for rid in common_ids:
+        p_item = pred_map[rid]
+        g_item = gold_map[rid]
+        p_text = p_item.get("text") if isinstance(p_item.get("text"), str) else ""
+        g_text = g_item.get("text") if isinstance(g_item.get("text"), str) else ""
+
+        new_item = dict(p_item)
+        new_item["text"] = g_text
+
+        p_spans = p_item.get("spans") or []
+        if not isinstance(p_spans, list):
+            p_spans = []
+
+        new_spans: List[dict] = []
+        for sp in p_spans:
+            if not isinstance(sp, dict):
+                continue
+            tag = sp.get("tag")
+            st = sp.get("start")
+            en = sp.get("end")
+            sp_text = sp.get("text")
+            if tag not in TAGS or not isinstance(sp_text, str) or not isinstance(st, int) or not isinstance(en, int):
+                continue
+
+            total_spans += 1
+            pred_pos = (st / len(p_text)) if isinstance(p_text, str) and len(p_text) else 0.0
+
+            occ = _find_all(g_text, sp_text)
+            if occ:
+                start = occ[0] if len(occ) == 1 else _best_occurrence_by_position(occ, pred_pos=pred_pos, gold_len=len(g_text))
+                end = start + len(sp_text)
+                new_spans.append({"tag": tag, "start": start, "end": end, "text": g_text[start:end]})
+                remapped_spans += 1
+                continue
+
+            fst, fen, score = _fuzzy_locate(g_text, sp_text, pred_pos=pred_pos)
+            if fst is not None and fen is not None and score >= min_fuzzy_ratio:
+                new_spans.append({"tag": tag, "start": fst, "end": fen, "text": g_text[fst:fen]})
+                remapped_spans += 1
+            else:
+                dropped_spans += 1
+
+        new_item["spans"] = new_spans
+        out_items.append(new_item)
+
+    stats = {
+        "common_requirements": len(common_ids),
+        "total_pred_spans": total_spans,
+        "remapped_spans": remapped_spans,
+        "dropped_spans": dropped_spans,
+        "min_fuzzy_ratio": min_fuzzy_ratio,
+    }
+    return out_items, stats
+
+
 def evaluate_run(pred_items: List[dict], gold_map: Dict[int, dict], mode: str, threshold: float) -> Tuple[dict, pd.DataFrame]:
     pred_map = {int(it.get("id")): it for it in pred_items if "id" in it}
     common_ids = sorted(set(pred_map.keys()).intersection(set(gold_map.keys())))
@@ -727,10 +887,15 @@ class ReqFlowApp(QMainWindow):
         self.setWindowTitle(APP_NAME)
         self.resize(1460, 920)
 
-        self.dataset_path: Path = DEFAULT_DATASET if DEFAULT_DATASET.exists() else Path()
+        # Pick a sensible default dataset if present; otherwise leave unset.
+        _fallback_datasets = [
+            DEFAULT_DATASET,
+            (ROOT / "data" / "dataset.csv").resolve(),
+        ]
+        self.dataset_path: Path = next((p for p in _fallback_datasets if p.is_file()), Path())
         self.df_dataset: Optional[pd.DataFrame] = None
 
-        self.gold_path: Path = DEFAULT_GOLD if DEFAULT_GOLD.exists() else Path()
+        self.gold_path: Path = DEFAULT_GOLD if DEFAULT_GOLD.is_file() else Path()
         self.current_run_dir: Optional[Path] = None
         self.current_pred_json: Optional[Path] = None
         self.current_pred_label: str = ""
@@ -741,13 +906,13 @@ class ReqFlowApp(QMainWindow):
         self._build_ui()
         self._apply_styles()
 
-        if self.dataset_path.exists():
+        if self.dataset_path.is_file():
             self.dataset_label.setText(str(self.dataset_path))
             self.load_dataset()
         else:
             self.dataset_label.setText("Select dataset CSV (id, text_en).")
 
-        if self.gold_path.exists():
+        if self.gold_path.is_file():
             self.gold_label.setText(str(self.gold_path))
         else:
             self.gold_label.setText("Select gold JSON (optional for evaluation).")
@@ -1073,6 +1238,18 @@ class ReqFlowApp(QMainWindow):
         self.eval_thr.setCurrentText("0.80")
         row.addWidget(self.eval_thr)
 
+        row.addSpacing(10)
+        self.eval_remap = QCheckBox("Remap spans to gold text")
+        self.eval_remap.setChecked(True)
+        row.addWidget(self.eval_remap)
+
+        row.addSpacing(10)
+        row.addWidget(QLabel("Min fuzzy:"))
+        self.eval_min_fuzzy = QComboBox()
+        self.eval_min_fuzzy.addItems(["0.75", "0.80", "0.85", "0.87", "0.90", "0.93", "0.95"])
+        self.eval_min_fuzzy.setCurrentText("0.80")
+        row.addWidget(self.eval_min_fuzzy)
+
         row.addStretch(1)
 
         self.eval_btn = QPushButton("Compute P/R/F1")
@@ -1217,7 +1394,11 @@ class ReqFlowApp(QMainWindow):
     def browse_dataset(self):
         fname, _ = QFileDialog.getOpenFileName(self, "Open Dataset CSV", str(ROOT), "CSV Files (*.csv)")
         if fname:
-            self.dataset_path = Path(fname).resolve()
+            p = Path(fname).resolve()
+            if not p.is_file():
+                QMessageBox.warning(self, "Invalid dataset", f"Selected path is not a file:\n{p}")
+                return
+            self.dataset_path = p
             self.dataset_label.setText(str(self.dataset_path))
             self.load_dataset()
 
@@ -1225,14 +1406,31 @@ class ReqFlowApp(QMainWindow):
         self.req_list.blockSignals(True)
         try:
             self.req_list.clear()
-            if not self.dataset_path.exists():
+            if not self.dataset_path:
                 QMessageBox.warning(self, "Dataset missing", "Please select a valid dataset CSV.")
+                return
+
+            # `Path()` defaults to ".", which exists but is a directory; avoid passing that to pandas.
+            if not self.dataset_path.exists():
+                QMessageBox.warning(self, "Dataset missing", f"Dataset path does not exist:\n{self.dataset_path}")
+                return
+
+            if not self.dataset_path.is_file():
+                QMessageBox.warning(
+                    self,
+                    "Invalid dataset",
+                    f"Dataset path is not a file (did you accidentally select a folder?):\n{self.dataset_path}",
+                )
                 return
 
             try:
                 df = pd.read_csv(self.dataset_path)
             except Exception as e:
-                QMessageBox.critical(self, "CSV read error", str(e))
+                QMessageBox.critical(
+                    self,
+                    "CSV read error",
+                    f"Failed to read CSV:\n{self.dataset_path}\n\nError:\n{e}",
+                )
                 return
 
             if "id" not in df.columns or "text_en" not in df.columns:
@@ -1354,9 +1552,23 @@ class ReqFlowApp(QMainWindow):
             return
 
         try:
-            pred_items = json.loads(self.current_pred_json.read_text(encoding="utf-8"))
+            pred_raw = json.loads(self.current_pred_json.read_text(encoding="utf-8"))
         except Exception as e:
             QMessageBox.critical(self, "Predictions read error", str(e))
+            return
+
+        if isinstance(pred_raw, list):
+            pred_items = [it for it in pred_raw if isinstance(it, dict)]
+        elif isinstance(pred_raw, dict) and isinstance(pred_raw.get("items"), list):
+            pred_items = [it for it in pred_raw["items"] if isinstance(it, dict)]
+        elif isinstance(pred_raw, dict) and isinstance(pred_raw.get("data"), list):
+            pred_items = [it for it in pred_raw["data"] if isinstance(it, dict)]
+        else:
+            QMessageBox.critical(
+                self,
+                "Predictions format error",
+                "Unsupported predictions JSON format (expected list or dict with items/data).",
+            )
             return
 
         try:
@@ -1368,15 +1580,43 @@ class ReqFlowApp(QMainWindow):
         mode = self.eval_mode.currentText()
         thr = 1.0 if mode == "Exact" else float(self.eval_thr.currentText())
 
-        summ, df = evaluate_run(pred_items, gold_map, mode=mode, threshold=thr)
+        same, total = pct_text_match(pred_items, gold_map)
+        text_match_ratio = (same / total) if total else 0.0
+
+        effective_items = pred_items
+        remap_stats: Optional[Dict[str, Any]] = None
+        if text_match_ratio < 1.0 and self.eval_remap.isChecked():
+            min_fuzzy = float(self.eval_min_fuzzy.currentText())
+            effective_items, remap_stats = remap_pred_items_to_gold_text(
+                pred_items, gold_map, min_fuzzy_ratio=min_fuzzy
+            )
+        elif text_match_ratio < 1.0 and not self.eval_remap.isChecked():
+            QMessageBox.information(
+                self,
+                "Text mismatch warning",
+                "Prediction texts do not match gold texts. Enable 'Remap spans to gold text' for meaningful evaluation.",
+            )
+
+        summ, df = evaluate_run(effective_items, gold_map, mode=mode, threshold=thr)
         set_table_from_df(self.eval_table, df)
 
-        curve_df = threshold_curve(pred_items, gold_map, mode=mode)
+        curve_df = threshold_curve(effective_items, gold_map, mode=mode)
         self.eval_curve.plot_threshold_curve(curve_df, "Threshold sweep (Precision/Recall/F1)")
+
+        remap_txt = "off"
+        if text_match_ratio < 1.0 and self.eval_remap.isChecked():
+            if remap_stats:
+                remap_txt = (
+                    f"on (remapped {remap_stats.get('remapped_spans', 0)}/{remap_stats.get('total_pred_spans', 0)}, "
+                    f"dropped {remap_stats.get('dropped_spans', 0)}, min={remap_stats.get('min_fuzzy_ratio')})"
+                )
+            else:
+                remap_txt = "on"
 
         self.eval_summary.setText(
             f"Run: {self.current_run_dir.name if self.current_run_dir else ''} | Pred: {self.current_pred_label} | "
-            f"Mode: {summ['mode']} | Thr: {summ['threshold']}\n"
+            f"Mode: {summ['mode']} | Thr: {summ['threshold']} | "
+            f"Text match: {same}/{total} ({text_match_ratio:.0%}) | Remap: {remap_txt}\n"
             f"Common: {summ['common_requirements']} | TP: {summ['TP']} | FP: {summ['FP']} | FN: {summ['FN']} | "
             f"P: {summ['precision']} | R: {summ['recall']} | F1: {summ['f1']}"
         )

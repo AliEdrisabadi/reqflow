@@ -2,15 +2,28 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Sequence
 
 
-def find_dotenv(start: str | os.PathLike | None = None, filename: str = ".env") -> Optional[str]:
+def find_dotenv(
+    start: str | os.PathLike | None = None,
+    filename: str = ".env",
+    *,
+    fallback_filenames: Sequence[str] = ("reqflow.env", ".env.example"),
+) -> Optional[str]:
+    """
+    Find an env file by walking upward from `start`.
+
+    We primarily look for `.env`, but some environments (or repos) block dotfiles.
+    In that case, we also accept `reqflow.env` (recommended) or `.env.example`.
+    """
     cur = Path(start or Path.cwd()).resolve()
+    candidates = (filename, *tuple(fallback_filenames))
     for p in [cur] + list(cur.parents):
-        cand = p / filename
-        if cand.exists() and cand.is_file():
-            return str(cand)
+        for name in candidates:
+            cand = p / name
+            if cand.exists() and cand.is_file():
+                return str(cand)
     return None
 
 

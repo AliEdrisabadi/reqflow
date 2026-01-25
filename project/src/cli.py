@@ -317,6 +317,11 @@ def run(mode: str, dataset: Path, out_dir: Path, ids: str = "", baseline_variant
         render_spans_html(pj, ph, theme=theme)
 
     print(f"Done. Results in: {out_dir}")
+    print(f"\n--- EVALUATION TIP ---")
+    print(f"To evaluate results against gold annotations:")
+    print(f"  python src/tools/evaluate.py --pred <output_json> --gold data/gold.json")
+    print(f"\nRecommended evaluation: Relaxed Match with threshold=0.5")
+    print(f"Primary metric: Micro F1 | Secondary metric: Macro F1")
 
 
 def main() -> None:

@@ -470,15 +470,20 @@ def text_sim(a: Span, b: Span) -> float:
 
 
 def span_score(a: Span, b: Span, mode: str) -> float:
+    """
+    Compute match score for two spans.
+    
+    Mode "Exact": requires exact boundary match
+    Mode "Relaxed": uses max(IoU, TextSimilarity) to handle LLM boundary variance
+    """
     if a.tag != b.tag:
         return 0.0
     if mode == "Exact":
         return 1.0 if (a.start == b.start and a.end == b.end) else 0.0
+    # Relaxed: max(IoU, TextSimilarity) - matches evaluation.py logic
     s_iou = iou(a, b)
-    if s_iou <= 0:
-        return 0.0
     s_txt = text_sim(a, b)
-    return 0.65 * s_iou + 0.35 * s_txt
+    return max(s_iou, s_txt)
 
 
 def match_counts(pred: List[Span], gold: List[Span], mode: str, threshold: float) -> Tuple[int, int, int]:
@@ -513,11 +518,19 @@ def prf(tp: int, fp: int, fn: int) -> Tuple[float, float, float]:
 
 
 def evaluate_run(pred_items: List[dict], gold_map: Dict[int, dict], mode: str, threshold: float) -> Tuple[dict, pd.DataFrame]:
+    """
+    Evaluate predictions against gold annotations.
+    
+    Returns:
+        summary: dict with Micro F1 (primary metric) and Macro F1 (secondary)
+        df: DataFrame with per-tag metrics
+    """
     pred_map = {int(it.get("id")): it for it in pred_items if "id" in it}
     common_ids = sorted(set(pred_map.keys()).intersection(set(gold_map.keys())))
 
     overall_tp = overall_fp = overall_fn = 0
     rows: List[Dict[str, Any]] = []
+    tag_f1_scores: List[float] = []  # For Macro F1 computation
 
     for tag in TAGS:
         tp_t = fp_t = fn_t = 0
@@ -536,6 +549,7 @@ def evaluate_run(pred_items: List[dict], gold_map: Dict[int, dict], mode: str, t
             fn_t += fn
 
         p, r, f1 = prf(tp_t, fp_t, fn_t)
+        tag_f1_scores.append(f1)  # Collect F1 for Macro computation
         rows.append(
             {
                 "tag": tag,
@@ -552,7 +566,12 @@ def evaluate_run(pred_items: List[dict], gold_map: Dict[int, dict], mode: str, t
         overall_fp += fp_t
         overall_fn += fn_t
 
-    p_all, r_all, f1_all = prf(overall_tp, overall_fp, overall_fn)
+    # Micro F1: computed from aggregated TP/FP/FN (PRIMARY METRIC)
+    p_all, r_all, f1_micro = prf(overall_tp, overall_fp, overall_fn)
+    
+    # Macro F1: average of per-tag F1 scores (SECONDARY METRIC)
+    f1_macro = sum(tag_f1_scores) / len(tag_f1_scores) if tag_f1_scores else 0.0
+    
     summary = {
         "common_requirements": len(common_ids),
         "mode": mode,
@@ -562,7 +581,9 @@ def evaluate_run(pred_items: List[dict], gold_map: Dict[int, dict], mode: str, t
         "FN": overall_fn,
         "precision": round(p_all, 4),
         "recall": round(r_all, 4),
-        "f1": round(f1_all, 4),
+        "f1": round(f1_micro, 4),           # Micro F1 (primary)
+        "micro_f1": round(f1_micro, 4),     # Explicit Micro F1
+        "macro_f1": round(f1_macro, 4),     # Macro F1 (secondary)
     }
 
     df = pd.DataFrame(rows).sort_values(by="f1", ascending=False)
@@ -633,6 +654,81 @@ class MetricLineChart(QWidget):
         _apply_dark_axes(ax)
 
         self.fig.tight_layout()
+        self.canvas.draw()
+
+
+class ComparisonChart(QWidget):
+    """Chart comparing Relaxed Match vs Exact Match across thresholds"""
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
+        self.fig = Figure(figsize=(6, 4), dpi=120)
+        self.canvas = FigureCanvas(self.fig)
+        layout.addWidget(self.canvas)
+
+    def plot_comparison(self, pred_items: List[dict], gold_map: Dict[int, dict]):
+        """Compare Relaxed Match vs Exact Match for Micro and Macro F1"""
+        self.fig.clear()
+        
+        if not pred_items or not gold_map:
+            ax = self.fig.add_subplot(111)
+            ax.text(0.5, 0.5, "No data", ha="center", va="center", color="#dbe2ea")
+            _apply_dark_axes(ax)
+            self.canvas.draw()
+            return
+
+        # Create 2 subplots: Micro F1 and Macro F1
+        ax1 = self.fig.add_subplot(2, 1, 1)
+        ax2 = self.fig.add_subplot(2, 1, 2)
+
+        # Compute metrics across thresholds
+        thresholds = [round(i / 20, 2) for i in range(0, 21)]
+        
+        relaxed_micro = []
+        relaxed_macro = []
+        
+        for t in thresholds:
+            summ, _ = evaluate_run(pred_items, gold_map, mode="Relaxed", threshold=t)
+            relaxed_micro.append(summ["micro_f1"])
+            relaxed_macro.append(summ["macro_f1"])
+        
+        # Exact match (single point at threshold 1.0)
+        exact_summ, _ = evaluate_run(pred_items, gold_map, mode="Exact", threshold=1.0)
+        exact_micro = exact_summ["micro_f1"]
+        exact_macro = exact_summ["macro_f1"]
+
+        # Plot Micro F1 comparison
+        ax1.plot(thresholds, relaxed_micro, marker="o", linewidth=2, 
+                label="Relaxed Match", color="#2bd98f")
+        ax1.axhline(y=exact_micro, color="#fb7185", linestyle="--", linewidth=2,
+                   label=f"Exact Match (F1={exact_micro:.3f})")
+        ax1.axvline(x=0.5, color="#ffb020", linestyle=":", alpha=0.5, linewidth=1.5)
+        ax1.text(0.5, ax1.get_ylim()[1] * 0.95, "Recommended\nthreshold=0.5", 
+                ha="center", va="top", color="#ffb020", fontsize=8)
+        ax1.set_title("Micro F1 Comparison (PRIMARY METRIC)", pad=8, fontsize=10, fontweight="bold")
+        ax1.set_xlabel("Threshold")
+        ax1.set_ylabel("Micro F1")
+        ax1.set_ylim(0.0, 1.0)
+        ax1.legend(loc="lower left", fontsize=8)
+        ax1.grid(True, alpha=0.3)
+        _apply_dark_axes(ax1)
+
+        # Plot Macro F1 comparison
+        ax2.plot(thresholds, relaxed_macro, marker="o", linewidth=2,
+                label="Relaxed Match", color="#66c2ff")
+        ax2.axhline(y=exact_macro, color="#f472b6", linestyle="--", linewidth=2,
+                   label=f"Exact Match (F1={exact_macro:.3f})")
+        ax2.axvline(x=0.5, color="#ffb020", linestyle=":", alpha=0.5, linewidth=1.5)
+        ax2.set_title("Macro F1 Comparison (SECONDARY METRIC)", pad=8, fontsize=10, fontweight="bold")
+        ax2.set_xlabel("Threshold")
+        ax2.set_ylabel("Macro F1")
+        ax2.set_ylim(0.0, 1.0)
+        ax2.legend(loc="lower left", fontsize=8)
+        ax2.grid(True, alpha=0.3)
+        _apply_dark_axes(ax2)
+
+        self.fig.tight_layout(pad=1.5)
         self.canvas.draw()
 
 
@@ -1070,7 +1166,7 @@ class ReqFlowApp(QMainWindow):
         row.addWidget(QLabel("Threshold:"))
         self.eval_thr = QComboBox()
         self.eval_thr.addItems([f"{i/20:.2f}" for i in range(0, 21)])
-        self.eval_thr.setCurrentText("0.80")
+        self.eval_thr.setCurrentText("0.50")  # Recommended threshold for relaxed matching
         row.addWidget(self.eval_thr)
 
         row.addStretch(1)
@@ -1087,6 +1183,14 @@ class ReqFlowApp(QMainWindow):
         self.eval_summary.setFont(QFont("Segoe UI", 10, QFont.Weight.Bold))
         e_layout.addWidget(self.eval_summary)
 
+        # Create tab widget for different evaluation views
+        eval_tabs = QTabWidget()
+        
+        # Tab 1: Per-tag metrics table + threshold curve
+        metrics_tab = QWidget()
+        metrics_layout = QVBoxLayout(metrics_tab)
+        metrics_layout.setContentsMargins(0, 0, 0, 0)
+        
         eval_split = QSplitter(Qt.Orientation.Horizontal)
         self.eval_table = QTableWidget()
         eval_split.addWidget(self.eval_table)
@@ -1096,8 +1200,30 @@ class ReqFlowApp(QMainWindow):
 
         eval_split.setStretchFactor(0, 1)
         eval_split.setStretchFactor(1, 1)
+        
+        metrics_layout.addWidget(eval_split)
+        eval_tabs.addTab(metrics_tab, "Per-Tag Metrics")
+        
+        # Tab 2: Comparison chart (Relaxed vs Exact)
+        comparison_tab = QWidget()
+        comparison_layout = QVBoxLayout(comparison_tab)
+        comparison_layout.setContentsMargins(0, 0, 0, 0)
+        
+        comparison_info = QLabel(
+            "This chart compares Relaxed Match (with IoU/TextSim threshold) vs Exact Match "
+            "for both Micro F1 (primary metric) and Macro F1 (secondary metric).\n"
+            "Recommended: Use Relaxed Match with threshold ≥ 0.5 to handle LLM boundary variance."
+        )
+        comparison_info.setWordWrap(True)
+        comparison_info.setStyleSheet("color: #b9c3cf; padding: 8px;")
+        comparison_layout.addWidget(comparison_info)
+        
+        self.comparison_chart = ComparisonChart()
+        comparison_layout.addWidget(self.comparison_chart, stretch=1)
+        
+        eval_tabs.addTab(comparison_tab, "Relaxed vs Exact Comparison")
 
-        e_layout.addWidget(eval_split, stretch=1)
+        e_layout.addWidget(eval_tabs, stretch=1)
         self.tabs.addTab(eval_tab, "Evaluation")
 
         right_layout.addWidget(self.tabs)
@@ -1174,6 +1300,9 @@ class ReqFlowApp(QMainWindow):
     def _set_eval_empty_state(self):
         set_table_from_df(self.eval_table, pd.DataFrame())
         self.eval_curve.plot_threshold_curve(pd.DataFrame(), "Threshold sweep (Precision/Recall/F1)")
+        # Clear comparison chart on initialization
+        if hasattr(self, 'comparison_chart'):
+            self.comparison_chart.plot_comparison([], {})
 
     def _checked_ids(self) -> List[int]:
         ids: List[int] = []
@@ -1374,11 +1503,17 @@ class ReqFlowApp(QMainWindow):
         curve_df = threshold_curve(pred_items, gold_map, mode=mode)
         self.eval_curve.plot_threshold_curve(curve_df, "Threshold sweep (Precision/Recall/F1)")
 
+        # Update comparison chart (Relaxed vs Exact for Micro/Macro F1)
+        self.comparison_chart.plot_comparison(pred_items, gold_map)
+
+        # Display evaluation summary with Micro F1 as PRIMARY metric
+        metric_label = "PRIMARY" if mode == "Relaxed" and thr >= 0.5 else "COMPUTED"
         self.eval_summary.setText(
             f"Run: {self.current_run_dir.name if self.current_run_dir else ''} | Pred: {self.current_pred_label} | "
-            f"Mode: {summ['mode']} | Thr: {summ['threshold']}\n"
-            f"Common: {summ['common_requirements']} | TP: {summ['TP']} | FP: {summ['FP']} | FN: {summ['FN']} | "
-            f"P: {summ['precision']} | R: {summ['recall']} | F1: {summ['f1']}"
+            f"Mode: {summ['mode']} | Threshold: {summ['threshold']}\n"
+            f"Samples: {summ['common_requirements']} | TP: {summ['TP']} | FP: {summ['FP']} | FN: {summ['FN']}\n"
+            f"Precision: {summ['precision']} | Recall: {summ['recall']} | "
+            f"Micro F1: {summ['micro_f1']} ({metric_label}) | Macro F1: {summ['macro_f1']} (SECONDARY)"
         )
 
 

@@ -591,18 +591,20 @@ def evaluate_run(pred_items: List[dict], gold_map: Dict[int, dict], mode: str, t
 
 
 def threshold_curve(pred_items: List[dict], gold_map: Dict[int, dict], mode: str) -> pd.DataFrame:
-    if mode == "Exact":
-        s, _ = evaluate_run(pred_items, gold_map, mode=mode, threshold=1.0)
-        return pd.DataFrame(
-            [
-                {"threshold": 1.0, "metric": "precision", "value": s["precision"]},
-                {"threshold": 1.0, "metric": "recall", "value": s["recall"]},
-                {"threshold": 1.0, "metric": "f1", "value": s["f1"]},
-            ]
-        )
-
     ths = [round(i / 20, 2) for i in range(0, 21)]
     out_rows: List[Dict[str, Any]] = []
+    
+    if mode == "Exact":
+        # For Exact Match, compute once and show as horizontal line across all thresholds
+        # (Exact Match is binary - doesn't vary with threshold)
+        s, _ = evaluate_run(pred_items, gold_map, mode=mode, threshold=1.0)
+        for t in ths:
+            out_rows.append({"threshold": t, "metric": "precision", "value": s["precision"]})
+            out_rows.append({"threshold": t, "metric": "recall", "value": s["recall"]})
+            out_rows.append({"threshold": t, "metric": "f1", "value": s["f1"]})
+        return pd.DataFrame(out_rows)
+
+    # For Relaxed Match, compute at each threshold
     for t in ths:
         s, _ = evaluate_run(pred_items, gold_map, mode=mode, threshold=t)
         out_rows.append({"threshold": t, "metric": "precision", "value": s["precision"]})

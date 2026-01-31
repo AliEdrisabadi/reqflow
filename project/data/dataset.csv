@@ -1,4 +1,4 @@
-id,text_en,nested,type,module,complexity
+id,text,nested,type,module,complexity
 1,"A student shall be able to search study rooms with available seats by campus, date, and time range.",False,Functional,Search & Discovery,Conditional
 2,"When the student is authenticated, the system shall allow reserving one or more seats in a study room for a chosen time slot.",True,Functional,Other,Conditional
 3,"If the selected study room has insufficient available seats for the requested time slot, the system shall reject the reservation and suggest the nearest available slots.",True,Functional,Search & Discovery,Conditional

@@ -1,0 +1,16 @@
+tag,tp,fp,fn,precision,recall,f1
+Main_actor,4,2,3,0.6667,0.5714,0.6154
+Entity,12,5,16,0.7059,0.4286,0.5333
+Action,2,7,10,0.2222,0.1667,0.1905
+System_response,3,2,3,0.6000,0.5000,0.5455
+Condition,5,3,0,0.6250,1.0000,0.7692
+Precondition,0,0,1,0.0000,0.0000,0.0000
+Constraint,2,0,5,1.0000,0.2857,0.4444
+Exception,1,0,0,1.0000,1.0000,1.0000
+
+# OVERALL METRICS (Relaxed Match (threshold=0.5))
+MICRO_F1,29,19,38,0.6042,0.4328,0.5043
+MACRO_F1,,,,,,0.5123
+
+# PRIMARY METRIC: Micro F1 = 0.5043
+# SECONDARY METRIC: Macro F1 = 0.5123

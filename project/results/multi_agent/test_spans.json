@@ -1,0 +1,290 @@
+[
+  {
+    "id": 1,
+    "text": "A student shall be able to search study rooms with available seats by campus, date, and time range.",
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 8,
+        "text": "A studen"
+      },
+      {
+        "tag": "Condition",
+        "start": 0,
+        "end": 39,
+        "text": "A student shall be able to search study"
+      },
+      {
+        "tag": "Action",
+        "start": 0,
+        "end": 49,
+        "text": "A student shall be able to search study rooms wit"
+      },
+      {
+        "tag": "Entity",
+        "start": 8,
+        "end": 18,
+        "text": "t shall be"
+      },
+      {
+        "tag": "Entity",
+        "start": 18,
+        "end": 26,
+        "text": " able to"
+      },
+      {
+        "tag": "Entity",
+        "start": 26,
+        "end": 30,
+        "text": " sea"
+      },
+      {
+        "tag": "Entity",
+        "start": 30,
+        "end": 35,
+        "text": "rch s"
+      },
+      {
+        "tag": "Entity",
+        "start": 35,
+        "end": 41,
+        "text": "tudy r"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "text": "When the student is authenticated, the system shall allow reserving one or more seats in a study room for a chosen time slot.",
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 8,
+        "text": "When the"
+      },
+      {
+        "tag": "Precondition",
+        "start": 0,
+        "end": 20,
+        "text": "When the student is "
+      },
+      {
+        "tag": "Action",
+        "start": 0,
+        "end": 49,
+        "text": "When the student is authenticated, the system sha"
+      },
+      {
+        "tag": "Condition",
+        "start": 20,
+        "end": 43,
+        "text": "authenticated, the syst"
+      },
+      {
+        "tag": "Main_actor",
+        "start": 23,
+        "end": 30,
+        "text": "hentica"
+      },
+      {
+        "tag": "Entity",
+        "start": 31,
+        "end": 37,
+        "text": "ed, th"
+      },
+      {
+        "tag": "Entity",
+        "start": 38,
+        "end": 44,
+        "text": " syste"
+      },
+      {
+        "tag": "Constraint",
+        "start": 43,
+        "end": 58,
+        "text": "em shall allow "
+      },
+      {
+        "tag": "Entity",
+        "start": 45,
+        "end": 53,
+        "text": " shall a"
+      },
+      {
+        "tag": "Entity",
+        "start": 54,
+        "end": 62,
+        "text": "low rese"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "text": "If the selected study room has insufficient available seats for the requested time slot, the system shall reject the reservation and suggest the nearest available slots.",
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 8,
+        "text": "If the s"
+      },
+      {
+        "tag": "System_response",
+        "start": 0,
+        "end": 48,
+        "text": "If the selected study room has insufficient avai"
+      },
+      {
+        "tag": "Condition",
+        "start": 0,
+        "end": 58,
+        "text": "If the selected study room has insufficient available seat"
+      },
+      {
+        "tag": "Entity",
+        "start": 13,
+        "end": 24,
+        "text": "ed study ro"
+      },
+      {
+        "tag": "Entity",
+        "start": 25,
+        "end": 36,
+        "text": "m has insuf"
+      },
+      {
+        "tag": "Main_actor",
+        "start": 37,
+        "end": 45,
+        "text": "icient a"
+      },
+      {
+        "tag": "Entity",
+        "start": 37,
+        "end": 45,
+        "text": "icient a"
+      },
+      {
+        "tag": "Entity",
+        "start": 46,
+        "end": 58,
+        "text": "ailable seat"
+      },
+      {
+        "tag": "Entity",
+        "start": 59,
+        "end": 69,
+        "text": " for the r"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "text": "A reservation shall include the room identifier, date, start time, end time, and the number of seats requested.",
+    "spans": [
+      {
+        "tag": "Entity",
+        "start": 0,
+        "end": 10,
+        "text": "A reservat"
+      },
+      {
+        "tag": "Action",
+        "start": 0,
+        "end": 55,
+        "text": "A reservation shall include the room identifier, date, "
+      },
+      {
+        "tag": "Entity",
+        "start": 11,
+        "end": 18,
+        "text": "on shal"
+      },
+      {
+        "tag": "Entity",
+        "start": 19,
+        "end": 24,
+        "text": " incl"
+      },
+      {
+        "tag": "Entity",
+        "start": 25,
+        "end": 31,
+        "text": "de the"
+      },
+      {
+        "tag": "Entity",
+        "start": 32,
+        "end": 38,
+        "text": "room i"
+      },
+      {
+        "tag": "Entity",
+        "start": 39,
+        "end": 48,
+        "text": "entifier,"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "text": "The system shall prevent a student from booking more than 2 active reservations per day and more than 6 per week.",
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 4,
+        "text": "The "
+      },
+      {
+        "tag": "System_response",
+        "start": 0,
+        "end": 59,
+        "text": "The system shall prevent a student from booking more than 2"
+      },
+      {
+        "tag": "Main_actor",
+        "start": 23,
+        "end": 28,
+        "text": "t a s"
+      },
+      {
+        "tag": "Entity",
+        "start": 28,
+        "end": 34,
+        "text": "tudent"
+      },
+      {
+        "tag": "Entity",
+        "start": 35,
+        "end": 40,
+        "text": "from "
+      },
+      {
+        "tag": "Constraint",
+        "start": 38,
+        "end": 45,
+        "text": "m booki"
+      },
+      {
+        "tag": "Entity",
+        "start": 41,
+        "end": 45,
+        "text": "ooki"
+      },
+      {
+        "tag": "Entity",
+        "start": 46,
+        "end": 51,
+        "text": "g mor"
+      },
+      {
+        "tag": "Constraint",
+        "start": 46,
+        "end": 53,
+        "text": "g more "
+      }
+    ]
+  }
+]

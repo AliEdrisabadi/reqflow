@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "text": "A student shall be able to search study rooms with available seats by campus, date, and time range.",
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 9,
+        "text": "A student"
+      },
+      {
+        "tag": "Action",
+        "start": 27,
+        "end": 45,
+        "text": "search study rooms"
+      },
+      {
+        "tag": "Entity",
+        "start": 34,
+        "end": 45,
+        "text": "study rooms"
+      },
+      {
+        "tag": "Condition",
+        "start": 46,
+        "end": 66,
+        "text": "with available seats"
+      },
+      {
+        "tag": "Entity",
+        "start": 70,
+        "end": 76,
+        "text": "campus"
+      },
+      {
+        "tag": "Entity",
+        "start": 78,
+        "end": 82,
+        "text": "date"
+      },
+      {
+        "tag": "Entity",
+        "start": 88,
+        "end": 98,
+        "text": "time range"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "text": "When the student is authenticated, the system shall allow reserving one or more seats in a study room for a chosen time slot.",
+    "spans": [
+      {
+        "tag": "Condition",
+        "start": 0,
+        "end": 33,
+        "text": "When the student is authenticated"
+      },
+      {
+        "tag": "Main_actor",
+        "start": 5,
+        "end": 16,
+        "text": "the student"
+      },
+      {
+        "tag": "System_response",
+        "start": 46,
+        "end": 101,
+        "text": "shall allow reserving one or more seats in a study room"
+      },
+      {
+        "tag": "Entity",
+        "start": 68,
+        "end": 85,
+        "text": "one or more seats"
+      },
+      {
+        "tag": "Entity",
+        "start": 89,
+        "end": 101,
+        "text": "a study room"
+      },
+      {
+        "tag": "Action",
+        "start": 102,
+        "end": 124,
+        "text": "for a chosen time slot"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "text": "If the selected study room has insufficient available seats for the requested time slot, the system shall reject the reservation and suggest the nearest available slots.",
+    "spans": [
+      {
+        "tag": "Condition",
+        "start": 0,
+        "end": 88,
+        "text": "If the selected study room has insufficient available seats for the requested time slot,"
+      },
+      {
+        "tag": "Main_actor",
+        "start": 3,
+        "end": 26,
+        "text": "the selected study room"
+      },
+      {
+        "tag": "Condition",
+        "start": 27,
+        "end": 87,
+        "text": "has insufficient available seats for the requested time slot"
+      },
+      {
+        "tag": "System_response",
+        "start": 89,
+        "end": 128,
+        "text": "the system shall reject the reservation"
+      },
+      {
+        "tag": "Entity",
+        "start": 113,
+        "end": 128,
+        "text": "the reservation"
+      },
+      {
+        "tag": "System_response",
+        "start": 129,
+        "end": 168,
+        "text": "and suggest the nearest available slots"
+      }
+    ]
+  }
+]

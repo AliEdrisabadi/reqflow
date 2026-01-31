@@ -1,0 +1,16 @@
+tag,tp,fp,fn,precision,recall,f1
+Main_actor,0,6,10,0.0000,0.0000,0.0000
+Entity,0,17,10,0.0000,0.0000,0.0000
+Action,0,9,10,0.0000,0.0000,0.0000
+System_response,0,5,10,0.0000,0.0000,0.0000
+Condition,0,8,1,0.0000,0.0000,0.0000
+Precondition,0,0,6,0.0000,0.0000,0.0000
+Constraint,0,2,8,0.0000,0.0000,0.0000
+Exception,0,1,4,0.0000,0.0000,0.0000
+
+# OVERALL METRICS (Exact Match)
+MICRO_F1,0,48,59,0.0000,0.0000,0.0000
+MACRO_F1,,,,,,0.0000
+
+# PRIMARY METRIC: Micro F1 = 0.0000
+# SECONDARY METRIC: Macro F1 = 0.0000

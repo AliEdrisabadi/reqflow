@@ -1,0 +1,387 @@
+<!doctype html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>ReqFlow — Spans</title>
+        <style>
+    :root {
+      --bg: #15181c;
+      --card: #0f1216;
+      --text: #eaeaea;
+      --muted: #a8b0bb;
+      --border: #2a2f36;
+      --track: #1b2026;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .container {
+      max-width: 1280px;
+      margin: 16px auto;
+      padding: 0 12px 28px 12px;
+    }
+    .header {
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 8px 0 18px 0;
+    }
+    .header h1 {
+      font-size: 18px;
+      margin: 0;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+    .header .meta {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      margin: 12px 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.20);
+    }
+    .cardHeader {
+      margin-bottom: 10px;
+    }
+    .rid {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+    .reqText {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      line-height: 1.45;
+      white-space: pre-wrap;
+    }
+    .rows {
+      margin-top: 12px;
+      display: grid;
+      gap: 8px;
+    }
+    .tagRow {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+    .tagLabel {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .track {
+      position: relative;
+      height: 18px;
+      border-radius: 10px;
+      background: var(--track);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .bar {
+      position: absolute;
+      top: 1px;
+      bottom: 1px;
+      border-radius: 9px;
+      opacity: 0.92;
+    }
+    .bar:hover {
+      opacity: 1.0;
+      filter: saturate(1.1);
+    }
+    </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>ReqFlow — Span Visualization</h1>
+            <div class="meta">baseline_spans.json</div>
+          </div>
+          
+    <section class="card">
+      <div class="cardHeader">
+        <div class="rid">ID 1</div>
+        <div class="reqText">A student shall be able to search study rooms with available seats by campus, date, and time range.</div>
+      </div>
+      <div class="rows">
+        
+            <div class="tagRow">
+              <div class="tagLabel">Main_actor</div>
+              <div class="track"><div class="bar" style="left:0.00%;width:9.09%;background:#66c2ff;" title="Main_actor: A student"></div></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Entity</div>
+              <div class="track"><div class="bar" style="left:34.34%;width:11.11%;background:#a78bfa;" title="Entity: study rooms"></div>
+<div class="bar" style="left:51.52%;width:15.15%;background:#a78bfa;" title="Entity: available seats"></div>
+<div class="bar" style="left:67.68%;width:9.09%;background:#a78bfa;" title="Entity: by campus"></div>
+<div class="bar" style="left:78.79%;width:4.04%;background:#a78bfa;" title="Entity: date"></div>
+<div class="bar" style="left:84.85%;width:14.14%;background:#a78bfa;" title="Entity: and time range"></div></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Action</div>
+              <div class="track"><div class="bar" style="left:10.10%;width:23.23%;background:#2bd98f;" title="Action: shall be able to search"></div></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">System_response</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Condition</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Precondition</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Constraint</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Exception</div>
+              <div class="track"></div>
+            </div>
+            
+      </div>
+    </section>
+    
+
+    <section class="card">
+      <div class="cardHeader">
+        <div class="rid">ID 2</div>
+        <div class="reqText">When the student is authenticated, the system shall allow reserving one or more seats in a study room for a chosen time slot.</div>
+      </div>
+      <div class="rows">
+        
+            <div class="tagRow">
+              <div class="tagLabel">Main_actor</div>
+              <div class="track"><div class="bar" style="left:0.00%;width:12.80%;background:#66c2ff;" title="Main_actor: When the student"></div></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Entity</div>
+              <div class="track"><div class="bar" style="left:54.40%;width:13.60%;background:#a78bfa;" title="Entity: one or more seats"></div>
+<div class="bar" style="left:68.80%;width:12.00%;background:#a78bfa;" title="Entity: in a study room"></div></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Action</div>
+              <div class="track"><div class="bar" style="left:28.00%;width:25.60%;background:#2bd98f;" title="Action: the system shall allow reserving"></div>
+<div class="bar" style="left:81.60%;width:17.60%;background:#2bd98f;" title="Action: for a chosen time slot"></div></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">System_response</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Condition</div>
+              <div class="track"><div class="bar" style="left:13.60%;width:12.80%;background:#f472b6;" title="Condition: is authenticated"></div></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Precondition</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Constraint</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Exception</div>
+              <div class="track"></div>
+            </div>
+            
+      </div>
+    </section>
+    
+
+    <section class="card">
+      <div class="cardHeader">
+        <div class="rid">ID 3</div>
+        <div class="reqText">If the selected study room has insufficient available seats for the requested time slot, the system shall reject the reservation and suggest the nearest available slots.</div>
+      </div>
+      <div class="rows">
+        
+            <div class="tagRow">
+              <div class="tagLabel">Main_actor</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Entity</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Action</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">System_response</div>
+              <div class="track"><div class="bar" style="left:52.66%;width:46.75%;background:#ffb020;" title="System_response: the system shall reject the reservation and suggest the nearest available slots"></div></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Condition</div>
+              <div class="track"><div class="bar" style="left:0.00%;width:51.48%;background:#f472b6;" title="Condition: If the selected study room has insufficient available seats for the requested time slot"></div></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Precondition</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Constraint</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Exception</div>
+              <div class="track"></div>
+            </div>
+            
+      </div>
+    </section>
+    
+
+    <section class="card">
+      <div class="cardHeader">
+        <div class="rid">ID 4</div>
+        <div class="reqText">A reservation shall include the room identifier, date, start time, end time, and the number of seats requested.</div>
+      </div>
+      <div class="rows">
+        
+            <div class="tagRow">
+              <div class="tagLabel">Main_actor</div>
+              <div class="track"><div class="bar" style="left:0.00%;width:0.90%;background:#66c2ff;" title="Main_actor: A"></div></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Entity</div>
+              <div class="track"><div class="bar" style="left:1.80%;width:9.91%;background:#a78bfa;" title="Entity: reservation"></div>
+<div class="bar" style="left:25.23%;width:17.12%;background:#a78bfa;" title="Entity: the room identifier"></div>
+<div class="bar" style="left:44.14%;width:3.60%;background:#a78bfa;" title="Entity: date"></div>
+<div class="bar" style="left:49.55%;width:9.01%;background:#a78bfa;" title="Entity: start time"></div>
+<div class="bar" style="left:60.36%;width:7.21%;background:#a78bfa;" title="Entity: end time"></div>
+<div class="bar" style="left:69.37%;width:29.73%;background:#a78bfa;" title="Entity: and the number of seats requested"></div></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Action</div>
+              <div class="track"><div class="bar" style="left:12.61%;width:11.71%;background:#2bd98f;" title="Action: shall include"></div></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">System_response</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Condition</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Precondition</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Constraint</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Exception</div>
+              <div class="track"></div>
+            </div>
+            
+      </div>
+    </section>
+    
+
+    <section class="card">
+      <div class="cardHeader">
+        <div class="rid">ID 5</div>
+        <div class="reqText">The system shall prevent a student from booking more than 2 active reservations per day and more than 6 per week.</div>
+      </div>
+      <div class="rows">
+        
+            <div class="tagRow">
+              <div class="tagLabel">Main_actor</div>
+              <div class="track"><div class="bar" style="left:0.00%;width:8.85%;background:#66c2ff;" title="Main_actor: The system"></div></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Entity</div>
+              <div class="track"><div class="bar" style="left:22.12%;width:7.96%;background:#a78bfa;" title="Entity: a student"></div>
+<div class="bar" style="left:42.48%;width:34.51%;background:#a78bfa;" title="Entity: more than 2 active reservations per day"></div>
+<div class="bar" style="left:92.04%;width:7.08%;background:#a78bfa;" title="Entity: per week"></div></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Action</div>
+              <div class="track"><div class="bar" style="left:9.73%;width:11.50%;background:#2bd98f;" title="Action: shall prevent"></div>
+<div class="bar" style="left:30.97%;width:10.62%;background:#2bd98f;" title="Action: from booking"></div></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">System_response</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Condition</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Precondition</div>
+              <div class="track"></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Constraint</div>
+              <div class="track"><div class="bar" style="left:70.80%;width:6.19%;background:#fb7185;" title="Constraint: per day"></div>
+<div class="bar" style="left:81.42%;width:9.73%;background:#fb7185;" title="Constraint: more than 6"></div>
+<div class="bar" style="left:92.04%;width:7.08%;background:#fb7185;" title="Constraint: per week"></div></div>
+            </div>
+            
+            <div class="tagRow">
+              <div class="tagLabel">Exception</div>
+              <div class="track"></div>
+            </div>
+            
+      </div>
+    </section>
+    
+        </div>
+      </body>
+    </html>
+    

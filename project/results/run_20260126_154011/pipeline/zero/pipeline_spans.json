@@ -1,0 +1,535 @@
+[
+  {
+    "id": 1,
+    "text": "A student shall be able to search study rooms with available seats by campus, date, and time range.",
+    "clauses": [
+      {
+        "clause_id": 0,
+        "start": 0,
+        "end": 99,
+        "text": "A student shall be able to search study rooms with available seats by campus, date, and time range.",
+        "cue": "MAIN"
+      }
+    ],
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 9,
+        "text": "A student"
+      },
+      {
+        "tag": "Action",
+        "start": 10,
+        "end": 33,
+        "text": "shall be able to search"
+      },
+      {
+        "tag": "Entity",
+        "start": 34,
+        "end": 45,
+        "text": "study rooms"
+      },
+      {
+        "tag": "Condition",
+        "start": 46,
+        "end": 66,
+        "text": "with available seats"
+      },
+      {
+        "tag": "Condition",
+        "start": 67,
+        "end": 98,
+        "text": "by campus, date, and time range"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "text": "When the student is authenticated, the system shall allow reserving one or more seats in a study room for a chosen time slot.",
+    "clauses": [
+      {
+        "clause_id": 1,
+        "start": 0,
+        "end": 33,
+        "text": "When the student is authenticated",
+        "cue": "CONDITION"
+      },
+      {
+        "clause_id": 2,
+        "start": 35,
+        "end": 125,
+        "text": "the system shall allow reserving one or more seats in a study room for a chosen time slot.",
+        "cue": "MAIN"
+      }
+    ],
+    "spans": [
+      {
+        "tag": "Condition",
+        "start": 0,
+        "end": 33,
+        "text": "When the student is authenticated"
+      },
+      {
+        "tag": "Main_actor",
+        "start": 35,
+        "end": 45,
+        "text": "the system"
+      },
+      {
+        "tag": "Action",
+        "start": 46,
+        "end": 67,
+        "text": "shall allow reserving"
+      },
+      {
+        "tag": "Entity",
+        "start": 68,
+        "end": 85,
+        "text": "one or more seats"
+      },
+      {
+        "tag": "Entity",
+        "start": 86,
+        "end": 101,
+        "text": "in a study room"
+      },
+      {
+        "tag": "Action",
+        "start": 102,
+        "end": 124,
+        "text": "for a chosen time slot"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "text": "If the selected study room has insufficient available seats for the requested time slot, the system shall reject the reservation and suggest the nearest available slots.",
+    "clauses": [
+      {
+        "clause_id": 1,
+        "start": 0,
+        "end": 169,
+        "text": "If the selected study room has insufficient available seats for the requested time slot, the system shall reject the reservation and suggest the nearest available slots.",
+        "cue": "MAIN"
+      }
+    ],
+    "spans": [
+      {
+        "tag": "Condition",
+        "start": 0,
+        "end": 59,
+        "text": "If the selected study room has insufficient available seats"
+      },
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 169,
+        "text": "If the selected study room has insufficient available seats for the requested time slot, the system shall reject the reservation and suggest the nearest available slots."
+      },
+      {
+        "tag": "Entity",
+        "start": 3,
+        "end": 26,
+        "text": "the selected study room"
+      },
+      {
+        "tag": "Action",
+        "start": 27,
+        "end": 59,
+        "text": "has insufficient available seats"
+      },
+      {
+        "tag": "Action",
+        "start": 100,
+        "end": 128,
+        "text": "shall reject the reservation"
+      },
+      {
+        "tag": "System_response",
+        "start": 133,
+        "end": 168,
+        "text": "suggest the nearest available slots"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "text": "A reservation shall include the room identifier, date, start time, end time, and the number of seats requested.",
+    "clauses": [
+      {
+        "clause_id": 0,
+        "start": 0,
+        "end": 27,
+        "text": "A reservation shall include",
+        "cue": "MAIN"
+      },
+      {
+        "clause_id": 1,
+        "start": 28,
+        "end": 47,
+        "text": "the room identifier",
+        "cue": "MAIN"
+      },
+      {
+        "clause_id": 2,
+        "start": 49,
+        "end": 75,
+        "text": "date, start time, end time",
+        "cue": "MAIN"
+      },
+      {
+        "clause_id": 3,
+        "start": 77,
+        "end": 111,
+        "text": "and the number of seats requested.",
+        "cue": "MAIN"
+      }
+    ],
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 27,
+        "text": "A reservation shall include"
+      },
+      {
+        "tag": "Entity",
+        "start": 28,
+        "end": 47,
+        "text": "the room identifier"
+      },
+      {
+        "tag": "Action",
+        "start": 49,
+        "end": 75,
+        "text": "date, start time, end time"
+      },
+      {
+        "tag": "Entity",
+        "start": 77,
+        "end": 111,
+        "text": "and the number of seats requested."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "text": "The system shall prevent a student from booking more than 2 active reservations per day and more than 6 per week.",
+    "clauses": [
+      {
+        "clause_id": 1,
+        "start": 0,
+        "end": 87,
+        "text": "The system shall prevent a student from booking more than 2 active reservations per day",
+        "cue": "MAIN"
+      },
+      {
+        "clause_id": 2,
+        "start": 88,
+        "end": 113,
+        "text": "and more than 6 per week.",
+        "cue": "MAIN"
+      }
+    ],
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 87,
+        "text": "The system shall prevent a student from booking more than 2 active reservations per day"
+      },
+      {
+        "tag": "Action",
+        "start": 17,
+        "end": 47,
+        "text": "prevent a student from booking"
+      },
+      {
+        "tag": "Entity",
+        "start": 48,
+        "end": 79,
+        "text": "more than 2 active reservations"
+      },
+      {
+        "tag": "Condition",
+        "start": 80,
+        "end": 87,
+        "text": "per day"
+      },
+      {
+        "tag": "Constraint",
+        "start": 88,
+        "end": 113,
+        "text": "and more than 6 per week."
+      },
+      {
+        "tag": "Entity",
+        "start": 92,
+        "end": 103,
+        "text": "more than 6"
+      },
+      {
+        "tag": "Condition",
+        "start": 104,
+        "end": 112,
+        "text": "per week"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "text": "If the student already has an active booking for the same time range, the system shall block creating another booking for that time range.",
+    "clauses": [
+      {
+        "clause_id": 0,
+        "start": 0,
+        "end": 138,
+        "text": "If the student already has an active booking for the same time range, the system shall block creating another booking for that time range.",
+        "cue": "MAIN"
+      }
+    ],
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 138,
+        "text": "If the student already has an active booking for the same time range, the system shall block creating another booking for that time range."
+      },
+      {
+        "tag": "Condition",
+        "start": 3,
+        "end": 14,
+        "text": "the student"
+      },
+      {
+        "tag": "Entity",
+        "start": 3,
+        "end": 14,
+        "text": "the student"
+      },
+      {
+        "tag": "Action",
+        "start": 23,
+        "end": 29,
+        "text": "has an"
+      },
+      {
+        "tag": "Condition",
+        "start": 23,
+        "end": 29,
+        "text": "has an"
+      },
+      {
+        "tag": "Action",
+        "start": 30,
+        "end": 44,
+        "text": "active booking"
+      },
+      {
+        "tag": "Condition",
+        "start": 30,
+        "end": 44,
+        "text": "active booking"
+      },
+      {
+        "tag": "Condition",
+        "start": 45,
+        "end": 68,
+        "text": "for the same time range"
+      },
+      {
+        "tag": "System_response",
+        "start": 87,
+        "end": 117,
+        "text": "block creating another booking"
+      },
+      {
+        "tag": "System_response",
+        "start": 118,
+        "end": 137,
+        "text": "for that time range"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "text": "A student shall be able to cancel a booking up to 30 minutes before the start time; otherwise, the system shall mark it as late-cancel.",
+    "clauses": [
+      {
+        "clause_id": 0,
+        "start": 0,
+        "end": 82,
+        "text": "A student shall be able to cancel a booking up to 30 minutes before the start time",
+        "cue": "MAIN"
+      },
+      {
+        "clause_id": 1,
+        "start": 84,
+        "end": 134,
+        "text": "otherwise, the system shall mark it as late-cancel",
+        "cue": "MAIN"
+      }
+    ],
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 9,
+        "text": "A student"
+      },
+      {
+        "tag": "Action",
+        "start": 10,
+        "end": 43,
+        "text": "shall be able to cancel a booking"
+      },
+      {
+        "tag": "Condition",
+        "start": 44,
+        "end": 82,
+        "text": "up to 30 minutes before the start time"
+      },
+      {
+        "tag": "System_response",
+        "start": 84,
+        "end": 134,
+        "text": "otherwise, the system shall mark it as late-cancel"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "text": "If a reservation is canceled, the system shall immediately release the reserved seats and notify students on the waitlist, if any.",
+    "clauses": [
+      {
+        "clause_id": 1,
+        "start": 0,
+        "end": 28,
+        "text": "If a reservation is canceled",
+        "cue": "CONDITION"
+      },
+      {
+        "clause_id": 2,
+        "start": 30,
+        "end": 85,
+        "text": "the system shall immediately release the reserved seats",
+        "cue": "MAIN"
+      },
+      {
+        "clause_id": 3,
+        "start": 86,
+        "end": 130,
+        "text": "and notify students on the waitlist, if any.",
+        "cue": "MAIN"
+      }
+    ],
+    "spans": [
+      {
+        "tag": "Condition",
+        "start": 0,
+        "end": 28,
+        "text": "If a reservation is canceled"
+      },
+      {
+        "tag": "Action",
+        "start": 30,
+        "end": 85,
+        "text": "the system shall immediately release the reserved seats"
+      },
+      {
+        "tag": "Action",
+        "start": 86,
+        "end": 130,
+        "text": "and notify students on the waitlist, if any."
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "text": "A student shall be able to join a waitlist for a fully booked room on a specific date.",
+    "clauses": [
+      {
+        "clause_id": 0,
+        "start": 0,
+        "end": 42,
+        "text": "A student shall be able to join a waitlist",
+        "cue": "MAIN"
+      },
+      {
+        "clause_id": 1,
+        "start": 43,
+        "end": 85,
+        "text": "for a fully booked room on a specific date",
+        "cue": "CONDITION"
+      }
+    ],
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 9,
+        "text": "A student"
+      },
+      {
+        "tag": "Action",
+        "start": 10,
+        "end": 42,
+        "text": "shall be able to join a waitlist"
+      },
+      {
+        "tag": "Condition",
+        "start": 43,
+        "end": 85,
+        "text": "for a fully booked room on a specific date"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "text": "When a room becomes available, the system shall offer the slot to the first student on the waitlist and give 10 minutes to confirm.",
+    "clauses": [
+      {
+        "clause_id": 0,
+        "start": 0,
+        "end": 29,
+        "text": "When a room becomes available",
+        "cue": "CONDITION"
+      },
+      {
+        "clause_id": 1,
+        "start": 31,
+        "end": 99,
+        "text": "the system shall offer the slot to the first student on the waitlist",
+        "cue": "MAIN"
+      },
+      {
+        "clause_id": 2,
+        "start": 100,
+        "end": 130,
+        "text": "and give 10 minutes to confirm",
+        "cue": "MAIN"
+      }
+    ],
+    "spans": [
+      {
+        "tag": "Condition",
+        "start": 0,
+        "end": 29,
+        "text": "When a room becomes available"
+      },
+      {
+        "tag": "Main_actor",
+        "start": 31,
+        "end": 99,
+        "text": "the system shall offer the slot to the first student on the waitlist"
+      },
+      {
+        "tag": "Action",
+        "start": 100,
+        "end": 130,
+        "text": "and give 10 minutes to confirm"
+      }
+    ]
+  }
+]

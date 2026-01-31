@@ -1,0 +1,350 @@
+[
+  {
+    "id": 1,
+    "text": "A student shall be able to search study rooms with available seats by campus, date, and time range.",
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 9,
+        "text": "A student"
+      },
+      {
+        "tag": "Action",
+        "start": 10,
+        "end": 33,
+        "text": "shall be able to search"
+      },
+      {
+        "tag": "Entity",
+        "start": 34,
+        "end": 45,
+        "text": "study rooms"
+      },
+      {
+        "tag": "Entity",
+        "start": 51,
+        "end": 66,
+        "text": "available seats"
+      },
+      {
+        "tag": "Entity",
+        "start": 67,
+        "end": 76,
+        "text": "by campus"
+      },
+      {
+        "tag": "Entity",
+        "start": 78,
+        "end": 82,
+        "text": "date"
+      },
+      {
+        "tag": "Entity",
+        "start": 88,
+        "end": 98,
+        "text": "time range"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "text": "When the student is authenticated, the system shall allow reserving one or more seats in a study room for a chosen time slot.",
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 16,
+        "text": "When the student"
+      },
+      {
+        "tag": "Condition",
+        "start": 17,
+        "end": 33,
+        "text": "is authenticated"
+      },
+      {
+        "tag": "Action",
+        "start": 35,
+        "end": 67,
+        "text": "the system shall allow reserving"
+      },
+      {
+        "tag": "Entity",
+        "start": 68,
+        "end": 85,
+        "text": "one or more seats"
+      },
+      {
+        "tag": "Entity",
+        "start": 86,
+        "end": 101,
+        "text": "in a study room"
+      },
+      {
+        "tag": "Action",
+        "start": 102,
+        "end": 124,
+        "text": "for a chosen time slot"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "text": "If the selected study room has insufficient available seats for the requested time slot, the system shall reject the reservation and suggest the nearest available slots.",
+    "spans": [
+      {
+        "tag": "Condition",
+        "start": 0,
+        "end": 87,
+        "text": "If the selected study room has insufficient available seats for the requested time slot"
+      },
+      {
+        "tag": "System_response",
+        "start": 89,
+        "end": 168,
+        "text": "the system shall reject the reservation and suggest the nearest available slots"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "text": "A reservation shall include the room identifier, date, start time, end time, and the number of seats requested.",
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 1,
+        "text": "A"
+      },
+      {
+        "tag": "Entity",
+        "start": 2,
+        "end": 13,
+        "text": "reservation"
+      },
+      {
+        "tag": "Action",
+        "start": 14,
+        "end": 27,
+        "text": "shall include"
+      },
+      {
+        "tag": "Entity",
+        "start": 28,
+        "end": 47,
+        "text": "the room identifier"
+      },
+      {
+        "tag": "Entity",
+        "start": 49,
+        "end": 53,
+        "text": "date"
+      },
+      {
+        "tag": "Entity",
+        "start": 55,
+        "end": 65,
+        "text": "start time"
+      },
+      {
+        "tag": "Entity",
+        "start": 67,
+        "end": 75,
+        "text": "end time"
+      },
+      {
+        "tag": "Entity",
+        "start": 81,
+        "end": 110,
+        "text": "the number of seats requested"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "text": "The system shall prevent a student from booking more than 2 active reservations per day and more than 6 per week.",
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 10,
+        "text": "The system"
+      },
+      {
+        "tag": "Action",
+        "start": 11,
+        "end": 24,
+        "text": "shall prevent"
+      },
+      {
+        "tag": "Entity",
+        "start": 25,
+        "end": 34,
+        "text": "a student"
+      },
+      {
+        "tag": "Action",
+        "start": 35,
+        "end": 47,
+        "text": "from booking"
+      },
+      {
+        "tag": "Entity",
+        "start": 48,
+        "end": 79,
+        "text": "more than 2 active reservations"
+      },
+      {
+        "tag": "Constraint",
+        "start": 80,
+        "end": 87,
+        "text": "per day"
+      },
+      {
+        "tag": "Constraint",
+        "start": 88,
+        "end": 112,
+        "text": "and more than 6 per week"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "text": "If the student already has an active booking for the same time range, the system shall block creating another booking for that time range.",
+    "spans": [
+      {
+        "tag": "Condition",
+        "start": 0,
+        "end": 68,
+        "text": "If the student already has an active booking for the same time range"
+      },
+      {
+        "tag": "System_response",
+        "start": 70,
+        "end": 137,
+        "text": "the system shall block creating another booking for that time range"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "text": "A student shall be able to cancel a booking up to 30 minutes before the start time; otherwise, the system shall mark it as late-cancel.",
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 9,
+        "text": "A student"
+      },
+      {
+        "tag": "Action",
+        "start": 10,
+        "end": 43,
+        "text": "shall be able to cancel a booking"
+      },
+      {
+        "tag": "Condition",
+        "start": 44,
+        "end": 82,
+        "text": "up to 30 minutes before the start time"
+      },
+      {
+        "tag": "Exception",
+        "start": 84,
+        "end": 134,
+        "text": "otherwise, the system shall mark it as late-cancel"
+      },
+      {
+        "tag": "System_response",
+        "start": 95,
+        "end": 134,
+        "text": "the system shall mark it as late-cancel"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "text": "If a reservation is canceled, the system shall immediately release the reserved seats and notify students on the waitlist, if any.",
+    "spans": [
+      {
+        "tag": "Condition",
+        "start": 0,
+        "end": 28,
+        "text": "If a reservation is canceled"
+      },
+      {
+        "tag": "System_response",
+        "start": 30,
+        "end": 121,
+        "text": "the system shall immediately release the reserved seats and notify students on the waitlist"
+      },
+      {
+        "tag": "Condition",
+        "start": 123,
+        "end": 129,
+        "text": "if any"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "text": "A student shall be able to join a waitlist for a fully booked room on a specific date.",
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 9,
+        "text": "A student"
+      },
+      {
+        "tag": "Action",
+        "start": 10,
+        "end": 31,
+        "text": "shall be able to join"
+      },
+      {
+        "tag": "Entity",
+        "start": 32,
+        "end": 42,
+        "text": "a waitlist"
+      },
+      {
+        "tag": "Entity",
+        "start": 43,
+        "end": 66,
+        "text": "for a fully booked room"
+      },
+      {
+        "tag": "Condition",
+        "start": 67,
+        "end": 85,
+        "text": "on a specific date"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "text": "When a room becomes available, the system shall offer the slot to the first student on the waitlist and give 10 minutes to confirm.",
+    "spans": [
+      {
+        "tag": "Condition",
+        "start": 0,
+        "end": 29,
+        "text": "When a room becomes available"
+      },
+      {
+        "tag": "Action",
+        "start": 31,
+        "end": 99,
+        "text": "the system shall offer the slot to the first student on the waitlist"
+      },
+      {
+        "tag": "System_response",
+        "start": 100,
+        "end": 130,
+        "text": "and give 10 minutes to confirm"
+      }
+    ]
+  }
+]

@@ -1,0 +1,18 @@
+tag,tp,fp,fn,precision,recall,f1
+Main_actor,38,45,1,0.4578,0.9744,0.6230
+Entity,51,147,12,0.2576,0.8095,0.3908
+Action,9,20,26,0.3103,0.2571,0.2812
+System_response,23,22,4,0.5111,0.8519,0.6389
+Condition,19,16,6,0.5429,0.7600,0.6333
+Precondition,1,4,3,0.2000,0.2500,0.2222
+Constraint,8,18,22,0.3077,0.2667,0.2857
+Exception,2,2,0,0.5000,1.0000,0.6667
+
+# Summary
+# Mode: RELAXED
+# Threshold: 0.5
+# Common requirements: 50
+# TP: 151, FP: 274, FN: 74
+MICRO_F1,,,,,, 0.4646
+MACRO_F1,,,,,, 0.4677
+EXACT_F1,,,,,, 0.2769

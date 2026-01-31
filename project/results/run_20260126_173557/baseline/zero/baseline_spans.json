@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1,
+    "text": "A student shall be able to search study rooms with available seats by campus, date, and time range.",
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 9,
+        "text": "A student"
+      },
+      {
+        "tag": "Action",
+        "start": 10,
+        "end": 45,
+        "text": "shall be able to search study rooms"
+      },
+      {
+        "tag": "Entity",
+        "start": 34,
+        "end": 45,
+        "text": "study rooms"
+      },
+      {
+        "tag": "Entity",
+        "start": 51,
+        "end": 66,
+        "text": "available seats"
+      },
+      {
+        "tag": "Entity",
+        "start": 67,
+        "end": 76,
+        "text": "by campus"
+      },
+      {
+        "tag": "Entity",
+        "start": 78,
+        "end": 82,
+        "text": "date"
+      },
+      {
+        "tag": "Entity",
+        "start": 88,
+        "end": 98,
+        "text": "time range"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "text": "When the student is authenticated, the system shall allow reserving one or more seats in a study room for a chosen time slot.",
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 16,
+        "text": "When the student"
+      },
+      {
+        "tag": "Condition",
+        "start": 17,
+        "end": 33,
+        "text": "is authenticated"
+      },
+      {
+        "tag": "Action",
+        "start": 46,
+        "end": 67,
+        "text": "shall allow reserving"
+      },
+      {
+        "tag": "Entity",
+        "start": 68,
+        "end": 85,
+        "text": "one or more seats"
+      },
+      {
+        "tag": "Entity",
+        "start": 86,
+        "end": 101,
+        "text": "in a study room"
+      },
+      {
+        "tag": "Action",
+        "start": 102,
+        "end": 124,
+        "text": "for a chosen time slot"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "text": "If the selected study room has insufficient available seats for the requested time slot, the system shall reject the reservation and suggest the nearest available slots.",
+    "spans": [
+      {
+        "tag": "Condition",
+        "start": 0,
+        "end": 87,
+        "text": "If the selected study room has insufficient available seats for the requested time slot"
+      },
+      {
+        "tag": "System_response",
+        "start": 89,
+        "end": 168,
+        "text": "the system shall reject the reservation and suggest the nearest available slots"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "text": "A reservation shall include the room identifier, date, start time, end time, and the number of seats requested.",
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 1,
+        "text": "A"
+      },
+      {
+        "tag": "Entity",
+        "start": 2,
+        "end": 13,
+        "text": "reservation"
+      },
+      {
+        "tag": "Action",
+        "start": 14,
+        "end": 27,
+        "text": "shall include"
+      },
+      {
+        "tag": "Entity",
+        "start": 28,
+        "end": 47,
+        "text": "the room identifier"
+      },
+      {
+        "tag": "Entity",
+        "start": 49,
+        "end": 53,
+        "text": "date"
+      },
+      {
+        "tag": "Entity",
+        "start": 55,
+        "end": 65,
+        "text": "start time"
+      },
+      {
+        "tag": "Entity",
+        "start": 67,
+        "end": 75,
+        "text": "end time"
+      },
+      {
+        "tag": "Entity",
+        "start": 81,
+        "end": 110,
+        "text": "the number of seats requested"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "text": "The system shall prevent a student from booking more than 2 active reservations per day and more than 6 per week.",
+    "spans": [
+      {
+        "tag": "Main_actor",
+        "start": 0,
+        "end": 10,
+        "text": "The system"
+      },
+      {
+        "tag": "Action",
+        "start": 11,
+        "end": 24,
+        "text": "shall prevent"
+      },
+      {
+        "tag": "Entity",
+        "start": 25,
+        "end": 34,
+        "text": "a student"
+      },
+      {
+        "tag": "Action",
+        "start": 35,
+        "end": 47,
+        "text": "from booking"
+      },
+      {
+        "tag": "Entity",
+        "start": 48,
+        "end": 79,
+        "text": "more than 2 active reservations"
+      },
+      {
+        "tag": "Constraint",
+        "start": 80,
+        "end": 87,
+        "text": "per day"
+      },
+      {
+        "tag": "Constraint",
+        "start": 88,
+        "end": 112,
+        "text": "and more than 6 per week"
+      }
+    ]
+  }
+]

@@ -1,5 +1,10 @@
 # ReqFlow 
 
+
+
+
+
+
 This project is a small student tool for the LLM4SE **A3** assignment: **Analysing Software Requirements Through Abstractions**.
 
 It extracts *abstraction spans* from requirements using a local LLM via **Ollama**, renders them as **HTML highlights**, and evaluates predictions against a **gold** annotation.

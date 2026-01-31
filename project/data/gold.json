@@ -1977,6 +1977,3246 @@
           "text": "create a priority ticket for staff and offer alternative rooms of similar capacity when available."
         }
       ]
+    },
+    {
+      "id": 51,
+      "text": "Before the student can submit a reservation request, the student must be authenticated. When the student submits a reservation request, the system shall approve the reservation if the room is available, so that the student can secure a seat.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 211,
+          "end": 240,
+          "text": "the student can secure a seat"
+        },
+        {
+          "tag": "Condition",
+          "start": 180,
+          "end": 201,
+          "text": "the room is available"
+        },
+        {
+          "tag": "Precondition",
+          "start": 53,
+          "end": 86,
+          "text": "the student must be authenticated"
+        },
+        {
+          "tag": "Trigger",
+          "start": 88,
+          "end": 135,
+          "text": "When the student submits a reservation request,"
+        },
+        {
+          "tag": "Action",
+          "start": 105,
+          "end": 134,
+          "text": "submits a reservation request"
+        },
+        {
+          "tag": "System_response",
+          "start": 153,
+          "end": 176,
+          "text": "approve the reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 51,
+          "text": "reservation request"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 43,
+          "text": "reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "text": "Before the student can submit a reservation request, the student must be registered. When the student submits a reservation request, the system shall approve the reservation if the time slot is within opening hours, so that the schedule stays accurate.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 224,
+          "end": 251,
+          "text": "the schedule stays accurate"
+        },
+        {
+          "tag": "Condition",
+          "start": 177,
+          "end": 214,
+          "text": "the time slot is within opening hours"
+        },
+        {
+          "tag": "Precondition",
+          "start": 53,
+          "end": 83,
+          "text": "the student must be registered"
+        },
+        {
+          "tag": "Trigger",
+          "start": 85,
+          "end": 132,
+          "text": "When the student submits a reservation request,"
+        },
+        {
+          "tag": "Action",
+          "start": 102,
+          "end": 131,
+          "text": "submits a reservation request"
+        },
+        {
+          "tag": "System_response",
+          "start": 150,
+          "end": 173,
+          "text": "approve the reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 51,
+          "text": "reservation request"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 43,
+          "text": "reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "text": "Before the student can submit a reservation request, the student must be verified. When the student submits a reservation request, the system shall approve the reservation if the reservation does not overlap another booking, so that double bookings are prevented.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 233,
+          "end": 262,
+          "text": "double bookings are prevented"
+        },
+        {
+          "tag": "Condition",
+          "start": 175,
+          "end": 223,
+          "text": "the reservation does not overlap another booking"
+        },
+        {
+          "tag": "Precondition",
+          "start": 53,
+          "end": 81,
+          "text": "the student must be verified"
+        },
+        {
+          "tag": "Trigger",
+          "start": 83,
+          "end": 130,
+          "text": "When the student submits a reservation request,"
+        },
+        {
+          "tag": "Action",
+          "start": 100,
+          "end": 129,
+          "text": "submits a reservation request"
+        },
+        {
+          "tag": "System_response",
+          "start": 148,
+          "end": 171,
+          "text": "approve the reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 51,
+          "text": "reservation request"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 43,
+          "text": "reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "text": "Before the student can submit a reservation request, the student must be in good standing. When the student submits a reservation request, the system shall approve the reservation if the user has no unpaid penalties, so that resources are used efficiently.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 225,
+          "end": 255,
+          "text": "resources are used efficiently"
+        },
+        {
+          "tag": "Condition",
+          "start": 183,
+          "end": 215,
+          "text": "the user has no unpaid penalties"
+        },
+        {
+          "tag": "Precondition",
+          "start": 53,
+          "end": 89,
+          "text": "the student must be in good standing"
+        },
+        {
+          "tag": "Trigger",
+          "start": 91,
+          "end": 138,
+          "text": "When the student submits a reservation request,"
+        },
+        {
+          "tag": "Action",
+          "start": 108,
+          "end": 137,
+          "text": "submits a reservation request"
+        },
+        {
+          "tag": "System_response",
+          "start": 156,
+          "end": 179,
+          "text": "approve the reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 51,
+          "text": "reservation request"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 43,
+          "text": "reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "text": "Before the student can submit a reservation request, the student must be authorized. When the student submits a reservation request, the system shall approve the reservation if the request is complete, so that the waitlist remains fair.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 210,
+          "end": 235,
+          "text": "the waitlist remains fair"
+        },
+        {
+          "tag": "Condition",
+          "start": 177,
+          "end": 200,
+          "text": "the request is complete"
+        },
+        {
+          "tag": "Precondition",
+          "start": 53,
+          "end": 83,
+          "text": "the student must be authorized"
+        },
+        {
+          "tag": "Trigger",
+          "start": 85,
+          "end": 132,
+          "text": "When the student submits a reservation request,"
+        },
+        {
+          "tag": "Action",
+          "start": 102,
+          "end": 131,
+          "text": "submits a reservation request"
+        },
+        {
+          "tag": "System_response",
+          "start": 150,
+          "end": 173,
+          "text": "approve the reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 51,
+          "text": "reservation request"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 43,
+          "text": "reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "text": "Before the student can cancel a reservation, the student must be authenticated. When the student cancels a reservation, the system shall confirm the cancellation if the reservation exists, so that the room schedule stays accurate.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 197,
+          "end": 229,
+          "text": "the room schedule stays accurate"
+        },
+        {
+          "tag": "Condition",
+          "start": 165,
+          "end": 187,
+          "text": "the reservation exists"
+        },
+        {
+          "tag": "Precondition",
+          "start": 45,
+          "end": 78,
+          "text": "the student must be authenticated"
+        },
+        {
+          "tag": "Trigger",
+          "start": 80,
+          "end": 119,
+          "text": "When the student cancels a reservation,"
+        },
+        {
+          "tag": "Action",
+          "start": 97,
+          "end": 118,
+          "text": "cancels a reservation"
+        },
+        {
+          "tag": "System_response",
+          "start": 137,
+          "end": 161,
+          "text": "confirm the cancellation"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 43,
+          "text": "reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 149,
+          "end": 161,
+          "text": "cancellation"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "text": "Before the student can cancel a reservation, the student must be registered. When the student cancels a reservation, the system shall confirm the cancellation if the cancellation is within 24 hours of the start time, so that unused seats are released.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 225,
+          "end": 250,
+          "text": "unused seats are released"
+        },
+        {
+          "tag": "Condition",
+          "start": 162,
+          "end": 215,
+          "text": "the cancellation is within 24 hours of the start time"
+        },
+        {
+          "tag": "Precondition",
+          "start": 45,
+          "end": 75,
+          "text": "the student must be registered"
+        },
+        {
+          "tag": "Trigger",
+          "start": 77,
+          "end": 116,
+          "text": "When the student cancels a reservation,"
+        },
+        {
+          "tag": "Action",
+          "start": 94,
+          "end": 115,
+          "text": "cancels a reservation"
+        },
+        {
+          "tag": "System_response",
+          "start": 134,
+          "end": 158,
+          "text": "confirm the cancellation"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 43,
+          "text": "reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 146,
+          "end": 158,
+          "text": "cancellation"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 58,
+      "text": "Before the student can cancel a reservation, the student must be verified. When the student cancels a reservation, the system shall confirm the cancellation if the reservation is active, so that penalties are applied consistently.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 195,
+          "end": 229,
+          "text": "penalties are applied consistently"
+        },
+        {
+          "tag": "Condition",
+          "start": 160,
+          "end": 185,
+          "text": "the reservation is active"
+        },
+        {
+          "tag": "Precondition",
+          "start": 45,
+          "end": 73,
+          "text": "the student must be verified"
+        },
+        {
+          "tag": "Trigger",
+          "start": 75,
+          "end": 114,
+          "text": "When the student cancels a reservation,"
+        },
+        {
+          "tag": "Action",
+          "start": 92,
+          "end": 113,
+          "text": "cancels a reservation"
+        },
+        {
+          "tag": "System_response",
+          "start": 132,
+          "end": 156,
+          "text": "confirm the cancellation"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 43,
+          "text": "reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 144,
+          "end": 156,
+          "text": "cancellation"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 59,
+      "text": "Before the student can cancel a reservation, the student must be in good standing. When the student cancels a reservation, the system shall confirm the cancellation if the user is the owner of the reservation, so that administrators can track usage.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 218,
+          "end": 248,
+          "text": "administrators can track usage"
+        },
+        {
+          "tag": "Condition",
+          "start": 168,
+          "end": 208,
+          "text": "the user is the owner of the reservation"
+        },
+        {
+          "tag": "Precondition",
+          "start": 45,
+          "end": 81,
+          "text": "the student must be in good standing"
+        },
+        {
+          "tag": "Trigger",
+          "start": 83,
+          "end": 122,
+          "text": "When the student cancels a reservation,"
+        },
+        {
+          "tag": "Action",
+          "start": 100,
+          "end": 121,
+          "text": "cancels a reservation"
+        },
+        {
+          "tag": "System_response",
+          "start": 140,
+          "end": 164,
+          "text": "confirm the cancellation"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 43,
+          "text": "reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 152,
+          "end": 164,
+          "text": "cancellation"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 60,
+      "text": "Before the student can cancel a reservation, the student must be authorized. When the student cancels a reservation, the system shall confirm the cancellation if the request is complete, so that other students can book the slot.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 195,
+          "end": 227,
+          "text": "other students can book the slot"
+        },
+        {
+          "tag": "Condition",
+          "start": 162,
+          "end": 185,
+          "text": "the request is complete"
+        },
+        {
+          "tag": "Precondition",
+          "start": 45,
+          "end": 75,
+          "text": "the student must be authorized"
+        },
+        {
+          "tag": "Trigger",
+          "start": 77,
+          "end": 116,
+          "text": "When the student cancels a reservation,"
+        },
+        {
+          "tag": "Action",
+          "start": 94,
+          "end": 115,
+          "text": "cancels a reservation"
+        },
+        {
+          "tag": "System_response",
+          "start": 134,
+          "end": 158,
+          "text": "confirm the cancellation"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 43,
+          "text": "reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 146,
+          "end": 158,
+          "text": "cancellation"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 61,
+      "text": "Before the student can extend a reservation, the student must be authenticated. When the student extends a reservation, the system shall update the end time if the room is available, so that the student can finish the session.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 191,
+          "end": 225,
+          "text": "the student can finish the session"
+        },
+        {
+          "tag": "Condition",
+          "start": 160,
+          "end": 181,
+          "text": "the room is available"
+        },
+        {
+          "tag": "Precondition",
+          "start": 45,
+          "end": 78,
+          "text": "the student must be authenticated"
+        },
+        {
+          "tag": "Trigger",
+          "start": 80,
+          "end": 119,
+          "text": "When the student extends a reservation,"
+        },
+        {
+          "tag": "Action",
+          "start": 97,
+          "end": 118,
+          "text": "extends a reservation"
+        },
+        {
+          "tag": "System_response",
+          "start": 137,
+          "end": 156,
+          "text": "update the end time"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 43,
+          "text": "reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 148,
+          "end": 156,
+          "text": "end time"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 62,
+      "text": "Before the student can extend a reservation, the student must be registered. When the student extends a reservation, the system shall update the end time if the extension does not exceed the maximum duration, so that double bookings are prevented.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 217,
+          "end": 246,
+          "text": "double bookings are prevented"
+        },
+        {
+          "tag": "Condition",
+          "start": 157,
+          "end": 207,
+          "text": "the extension does not exceed the maximum duration"
+        },
+        {
+          "tag": "Precondition",
+          "start": 45,
+          "end": 75,
+          "text": "the student must be registered"
+        },
+        {
+          "tag": "Trigger",
+          "start": 77,
+          "end": 116,
+          "text": "When the student extends a reservation,"
+        },
+        {
+          "tag": "Action",
+          "start": 94,
+          "end": 115,
+          "text": "extends a reservation"
+        },
+        {
+          "tag": "System_response",
+          "start": 134,
+          "end": 153,
+          "text": "update the end time"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 43,
+          "text": "reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 145,
+          "end": 153,
+          "text": "end time"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 63,
+      "text": "Before the student can extend a reservation, the student must be verified. When the student extends a reservation, the system shall update the end time if the reservation is active, so that capacity limits are enforced.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 190,
+          "end": 218,
+          "text": "capacity limits are enforced"
+        },
+        {
+          "tag": "Condition",
+          "start": 155,
+          "end": 180,
+          "text": "the reservation is active"
+        },
+        {
+          "tag": "Precondition",
+          "start": 45,
+          "end": 73,
+          "text": "the student must be verified"
+        },
+        {
+          "tag": "Trigger",
+          "start": 75,
+          "end": 114,
+          "text": "When the student extends a reservation,"
+        },
+        {
+          "tag": "Action",
+          "start": 92,
+          "end": 113,
+          "text": "extends a reservation"
+        },
+        {
+          "tag": "System_response",
+          "start": 132,
+          "end": 151,
+          "text": "update the end time"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 43,
+          "text": "reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 143,
+          "end": 151,
+          "text": "end time"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 64,
+      "text": "Before the student can extend a reservation, the student must be in good standing. When the student extends a reservation, the system shall update the end time if the time slot is within opening hours, so that the schedule stays accurate.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 210,
+          "end": 237,
+          "text": "the schedule stays accurate"
+        },
+        {
+          "tag": "Condition",
+          "start": 163,
+          "end": 200,
+          "text": "the time slot is within opening hours"
+        },
+        {
+          "tag": "Precondition",
+          "start": 45,
+          "end": 81,
+          "text": "the student must be in good standing"
+        },
+        {
+          "tag": "Trigger",
+          "start": 83,
+          "end": 122,
+          "text": "When the student extends a reservation,"
+        },
+        {
+          "tag": "Action",
+          "start": 100,
+          "end": 121,
+          "text": "extends a reservation"
+        },
+        {
+          "tag": "System_response",
+          "start": 140,
+          "end": 159,
+          "text": "update the end time"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 43,
+          "text": "reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 151,
+          "end": 159,
+          "text": "end time"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 65,
+      "text": "Before the student can extend a reservation, the student must be authorized. When the student extends a reservation, the system shall update the end time if the request is complete, so that resources are used efficiently.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 190,
+          "end": 220,
+          "text": "resources are used efficiently"
+        },
+        {
+          "tag": "Condition",
+          "start": 157,
+          "end": 180,
+          "text": "the request is complete"
+        },
+        {
+          "tag": "Precondition",
+          "start": 45,
+          "end": 75,
+          "text": "the student must be authorized"
+        },
+        {
+          "tag": "Trigger",
+          "start": 77,
+          "end": 116,
+          "text": "When the student extends a reservation,"
+        },
+        {
+          "tag": "Action",
+          "start": 94,
+          "end": 115,
+          "text": "extends a reservation"
+        },
+        {
+          "tag": "System_response",
+          "start": 134,
+          "end": 153,
+          "text": "update the end time"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 43,
+          "text": "reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 145,
+          "end": 153,
+          "text": "end time"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 66,
+      "text": "Before the student can join the waitlist, the student must be authenticated. When the student joins the waitlist, the system shall add the student to the waitlist if the room is full, so that the waitlist remains fair.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 192,
+          "end": 217,
+          "text": "the waitlist remains fair"
+        },
+        {
+          "tag": "Condition",
+          "start": 166,
+          "end": 182,
+          "text": "the room is full"
+        },
+        {
+          "tag": "Precondition",
+          "start": 42,
+          "end": 75,
+          "text": "the student must be authenticated"
+        },
+        {
+          "tag": "Trigger",
+          "start": 77,
+          "end": 113,
+          "text": "When the student joins the waitlist,"
+        },
+        {
+          "tag": "Action",
+          "start": 94,
+          "end": 112,
+          "text": "joins the waitlist"
+        },
+        {
+          "tag": "System_response",
+          "start": 131,
+          "end": 162,
+          "text": "add the student to the waitlist"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 40,
+          "text": "waitlist"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 67,
+      "text": "Before the student can join the waitlist, the student must be registered. When the student joins the waitlist, the system shall add the student to the waitlist if the time slot is within opening hours, so that cancellations can be reused.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 210,
+          "end": 237,
+          "text": "cancellations can be reused"
+        },
+        {
+          "tag": "Condition",
+          "start": 163,
+          "end": 200,
+          "text": "the time slot is within opening hours"
+        },
+        {
+          "tag": "Precondition",
+          "start": 42,
+          "end": 72,
+          "text": "the student must be registered"
+        },
+        {
+          "tag": "Trigger",
+          "start": 74,
+          "end": 110,
+          "text": "When the student joins the waitlist,"
+        },
+        {
+          "tag": "Action",
+          "start": 91,
+          "end": 109,
+          "text": "joins the waitlist"
+        },
+        {
+          "tag": "System_response",
+          "start": 128,
+          "end": 159,
+          "text": "add the student to the waitlist"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 40,
+          "text": "waitlist"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 68,
+      "text": "Before the student can join the waitlist, the student must be verified. When the student joins the waitlist, the system shall add the student to the waitlist if the user has no unpaid penalties, so that students can secure a seat.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 203,
+          "end": 229,
+          "text": "students can secure a seat"
+        },
+        {
+          "tag": "Condition",
+          "start": 161,
+          "end": 193,
+          "text": "the user has no unpaid penalties"
+        },
+        {
+          "tag": "Precondition",
+          "start": 42,
+          "end": 70,
+          "text": "the student must be verified"
+        },
+        {
+          "tag": "Trigger",
+          "start": 72,
+          "end": 108,
+          "text": "When the student joins the waitlist,"
+        },
+        {
+          "tag": "Action",
+          "start": 89,
+          "end": 107,
+          "text": "joins the waitlist"
+        },
+        {
+          "tag": "System_response",
+          "start": 126,
+          "end": 157,
+          "text": "add the student to the waitlist"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 40,
+          "text": "waitlist"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 69,
+      "text": "Before the student can join the waitlist, the student must be in good standing. When the student joins the waitlist, the system shall add the student to the waitlist if the waitlist is open, so that the system tracks demand.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 199,
+          "end": 223,
+          "text": "the system tracks demand"
+        },
+        {
+          "tag": "Condition",
+          "start": 169,
+          "end": 189,
+          "text": "the waitlist is open"
+        },
+        {
+          "tag": "Precondition",
+          "start": 42,
+          "end": 78,
+          "text": "the student must be in good standing"
+        },
+        {
+          "tag": "Trigger",
+          "start": 80,
+          "end": 116,
+          "text": "When the student joins the waitlist,"
+        },
+        {
+          "tag": "Action",
+          "start": 97,
+          "end": 115,
+          "text": "joins the waitlist"
+        },
+        {
+          "tag": "System_response",
+          "start": 134,
+          "end": 165,
+          "text": "add the student to the waitlist"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 40,
+          "text": "waitlist"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 70,
+      "text": "Before the student can join the waitlist, the student must be authorized. When the student joins the waitlist, the system shall add the student to the waitlist if the request is complete, so that resources are used efficiently.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 196,
+          "end": 226,
+          "text": "resources are used efficiently"
+        },
+        {
+          "tag": "Condition",
+          "start": 163,
+          "end": 186,
+          "text": "the request is complete"
+        },
+        {
+          "tag": "Precondition",
+          "start": 42,
+          "end": 72,
+          "text": "the student must be authorized"
+        },
+        {
+          "tag": "Trigger",
+          "start": 74,
+          "end": 110,
+          "text": "When the student joins the waitlist,"
+        },
+        {
+          "tag": "Action",
+          "start": 91,
+          "end": 109,
+          "text": "joins the waitlist"
+        },
+        {
+          "tag": "System_response",
+          "start": 128,
+          "end": 159,
+          "text": "add the student to the waitlist"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 40,
+          "text": "waitlist"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 71,
+      "text": "Before the student can check in to the room, the student must be authenticated. When the student checks in to the room, the system shall record the check-in if the reservation is active, so that no-shows are reduced.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 195,
+          "end": 215,
+          "text": "no-shows are reduced"
+        },
+        {
+          "tag": "Condition",
+          "start": 160,
+          "end": 185,
+          "text": "the reservation is active"
+        },
+        {
+          "tag": "Precondition",
+          "start": 45,
+          "end": 78,
+          "text": "the student must be authenticated"
+        },
+        {
+          "tag": "Trigger",
+          "start": 80,
+          "end": 119,
+          "text": "When the student checks in to the room,"
+        },
+        {
+          "tag": "Action",
+          "start": 97,
+          "end": 118,
+          "text": "checks in to the room"
+        },
+        {
+          "tag": "System_response",
+          "start": 137,
+          "end": 156,
+          "text": "record the check-in"
+        },
+        {
+          "tag": "Entity",
+          "start": 148,
+          "end": 156,
+          "text": "check-in"
+        },
+        {
+          "tag": "Entity",
+          "start": 39,
+          "end": 43,
+          "text": "room"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 72,
+      "text": "Before the student can check in to the room, the student must be registered. When the student checks in to the room, the system shall record the check-in if the check-in window has started, so that the system records attendance.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 198,
+          "end": 227,
+          "text": "the system records attendance"
+        },
+        {
+          "tag": "Condition",
+          "start": 157,
+          "end": 188,
+          "text": "the check-in window has started"
+        },
+        {
+          "tag": "Precondition",
+          "start": 45,
+          "end": 75,
+          "text": "the student must be registered"
+        },
+        {
+          "tag": "Trigger",
+          "start": 77,
+          "end": 116,
+          "text": "When the student checks in to the room,"
+        },
+        {
+          "tag": "Action",
+          "start": 94,
+          "end": 115,
+          "text": "checks in to the room"
+        },
+        {
+          "tag": "System_response",
+          "start": 134,
+          "end": 153,
+          "text": "record the check-in"
+        },
+        {
+          "tag": "Entity",
+          "start": 145,
+          "end": 153,
+          "text": "check-in"
+        },
+        {
+          "tag": "Entity",
+          "start": 39,
+          "end": 43,
+          "text": "room"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 73,
+      "text": "Before the student can check in to the room, the student must be verified. When the student checks in to the room, the system shall record the check-in if the user has a valid ID card, so that penalties are applied fairly.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 193,
+          "end": 221,
+          "text": "penalties are applied fairly"
+        },
+        {
+          "tag": "Condition",
+          "start": 155,
+          "end": 183,
+          "text": "the user has a valid ID card"
+        },
+        {
+          "tag": "Precondition",
+          "start": 45,
+          "end": 73,
+          "text": "the student must be verified"
+        },
+        {
+          "tag": "Trigger",
+          "start": 75,
+          "end": 114,
+          "text": "When the student checks in to the room,"
+        },
+        {
+          "tag": "Action",
+          "start": 92,
+          "end": 113,
+          "text": "checks in to the room"
+        },
+        {
+          "tag": "System_response",
+          "start": 132,
+          "end": 151,
+          "text": "record the check-in"
+        },
+        {
+          "tag": "Entity",
+          "start": 143,
+          "end": 151,
+          "text": "check-in"
+        },
+        {
+          "tag": "Entity",
+          "start": 39,
+          "end": 43,
+          "text": "room"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 74,
+      "text": "Before the student can check in to the room, the student must be in good standing. When the student checks in to the room, the system shall record the check-in if the room is available, so that seat usage is tracked.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 194,
+          "end": 215,
+          "text": "seat usage is tracked"
+        },
+        {
+          "tag": "Condition",
+          "start": 163,
+          "end": 184,
+          "text": "the room is available"
+        },
+        {
+          "tag": "Precondition",
+          "start": 45,
+          "end": 81,
+          "text": "the student must be in good standing"
+        },
+        {
+          "tag": "Trigger",
+          "start": 83,
+          "end": 122,
+          "text": "When the student checks in to the room,"
+        },
+        {
+          "tag": "Action",
+          "start": 100,
+          "end": 121,
+          "text": "checks in to the room"
+        },
+        {
+          "tag": "System_response",
+          "start": 140,
+          "end": 159,
+          "text": "record the check-in"
+        },
+        {
+          "tag": "Entity",
+          "start": 151,
+          "end": 159,
+          "text": "check-in"
+        },
+        {
+          "tag": "Entity",
+          "start": 39,
+          "end": 43,
+          "text": "room"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 75,
+      "text": "Before the student can check in to the room, the student must be authorized. When the student checks in to the room, the system shall record the check-in if the request is complete, so that resources are used efficiently.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 190,
+          "end": 220,
+          "text": "resources are used efficiently"
+        },
+        {
+          "tag": "Condition",
+          "start": 157,
+          "end": 180,
+          "text": "the request is complete"
+        },
+        {
+          "tag": "Precondition",
+          "start": 45,
+          "end": 75,
+          "text": "the student must be authorized"
+        },
+        {
+          "tag": "Trigger",
+          "start": 77,
+          "end": 116,
+          "text": "When the student checks in to the room,"
+        },
+        {
+          "tag": "Action",
+          "start": 94,
+          "end": 115,
+          "text": "checks in to the room"
+        },
+        {
+          "tag": "System_response",
+          "start": 134,
+          "end": 153,
+          "text": "record the check-in"
+        },
+        {
+          "tag": "Entity",
+          "start": 145,
+          "end": 153,
+          "text": "check-in"
+        },
+        {
+          "tag": "Entity",
+          "start": 39,
+          "end": 43,
+          "text": "room"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 76,
+      "text": "Before the student can request a room change, the student must be authenticated. When the student requests a room change, the system shall update the room assignment if the room is unavailable, so that the student can continue studying.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 202,
+          "end": 235,
+          "text": "the student can continue studying"
+        },
+        {
+          "tag": "Condition",
+          "start": 169,
+          "end": 192,
+          "text": "the room is unavailable"
+        },
+        {
+          "tag": "Precondition",
+          "start": 46,
+          "end": 79,
+          "text": "the student must be authenticated"
+        },
+        {
+          "tag": "Trigger",
+          "start": 81,
+          "end": 121,
+          "text": "When the student requests a room change,"
+        },
+        {
+          "tag": "Action",
+          "start": 98,
+          "end": 120,
+          "text": "requests a room change"
+        },
+        {
+          "tag": "System_response",
+          "start": 139,
+          "end": 165,
+          "text": "update the room assignment"
+        },
+        {
+          "tag": "Entity",
+          "start": 33,
+          "end": 44,
+          "text": "room change"
+        },
+        {
+          "tag": "Entity",
+          "start": 150,
+          "end": 165,
+          "text": "room assignment"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 77,
+      "text": "Before the student can request a room change, the student must be registered. When the student requests a room change, the system shall update the room assignment if the new room has enough seats, so that the schedule stays accurate.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 205,
+          "end": 232,
+          "text": "the schedule stays accurate"
+        },
+        {
+          "tag": "Condition",
+          "start": 166,
+          "end": 195,
+          "text": "the new room has enough seats"
+        },
+        {
+          "tag": "Precondition",
+          "start": 46,
+          "end": 76,
+          "text": "the student must be registered"
+        },
+        {
+          "tag": "Trigger",
+          "start": 78,
+          "end": 118,
+          "text": "When the student requests a room change,"
+        },
+        {
+          "tag": "Action",
+          "start": 95,
+          "end": 117,
+          "text": "requests a room change"
+        },
+        {
+          "tag": "System_response",
+          "start": 136,
+          "end": 162,
+          "text": "update the room assignment"
+        },
+        {
+          "tag": "Entity",
+          "start": 33,
+          "end": 44,
+          "text": "room change"
+        },
+        {
+          "tag": "Entity",
+          "start": 147,
+          "end": 162,
+          "text": "room assignment"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 78,
+      "text": "Before the student can request a room change, the student must be verified. When the student requests a room change, the system shall update the room assignment if the reservation is active, so that capacity limits are enforced.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 199,
+          "end": 227,
+          "text": "capacity limits are enforced"
+        },
+        {
+          "tag": "Condition",
+          "start": 164,
+          "end": 189,
+          "text": "the reservation is active"
+        },
+        {
+          "tag": "Precondition",
+          "start": 46,
+          "end": 74,
+          "text": "the student must be verified"
+        },
+        {
+          "tag": "Trigger",
+          "start": 76,
+          "end": 116,
+          "text": "When the student requests a room change,"
+        },
+        {
+          "tag": "Action",
+          "start": 93,
+          "end": 115,
+          "text": "requests a room change"
+        },
+        {
+          "tag": "System_response",
+          "start": 134,
+          "end": 160,
+          "text": "update the room assignment"
+        },
+        {
+          "tag": "Entity",
+          "start": 33,
+          "end": 44,
+          "text": "room change"
+        },
+        {
+          "tag": "Entity",
+          "start": 145,
+          "end": 160,
+          "text": "room assignment"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 79,
+      "text": "Before the student can request a room change, the student must be in good standing. When the student requests a room change, the system shall update the room assignment if the request is complete, so that double bookings are prevented.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 205,
+          "end": 234,
+          "text": "double bookings are prevented"
+        },
+        {
+          "tag": "Condition",
+          "start": 172,
+          "end": 195,
+          "text": "the request is complete"
+        },
+        {
+          "tag": "Precondition",
+          "start": 46,
+          "end": 82,
+          "text": "the student must be in good standing"
+        },
+        {
+          "tag": "Trigger",
+          "start": 84,
+          "end": 124,
+          "text": "When the student requests a room change,"
+        },
+        {
+          "tag": "Action",
+          "start": 101,
+          "end": 123,
+          "text": "requests a room change"
+        },
+        {
+          "tag": "System_response",
+          "start": 142,
+          "end": 168,
+          "text": "update the room assignment"
+        },
+        {
+          "tag": "Entity",
+          "start": 33,
+          "end": 44,
+          "text": "room change"
+        },
+        {
+          "tag": "Entity",
+          "start": 153,
+          "end": 168,
+          "text": "room assignment"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 80,
+      "text": "Before the student can request a room change, the student must be authorized. When the student requests a room change, the system shall update the room assignment if the change is within opening hours, so that resources are used efficiently.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 210,
+          "end": 240,
+          "text": "resources are used efficiently"
+        },
+        {
+          "tag": "Condition",
+          "start": 166,
+          "end": 200,
+          "text": "the change is within opening hours"
+        },
+        {
+          "tag": "Precondition",
+          "start": 46,
+          "end": 76,
+          "text": "the student must be authorized"
+        },
+        {
+          "tag": "Trigger",
+          "start": 78,
+          "end": 118,
+          "text": "When the student requests a room change,"
+        },
+        {
+          "tag": "Action",
+          "start": 95,
+          "end": 117,
+          "text": "requests a room change"
+        },
+        {
+          "tag": "System_response",
+          "start": 136,
+          "end": 162,
+          "text": "update the room assignment"
+        },
+        {
+          "tag": "Entity",
+          "start": 33,
+          "end": 44,
+          "text": "room change"
+        },
+        {
+          "tag": "Entity",
+          "start": 147,
+          "end": 162,
+          "text": "room assignment"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 81,
+      "text": "Before the student can report a room issue, the student must be authenticated. When the student reports a room issue, the system shall log the issue if the room is in use, so that issues are resolved quickly.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 180,
+          "end": 207,
+          "text": "issues are resolved quickly"
+        },
+        {
+          "tag": "Condition",
+          "start": 152,
+          "end": 170,
+          "text": "the room is in use"
+        },
+        {
+          "tag": "Precondition",
+          "start": 44,
+          "end": 77,
+          "text": "the student must be authenticated"
+        },
+        {
+          "tag": "Trigger",
+          "start": 79,
+          "end": 117,
+          "text": "When the student reports a room issue,"
+        },
+        {
+          "tag": "Action",
+          "start": 96,
+          "end": 116,
+          "text": "reports a room issue"
+        },
+        {
+          "tag": "System_response",
+          "start": 135,
+          "end": 148,
+          "text": "log the issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 42,
+          "text": "room issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 37,
+          "end": 42,
+          "text": "issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 82,
+      "text": "Before the student can report a room issue, the student must be registered. When the student reports a room issue, the system shall log the issue if the report includes a description, so that maintenance is scheduled promptly.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 192,
+          "end": 225,
+          "text": "maintenance is scheduled promptly"
+        },
+        {
+          "tag": "Condition",
+          "start": 149,
+          "end": 182,
+          "text": "the report includes a description"
+        },
+        {
+          "tag": "Precondition",
+          "start": 44,
+          "end": 74,
+          "text": "the student must be registered"
+        },
+        {
+          "tag": "Trigger",
+          "start": 76,
+          "end": 114,
+          "text": "When the student reports a room issue,"
+        },
+        {
+          "tag": "Action",
+          "start": 93,
+          "end": 113,
+          "text": "reports a room issue"
+        },
+        {
+          "tag": "System_response",
+          "start": 132,
+          "end": 145,
+          "text": "log the issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 42,
+          "text": "room issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 37,
+          "end": 42,
+          "text": "issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 83,
+      "text": "Before the student can report a room issue, the student must be verified. When the student reports a room issue, the system shall log the issue if the request is complete, so that safety risks are reduced.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 180,
+          "end": 204,
+          "text": "safety risks are reduced"
+        },
+        {
+          "tag": "Condition",
+          "start": 147,
+          "end": 170,
+          "text": "the request is complete"
+        },
+        {
+          "tag": "Precondition",
+          "start": 44,
+          "end": 72,
+          "text": "the student must be verified"
+        },
+        {
+          "tag": "Trigger",
+          "start": 74,
+          "end": 112,
+          "text": "When the student reports a room issue,"
+        },
+        {
+          "tag": "Action",
+          "start": 91,
+          "end": 111,
+          "text": "reports a room issue"
+        },
+        {
+          "tag": "System_response",
+          "start": 130,
+          "end": 143,
+          "text": "log the issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 42,
+          "text": "room issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 37,
+          "end": 42,
+          "text": "issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 84,
+      "text": "Before the student can report a room issue, the student must be in good standing. When the student reports a room issue, the system shall log the issue if the issue is not already reported, so that the system tracks recurring problems.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 198,
+          "end": 234,
+          "text": "the system tracks recurring problems"
+        },
+        {
+          "tag": "Condition",
+          "start": 155,
+          "end": 188,
+          "text": "the issue is not already reported"
+        },
+        {
+          "tag": "Precondition",
+          "start": 44,
+          "end": 80,
+          "text": "the student must be in good standing"
+        },
+        {
+          "tag": "Trigger",
+          "start": 82,
+          "end": 120,
+          "text": "When the student reports a room issue,"
+        },
+        {
+          "tag": "Action",
+          "start": 99,
+          "end": 119,
+          "text": "reports a room issue"
+        },
+        {
+          "tag": "System_response",
+          "start": 138,
+          "end": 151,
+          "text": "log the issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 42,
+          "text": "room issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 37,
+          "end": 42,
+          "text": "issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 85,
+      "text": "Before the student can report a room issue, the student must be authorized. When the student reports a room issue, the system shall log the issue if the room is under maintenance, so that administrators can prioritize repairs.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 188,
+          "end": 225,
+          "text": "administrators can prioritize repairs"
+        },
+        {
+          "tag": "Condition",
+          "start": 149,
+          "end": 178,
+          "text": "the room is under maintenance"
+        },
+        {
+          "tag": "Precondition",
+          "start": 44,
+          "end": 74,
+          "text": "the student must be authorized"
+        },
+        {
+          "tag": "Trigger",
+          "start": 76,
+          "end": 114,
+          "text": "When the student reports a room issue,"
+        },
+        {
+          "tag": "Action",
+          "start": 93,
+          "end": 113,
+          "text": "reports a room issue"
+        },
+        {
+          "tag": "System_response",
+          "start": 132,
+          "end": 145,
+          "text": "log the issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 42,
+          "text": "room issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 37,
+          "end": 42,
+          "text": "issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 86,
+      "text": "Before the student can request a group booking, the student must be authenticated. When the student requests a group booking, the system shall schedule the group booking if the group size does not exceed capacity, so that group study is supported.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 222,
+          "end": 246,
+          "text": "group study is supported"
+        },
+        {
+          "tag": "Condition",
+          "start": 173,
+          "end": 212,
+          "text": "the group size does not exceed capacity"
+        },
+        {
+          "tag": "Precondition",
+          "start": 48,
+          "end": 81,
+          "text": "the student must be authenticated"
+        },
+        {
+          "tag": "Trigger",
+          "start": 83,
+          "end": 125,
+          "text": "When the student requests a group booking,"
+        },
+        {
+          "tag": "Action",
+          "start": 100,
+          "end": 124,
+          "text": "requests a group booking"
+        },
+        {
+          "tag": "System_response",
+          "start": 143,
+          "end": 169,
+          "text": "schedule the group booking"
+        },
+        {
+          "tag": "Entity",
+          "start": 33,
+          "end": 46,
+          "text": "group booking"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 87,
+      "text": "Before the student can request a group booking, the student must be registered. When the student requests a group booking, the system shall schedule the group booking if the room is available, so that capacity limits are enforced.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 201,
+          "end": 229,
+          "text": "capacity limits are enforced"
+        },
+        {
+          "tag": "Condition",
+          "start": 170,
+          "end": 191,
+          "text": "the room is available"
+        },
+        {
+          "tag": "Precondition",
+          "start": 48,
+          "end": 78,
+          "text": "the student must be registered"
+        },
+        {
+          "tag": "Trigger",
+          "start": 80,
+          "end": 122,
+          "text": "When the student requests a group booking,"
+        },
+        {
+          "tag": "Action",
+          "start": 97,
+          "end": 121,
+          "text": "requests a group booking"
+        },
+        {
+          "tag": "System_response",
+          "start": 140,
+          "end": 166,
+          "text": "schedule the group booking"
+        },
+        {
+          "tag": "Entity",
+          "start": 33,
+          "end": 46,
+          "text": "group booking"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 88,
+      "text": "Before the student can request a group booking, the student must be verified. When the student requests a group booking, the system shall schedule the group booking if the request is complete, so that double bookings are prevented.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 201,
+          "end": 230,
+          "text": "double bookings are prevented"
+        },
+        {
+          "tag": "Condition",
+          "start": 168,
+          "end": 191,
+          "text": "the request is complete"
+        },
+        {
+          "tag": "Precondition",
+          "start": 48,
+          "end": 76,
+          "text": "the student must be verified"
+        },
+        {
+          "tag": "Trigger",
+          "start": 78,
+          "end": 120,
+          "text": "When the student requests a group booking,"
+        },
+        {
+          "tag": "Action",
+          "start": 95,
+          "end": 119,
+          "text": "requests a group booking"
+        },
+        {
+          "tag": "System_response",
+          "start": 138,
+          "end": 164,
+          "text": "schedule the group booking"
+        },
+        {
+          "tag": "Entity",
+          "start": 33,
+          "end": 46,
+          "text": "group booking"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 89,
+      "text": "Before the student can request a group booking, the student must be in good standing. When the student requests a group booking, the system shall schedule the group booking if the group has a designated leader, so that the schedule stays accurate.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 219,
+          "end": 246,
+          "text": "the schedule stays accurate"
+        },
+        {
+          "tag": "Condition",
+          "start": 176,
+          "end": 209,
+          "text": "the group has a designated leader"
+        },
+        {
+          "tag": "Precondition",
+          "start": 48,
+          "end": 84,
+          "text": "the student must be in good standing"
+        },
+        {
+          "tag": "Trigger",
+          "start": 86,
+          "end": 128,
+          "text": "When the student requests a group booking,"
+        },
+        {
+          "tag": "Action",
+          "start": 103,
+          "end": 127,
+          "text": "requests a group booking"
+        },
+        {
+          "tag": "System_response",
+          "start": 146,
+          "end": 172,
+          "text": "schedule the group booking"
+        },
+        {
+          "tag": "Entity",
+          "start": 33,
+          "end": 46,
+          "text": "group booking"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 90,
+      "text": "Before the student can request a group booking, the student must be authorized. When the student requests a group booking, the system shall schedule the group booking if the time slot is within opening hours, so that resources are used efficiently.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 217,
+          "end": 247,
+          "text": "resources are used efficiently"
+        },
+        {
+          "tag": "Condition",
+          "start": 170,
+          "end": 207,
+          "text": "the time slot is within opening hours"
+        },
+        {
+          "tag": "Precondition",
+          "start": 48,
+          "end": 78,
+          "text": "the student must be authorized"
+        },
+        {
+          "tag": "Trigger",
+          "start": 80,
+          "end": 122,
+          "text": "When the student requests a group booking,"
+        },
+        {
+          "tag": "Action",
+          "start": 97,
+          "end": 121,
+          "text": "requests a group booking"
+        },
+        {
+          "tag": "System_response",
+          "start": 140,
+          "end": 166,
+          "text": "schedule the group booking"
+        },
+        {
+          "tag": "Entity",
+          "start": 33,
+          "end": 46,
+          "text": "group booking"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 18,
+          "text": "the student"
+        }
+      ]
+    },
+    {
+      "id": 91,
+      "text": "Before the administrator can upload a room photo, the administrator must be authorized. When the administrator uploads a room photo, the system shall store the photo if the room exists, so that room listings are accurate.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 194,
+          "end": 220,
+          "text": "room listings are accurate"
+        },
+        {
+          "tag": "Condition",
+          "start": 169,
+          "end": 184,
+          "text": "the room exists"
+        },
+        {
+          "tag": "Precondition",
+          "start": 50,
+          "end": 86,
+          "text": "the administrator must be authorized"
+        },
+        {
+          "tag": "Trigger",
+          "start": 88,
+          "end": 132,
+          "text": "When the administrator uploads a room photo,"
+        },
+        {
+          "tag": "Action",
+          "start": 111,
+          "end": 131,
+          "text": "uploads a room photo"
+        },
+        {
+          "tag": "System_response",
+          "start": 150,
+          "end": 165,
+          "text": "store the photo"
+        },
+        {
+          "tag": "Entity",
+          "start": 38,
+          "end": 48,
+          "text": "room photo"
+        },
+        {
+          "tag": "Entity",
+          "start": 43,
+          "end": 48,
+          "text": "photo"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        }
+      ]
+    },
+    {
+      "id": 92,
+      "text": "Before the administrator can upload a room photo, the administrator must be authenticated. When the administrator uploads a room photo, the system shall store the photo if the photo meets the size limit, so that students can identify the room.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 212,
+          "end": 242,
+          "text": "students can identify the room"
+        },
+        {
+          "tag": "Condition",
+          "start": 172,
+          "end": 202,
+          "text": "the photo meets the size limit"
+        },
+        {
+          "tag": "Precondition",
+          "start": 50,
+          "end": 89,
+          "text": "the administrator must be authenticated"
+        },
+        {
+          "tag": "Trigger",
+          "start": 91,
+          "end": 135,
+          "text": "When the administrator uploads a room photo,"
+        },
+        {
+          "tag": "Action",
+          "start": 114,
+          "end": 134,
+          "text": "uploads a room photo"
+        },
+        {
+          "tag": "System_response",
+          "start": 153,
+          "end": 168,
+          "text": "store the photo"
+        },
+        {
+          "tag": "Entity",
+          "start": 38,
+          "end": 48,
+          "text": "room photo"
+        },
+        {
+          "tag": "Entity",
+          "start": 43,
+          "end": 48,
+          "text": "photo"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        }
+      ]
+    },
+    {
+      "id": 93,
+      "text": "Before the administrator can upload a room photo, the administrator must be verified. When the administrator uploads a room photo, the system shall store the photo if the request is complete, so that administrators can update assets.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 200,
+          "end": 232,
+          "text": "administrators can update assets"
+        },
+        {
+          "tag": "Condition",
+          "start": 167,
+          "end": 190,
+          "text": "the request is complete"
+        },
+        {
+          "tag": "Precondition",
+          "start": 50,
+          "end": 84,
+          "text": "the administrator must be verified"
+        },
+        {
+          "tag": "Trigger",
+          "start": 86,
+          "end": 130,
+          "text": "When the administrator uploads a room photo,"
+        },
+        {
+          "tag": "Action",
+          "start": 109,
+          "end": 129,
+          "text": "uploads a room photo"
+        },
+        {
+          "tag": "System_response",
+          "start": 148,
+          "end": 163,
+          "text": "store the photo"
+        },
+        {
+          "tag": "Entity",
+          "start": 38,
+          "end": 48,
+          "text": "room photo"
+        },
+        {
+          "tag": "Entity",
+          "start": 43,
+          "end": 48,
+          "text": "photo"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        }
+      ]
+    },
+    {
+      "id": 94,
+      "text": "Before the administrator can upload a room photo, the administrator must be assigned to the role. When the administrator uploads a room photo, the system shall store the photo if the room is not under maintenance, so that the room catalog stays current.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 222,
+          "end": 252,
+          "text": "the room catalog stays current"
+        },
+        {
+          "tag": "Condition",
+          "start": 179,
+          "end": 212,
+          "text": "the room is not under maintenance"
+        },
+        {
+          "tag": "Precondition",
+          "start": 50,
+          "end": 96,
+          "text": "the administrator must be assigned to the role"
+        },
+        {
+          "tag": "Trigger",
+          "start": 98,
+          "end": 142,
+          "text": "When the administrator uploads a room photo,"
+        },
+        {
+          "tag": "Action",
+          "start": 121,
+          "end": 141,
+          "text": "uploads a room photo"
+        },
+        {
+          "tag": "System_response",
+          "start": 160,
+          "end": 175,
+          "text": "store the photo"
+        },
+        {
+          "tag": "Entity",
+          "start": 38,
+          "end": 48,
+          "text": "room photo"
+        },
+        {
+          "tag": "Entity",
+          "start": 43,
+          "end": 48,
+          "text": "photo"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        }
+      ]
+    },
+    {
+      "id": 95,
+      "text": "Before the administrator can upload a room photo, the administrator must be approved. When the administrator uploads a room photo, the system shall store the photo if the administrator is assigned to the room, so that quality issues are detected.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 218,
+          "end": 245,
+          "text": "quality issues are detected"
+        },
+        {
+          "tag": "Condition",
+          "start": 167,
+          "end": 208,
+          "text": "the administrator is assigned to the room"
+        },
+        {
+          "tag": "Precondition",
+          "start": 50,
+          "end": 84,
+          "text": "the administrator must be approved"
+        },
+        {
+          "tag": "Trigger",
+          "start": 86,
+          "end": 130,
+          "text": "When the administrator uploads a room photo,"
+        },
+        {
+          "tag": "Action",
+          "start": 109,
+          "end": 129,
+          "text": "uploads a room photo"
+        },
+        {
+          "tag": "System_response",
+          "start": 148,
+          "end": 163,
+          "text": "store the photo"
+        },
+        {
+          "tag": "Entity",
+          "start": 38,
+          "end": 48,
+          "text": "room photo"
+        },
+        {
+          "tag": "Entity",
+          "start": 43,
+          "end": 48,
+          "text": "photo"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        }
+      ]
+    },
+    {
+      "id": 96,
+      "text": "Before the administrator can export a usage report, the administrator must be authorized. When the administrator exports a usage report, the system shall generate the report if the reporting period is selected, so that administrators can track usage.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 219,
+          "end": 249,
+          "text": "administrators can track usage"
+        },
+        {
+          "tag": "Condition",
+          "start": 177,
+          "end": 209,
+          "text": "the reporting period is selected"
+        },
+        {
+          "tag": "Precondition",
+          "start": 52,
+          "end": 88,
+          "text": "the administrator must be authorized"
+        },
+        {
+          "tag": "Trigger",
+          "start": 90,
+          "end": 136,
+          "text": "When the administrator exports a usage report,"
+        },
+        {
+          "tag": "Action",
+          "start": 113,
+          "end": 135,
+          "text": "exports a usage report"
+        },
+        {
+          "tag": "System_response",
+          "start": 154,
+          "end": 173,
+          "text": "generate the report"
+        },
+        {
+          "tag": "Entity",
+          "start": 38,
+          "end": 50,
+          "text": "usage report"
+        },
+        {
+          "tag": "Entity",
+          "start": 44,
+          "end": 50,
+          "text": "report"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        }
+      ]
+    },
+    {
+      "id": 97,
+      "text": "Before the administrator can export a usage report, the administrator must be authenticated. When the administrator exports a usage report, the system shall generate the report if the request is complete, so that capacity planning is supported.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 213,
+          "end": 243,
+          "text": "capacity planning is supported"
+        },
+        {
+          "tag": "Condition",
+          "start": 180,
+          "end": 203,
+          "text": "the request is complete"
+        },
+        {
+          "tag": "Precondition",
+          "start": 52,
+          "end": 91,
+          "text": "the administrator must be authenticated"
+        },
+        {
+          "tag": "Trigger",
+          "start": 93,
+          "end": 139,
+          "text": "When the administrator exports a usage report,"
+        },
+        {
+          "tag": "Action",
+          "start": 116,
+          "end": 138,
+          "text": "exports a usage report"
+        },
+        {
+          "tag": "System_response",
+          "start": 157,
+          "end": 176,
+          "text": "generate the report"
+        },
+        {
+          "tag": "Entity",
+          "start": 38,
+          "end": 50,
+          "text": "usage report"
+        },
+        {
+          "tag": "Entity",
+          "start": 44,
+          "end": 50,
+          "text": "report"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        }
+      ]
+    },
+    {
+      "id": 98,
+      "text": "Before the administrator can export a usage report, the administrator must be verified. When the administrator exports a usage report, the system shall generate the report if the administrator has reporting access, so that policy decisions are informed.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 223,
+          "end": 252,
+          "text": "policy decisions are informed"
+        },
+        {
+          "tag": "Condition",
+          "start": 175,
+          "end": 213,
+          "text": "the administrator has reporting access"
+        },
+        {
+          "tag": "Precondition",
+          "start": 52,
+          "end": 86,
+          "text": "the administrator must be verified"
+        },
+        {
+          "tag": "Trigger",
+          "start": 88,
+          "end": 134,
+          "text": "When the administrator exports a usage report,"
+        },
+        {
+          "tag": "Action",
+          "start": 111,
+          "end": 133,
+          "text": "exports a usage report"
+        },
+        {
+          "tag": "System_response",
+          "start": 152,
+          "end": 171,
+          "text": "generate the report"
+        },
+        {
+          "tag": "Entity",
+          "start": 38,
+          "end": 50,
+          "text": "usage report"
+        },
+        {
+          "tag": "Entity",
+          "start": 44,
+          "end": 50,
+          "text": "report"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        }
+      ]
+    },
+    {
+      "id": 99,
+      "text": "Before the administrator can export a usage report, the administrator must be assigned to the role. When the administrator exports a usage report, the system shall generate the report if the system is available, so that peak hours are identified.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 220,
+          "end": 245,
+          "text": "peak hours are identified"
+        },
+        {
+          "tag": "Condition",
+          "start": 187,
+          "end": 210,
+          "text": "the system is available"
+        },
+        {
+          "tag": "Precondition",
+          "start": 52,
+          "end": 98,
+          "text": "the administrator must be assigned to the role"
+        },
+        {
+          "tag": "Trigger",
+          "start": 100,
+          "end": 146,
+          "text": "When the administrator exports a usage report,"
+        },
+        {
+          "tag": "Action",
+          "start": 123,
+          "end": 145,
+          "text": "exports a usage report"
+        },
+        {
+          "tag": "System_response",
+          "start": 164,
+          "end": 183,
+          "text": "generate the report"
+        },
+        {
+          "tag": "Entity",
+          "start": 38,
+          "end": 50,
+          "text": "usage report"
+        },
+        {
+          "tag": "Entity",
+          "start": 44,
+          "end": 50,
+          "text": "report"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        }
+      ]
+    },
+    {
+      "id": 100,
+      "text": "Before the administrator can export a usage report, the administrator must be approved. When the administrator exports a usage report, the system shall generate the report if the dataset is up to date, so that resources are allocated efficiently.",
+      "spans": [
+        {
+          "tag": "Purpose",
+          "start": 210,
+          "end": 245,
+          "text": "resources are allocated efficiently"
+        },
+        {
+          "tag": "Condition",
+          "start": 175,
+          "end": 200,
+          "text": "the dataset is up to date"
+        },
+        {
+          "tag": "Precondition",
+          "start": 52,
+          "end": 86,
+          "text": "the administrator must be approved"
+        },
+        {
+          "tag": "Trigger",
+          "start": 88,
+          "end": 134,
+          "text": "When the administrator exports a usage report,"
+        },
+        {
+          "tag": "Action",
+          "start": 111,
+          "end": 133,
+          "text": "exports a usage report"
+        },
+        {
+          "tag": "System_response",
+          "start": 152,
+          "end": 171,
+          "text": "generate the report"
+        },
+        {
+          "tag": "Entity",
+          "start": 38,
+          "end": 50,
+          "text": "usage report"
+        },
+        {
+          "tag": "Entity",
+          "start": 44,
+          "end": 50,
+          "text": "report"
+        },
+        {
+          "tag": "Entity",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 7,
+          "end": 24,
+          "text": "the administrator"
+        }
+      ]
     }
   ]
 }

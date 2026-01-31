@@ -1,6 +1,6 @@
 # ReqFlow : Analysing Software Requirements Through Abstractions
 
-<img src="img.jpg" width="300" alt="explain">
+<img src="img.jpg" width="700" alt="explain">
 
 
 

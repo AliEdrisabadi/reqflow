@@ -1,4 +1,4 @@
-# ReqFlow (LLM4SE A3) — Baseline vs Multi‑Agent Agent‑Chain (Ollama)
+# ReqFlow 
 
 This project is a small student tool for the LLM4SE **A3** assignment: **Analysing Software Requirements Through Abstractions**.
 
@@ -18,11 +18,7 @@ A workflow that follows the course slide idea (multi‑step / multi‑agent):
 4. **Logic Agent**: `Condition`, `Precondition`, `Trigger`
 5. **Purpose Agent**: `Purpose`
 
-Then we merge + deduplicate spans and enforce consistency rules:
-- `System_response ⊆ Action`
-- `Main_actor ⊆ Entity`
-- `Precondition ⊆ Condition`
-- `Trigger ⊆ Condition`
+
 
 ## Tags (A3 slide taxonomy)
 `Purpose, Trigger, Precondition, Condition, Action, System_response, Entity, Main_actor`

@@ -21,6 +21,9 @@ Return ONLY a JSON object:
 ## Hard constraints
 - Every span MUST be an exact substring of the input text.
 - Do NOT paraphrase.
+- Output spans in the same order they appear in the input.
+- If a leading clause starts with When/If/Upon/After/Before/Once/While and is immediately followed by a comma in the input, INCLUDE the comma in the span.
+- For criteria lists that use commas (e.g., "X by A, B, and C"), prefer extracting the full list as ONE Condition span.
 - Any span listed in Precondition or Trigger MUST also appear in Condition.
 - Deduplicate exact duplicates.
 - If none found for a field, return an empty list.

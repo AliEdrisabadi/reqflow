@@ -1,0 +1,2462 @@
+{
+  "schema": [
+    "Purpose",
+    "Condition",
+    "Precondition",
+    "Trigger",
+    "Action",
+    "System_response",
+    "Entity",
+    "Main_actor"
+  ],
+  "items": [
+    {
+      "id": 1,
+      "text": "A student shall be able to search study rooms with available seats by campus, date, and time range.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 27,
+          "end": 45,
+          "text": "search study rooms"
+        },
+        {
+          "tag": "Condition",
+          "text": "by campus",
+          "start": 67,
+          "end": 76
+        },
+        {
+          "tag": "Condition",
+          "text": "date",
+          "start": 78,
+          "end": 82
+        },
+        {
+          "tag": "Condition",
+          "text": "time range",
+          "start": 88,
+          "end": 98
+        },
+        {
+          "tag": "Entity",
+          "start": 2,
+          "end": 9,
+          "text": "student"
+        },
+        {
+          "tag": "Entity",
+          "start": 34,
+          "end": 45,
+          "text": "study rooms"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 2,
+          "end": 9,
+          "text": "student"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "When the student is authenticated, the system shall allow reserving one or more seats in a study room for a chosen time slot.",
+      "spans": [
+        {
+          "tag": "Condition",
+          "text": "When the student is authenticated",
+          "start": 0,
+          "end": 33
+        },
+        {
+          "tag": "Condition",
+          "start": 9,
+          "end": 33,
+          "text": "student is authenticated"
+        },
+        {
+          "tag": "Condition",
+          "start": 108,
+          "end": 124,
+          "text": "chosen time slot"
+        },
+        {
+          "tag": "Entity",
+          "start": 5,
+          "end": 16,
+          "text": "the student"
+        },
+        {
+          "tag": "Entity",
+          "start": 80,
+          "end": 85,
+          "text": "seats"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 5,
+          "end": 16,
+          "text": "the student"
+        },
+        {
+          "tag": "Precondition",
+          "text": "When the student is authenticated",
+          "start": 0,
+          "end": 33
+        },
+        {
+          "tag": "Precondition",
+          "start": 9,
+          "end": 33,
+          "text": "student is authenticated"
+        },
+        {
+          "tag": "Trigger",
+          "text": "When the student is authenticated",
+          "start": 0,
+          "end": 33
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "If the selected study room has insufficient available seats for the requested time slot, the system shall reject the reservation and suggest the nearest available slots.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "reject the reservation",
+          "start": 106,
+          "end": 128
+        },
+        {
+          "tag": "Action",
+          "text": "suggest the nearest available slots",
+          "start": 133,
+          "end": 168
+        },
+        {
+          "tag": "Condition",
+          "text": "If the selected study room has insufficient available seats for the requested time slot",
+          "start": 0,
+          "end": 87
+        },
+        {
+          "tag": "Condition",
+          "start": 7,
+          "end": 53,
+          "text": "selected study room has insufficient available"
+        },
+        {
+          "tag": "Precondition",
+          "start": 7,
+          "end": 53,
+          "text": "selected study room has insufficient available"
+        },
+        {
+          "tag": "System_response",
+          "text": "reject the reservation",
+          "start": 106,
+          "end": 128
+        },
+        {
+          "tag": "System_response",
+          "text": "suggest the nearest available slots",
+          "start": 133,
+          "end": 168
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "A reservation shall include the room identifier, date, start time, end time, and the number of seats requested.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "the room identifier",
+          "start": 28,
+          "end": 47
+        },
+        {
+          "tag": "Action",
+          "text": "date",
+          "start": 49,
+          "end": 53
+        },
+        {
+          "tag": "Action",
+          "text": "start time",
+          "start": 55,
+          "end": 65
+        },
+        {
+          "tag": "Action",
+          "text": "end time",
+          "start": 67,
+          "end": 75
+        },
+        {
+          "tag": "Action",
+          "text": "the number of seats",
+          "start": 81,
+          "end": 100
+        },
+        {
+          "tag": "System_response",
+          "text": "the room identifier",
+          "start": 28,
+          "end": 47
+        },
+        {
+          "tag": "System_response",
+          "text": "date",
+          "start": 49,
+          "end": 53
+        },
+        {
+          "tag": "System_response",
+          "text": "start time",
+          "start": 55,
+          "end": 65
+        },
+        {
+          "tag": "System_response",
+          "text": "end time",
+          "start": 67,
+          "end": 75
+        },
+        {
+          "tag": "System_response",
+          "text": "the number of seats",
+          "start": 81,
+          "end": 100
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "The system shall prevent a student from booking more than 2 active reservations per day and more than 6 per week.",
+      "spans": [
+        {
+          "tag": "Condition",
+          "start": 53,
+          "end": 87,
+          "text": "than 2 active reservations per day"
+        },
+        {
+          "tag": "Entity",
+          "start": 25,
+          "end": 34,
+          "text": "a student"
+        },
+        {
+          "tag": "Entity",
+          "start": 40,
+          "end": 47,
+          "text": "booking"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 25,
+          "end": 34,
+          "text": "a student"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "If the student already has an active booking for the same time range, the system shall block creating another booking for that time range.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 30,
+          "end": 68,
+          "text": "active booking for the same time range"
+        },
+        {
+          "tag": "Condition",
+          "text": "If the student already has an active booking for the same time range",
+          "start": 0,
+          "end": 68
+        },
+        {
+          "tag": "Condition",
+          "start": 7,
+          "end": 68,
+          "text": "student already has an active booking for the same time range"
+        },
+        {
+          "tag": "Entity",
+          "start": 3,
+          "end": 14,
+          "text": "the student"
+        },
+        {
+          "tag": "Entity",
+          "start": 110,
+          "end": 137,
+          "text": "booking for that time range"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 3,
+          "end": 14,
+          "text": "the student"
+        },
+        {
+          "tag": "Precondition",
+          "start": 7,
+          "end": 68,
+          "text": "student already has an active booking for the same time range"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "A student shall be able to cancel a booking up to 30 minutes before the start time; otherwise, the system shall mark it as late-cancel.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 27,
+          "end": 43,
+          "text": "cancel a booking"
+        },
+        {
+          "tag": "Entity",
+          "start": 2,
+          "end": 9,
+          "text": "student"
+        },
+        {
+          "tag": "Entity",
+          "start": 34,
+          "end": 43,
+          "text": "a booking"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 2,
+          "end": 9,
+          "text": "student"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "If a reservation is canceled, the system shall immediately release the reserved seats and notify students on the waitlist, if any.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "release the reserved seats",
+          "start": 59,
+          "end": 85
+        },
+        {
+          "tag": "Action",
+          "text": "notify students",
+          "start": 90,
+          "end": 105
+        },
+        {
+          "tag": "Condition",
+          "text": "If a reservation is canceled",
+          "start": 0,
+          "end": 28
+        },
+        {
+          "tag": "Condition",
+          "start": 5,
+          "end": 28,
+          "text": "reservation is canceled"
+        },
+        {
+          "tag": "Condition",
+          "start": 123,
+          "end": 130,
+          "text": "if any."
+        },
+        {
+          "tag": "Entity",
+          "start": 30,
+          "end": 40,
+          "text": "the system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 30,
+          "end": 40,
+          "text": "the system"
+        },
+        {
+          "tag": "Precondition",
+          "start": 5,
+          "end": 28,
+          "text": "reservation is canceled"
+        },
+        {
+          "tag": "System_response",
+          "text": "release the reserved seats",
+          "start": 59,
+          "end": 85
+        },
+        {
+          "tag": "System_response",
+          "text": "notify students",
+          "start": 90,
+          "end": 105
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "A student shall be able to join a waitlist for a fully booked room on a specific date.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 27,
+          "end": 42,
+          "text": "join a waitlist"
+        },
+        {
+          "tag": "Condition",
+          "start": 43,
+          "end": 61,
+          "text": "for a fully booked"
+        },
+        {
+          "tag": "Entity",
+          "start": 2,
+          "end": 9,
+          "text": "student"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 42,
+          "text": "a waitlist"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 2,
+          "end": 9,
+          "text": "student"
+        },
+        {
+          "tag": "Precondition",
+          "start": 43,
+          "end": 61,
+          "text": "for a fully booked"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "When a room becomes available, the system shall offer the slot to the first student on the waitlist and give 10 minutes to confirm.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "shall offer the slot to the first student on the waitlist",
+          "start": 42,
+          "end": 99
+        },
+        {
+          "tag": "Action",
+          "text": "give 10 minutes to confirm",
+          "start": 104,
+          "end": 130
+        },
+        {
+          "tag": "Condition",
+          "text": "When a room becomes available",
+          "start": 0,
+          "end": 29
+        },
+        {
+          "tag": "Condition",
+          "start": 7,
+          "end": 29,
+          "text": "room becomes available"
+        },
+        {
+          "tag": "Entity",
+          "start": 31,
+          "end": 41,
+          "text": "the system"
+        },
+        {
+          "tag": "Entity",
+          "start": 91,
+          "end": 99,
+          "text": "waitlist"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 31,
+          "end": 41,
+          "text": "the system"
+        },
+        {
+          "tag": "Precondition",
+          "start": 7,
+          "end": 29,
+          "text": "room becomes available"
+        },
+        {
+          "tag": "System_response",
+          "text": "shall offer the slot to the first student on the waitlist",
+          "start": 42,
+          "end": 99
+        },
+        {
+          "tag": "System_response",
+          "text": "give 10 minutes to confirm",
+          "start": 104,
+          "end": 130
+        },
+        {
+          "tag": "Trigger",
+          "text": "When a room becomes available",
+          "start": 0,
+          "end": 29
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "text": "If the student does not confirm within 10 minutes, the system shall offer the slot to the next student on the waitlist.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 68,
+          "end": 118,
+          "text": "offer the slot to the next student on the waitlist"
+        },
+        {
+          "tag": "Condition",
+          "text": "If the student does not confirm within 10 minutes",
+          "start": 0,
+          "end": 49
+        },
+        {
+          "tag": "Entity",
+          "start": 51,
+          "end": 61,
+          "text": "the system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 51,
+          "end": 61,
+          "text": "the system"
+        },
+        {
+          "tag": "Precondition",
+          "text": "If the student does not confirm within 10 minutes",
+          "start": 0,
+          "end": 49
+        },
+        {
+          "tag": "System_response",
+          "start": 68,
+          "end": 118,
+          "text": "offer the slot to the next student on the waitlist"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "text": "The system shall send a booking confirmation via email and in-app notification within 1 minute after a successful reservation.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "shall send a booking confirmation via email",
+          "start": 11,
+          "end": 54
+        },
+        {
+          "tag": "Action",
+          "text": "in-app notification within 1 minute after a successful reservation",
+          "start": 59,
+          "end": 125
+        },
+        {
+          "tag": "Action",
+          "start": 24,
+          "end": 44,
+          "text": "booking confirmation"
+        },
+        {
+          "tag": "Condition",
+          "start": 66,
+          "end": 94,
+          "text": "notification within 1 minute"
+        },
+        {
+          "tag": "Entity",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        },
+        {
+          "tag": "Entity",
+          "start": 32,
+          "end": 44,
+          "text": "confirmation"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        },
+        {
+          "tag": "System_response",
+          "text": "shall send a booking confirmation via email",
+          "start": 11,
+          "end": 54
+        },
+        {
+          "tag": "System_response",
+          "text": "in-app notification within 1 minute after a successful reservation",
+          "start": 59,
+          "end": 125
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "text": "A student shall be able to check in for a seat reservation starting 10 minutes before the start time until 15 minutes after the start time.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 27,
+          "end": 58,
+          "text": "check in for a seat reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 2,
+          "end": 9,
+          "text": "student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 2,
+          "end": 9,
+          "text": "student"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "text": "If no check-in occurs by 15 minutes after the start time, the system shall automatically cancel the booking and record a no-show.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "automatically cancel the booking",
+          "start": 75,
+          "end": 107
+        },
+        {
+          "tag": "Action",
+          "text": "record a no-show",
+          "start": 112,
+          "end": 128
+        },
+        {
+          "tag": "Condition",
+          "text": "by 15 minutes after the start time",
+          "start": 22,
+          "end": 56
+        },
+        {
+          "tag": "Condition",
+          "start": 15,
+          "end": 56,
+          "text": "occurs by 15 minutes after the start time"
+        },
+        {
+          "tag": "Entity",
+          "start": 58,
+          "end": 68,
+          "text": "the system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 58,
+          "end": 68,
+          "text": "the system"
+        },
+        {
+          "tag": "Precondition",
+          "start": 15,
+          "end": 56,
+          "text": "occurs by 15 minutes after the start time"
+        },
+        {
+          "tag": "System_response",
+          "text": "automatically cancel the booking",
+          "start": 75,
+          "end": 107
+        },
+        {
+          "tag": "System_response",
+          "text": "record a no-show",
+          "start": 112,
+          "end": 128
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "text": "If a no-show is recorded three times within 30 days, the system shall suspend the student's booking privileges for 7 days.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 70,
+          "end": 116,
+          "text": "suspend the student's booking privileges for 7"
+        },
+        {
+          "tag": "Condition",
+          "text": "If a no-show is recorded three times within 30 days",
+          "start": 0,
+          "end": 51
+        },
+        {
+          "tag": "Entity",
+          "start": 53,
+          "end": 63,
+          "text": "the system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 53,
+          "end": 63,
+          "text": "the system"
+        },
+        {
+          "tag": "System_response",
+          "start": 70,
+          "end": 116,
+          "text": "suspend the student's booking privileges for 7"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "text": "The system shall display room capacity, equipment (e.g., whiteboard, projector), and accessibility features before booking.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "shall display room capacity",
+          "start": 11,
+          "end": 38
+        },
+        {
+          "tag": "Action",
+          "text": "equipment (e.g",
+          "start": 40,
+          "end": 54
+        },
+        {
+          "tag": "Action",
+          "text": "whiteboard",
+          "start": 57,
+          "end": 67
+        },
+        {
+          "tag": "Action",
+          "text": "projector",
+          "start": 69,
+          "end": 78
+        },
+        {
+          "tag": "Action",
+          "text": "accessibility features before booking",
+          "start": 85,
+          "end": 122
+        },
+        {
+          "tag": "Action",
+          "start": 17,
+          "end": 29,
+          "text": "display room"
+        },
+        {
+          "tag": "Entity",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        },
+        {
+          "tag": "System_response",
+          "text": "shall display room capacity",
+          "start": 11,
+          "end": 38
+        },
+        {
+          "tag": "System_response",
+          "text": "equipment (e.g",
+          "start": 40,
+          "end": 54
+        },
+        {
+          "tag": "System_response",
+          "text": "whiteboard",
+          "start": 57,
+          "end": 67
+        },
+        {
+          "tag": "System_response",
+          "text": "projector",
+          "start": 69,
+          "end": 78
+        },
+        {
+          "tag": "System_response",
+          "text": "accessibility features before booking",
+          "start": 85,
+          "end": 122
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "text": "A student shall be able to filter rooms by minimum capacity and required equipment.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 27,
+          "end": 39,
+          "text": "filter rooms"
+        },
+        {
+          "tag": "Condition",
+          "start": 43,
+          "end": 59,
+          "text": "minimum capacity"
+        },
+        {
+          "tag": "Condition",
+          "start": 64,
+          "end": 82,
+          "text": "required equipment"
+        },
+        {
+          "tag": "Entity",
+          "start": 2,
+          "end": 9,
+          "text": "student"
+        },
+        {
+          "tag": "Entity",
+          "start": 34,
+          "end": 39,
+          "text": "rooms"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 2,
+          "end": 9,
+          "text": "student"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "text": "If the number of seats requested exceeds the remaining available seats, the system shall prevent the reservation and explain the capacity constraint.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "requested exceeds the remaining available seats",
+          "start": 23,
+          "end": 70
+        },
+        {
+          "tag": "Action",
+          "text": "the",
+          "start": 3,
+          "end": 6
+        },
+        {
+          "tag": "Action",
+          "text": "shall prevent the reservation",
+          "start": 83,
+          "end": 112
+        },
+        {
+          "tag": "Action",
+          "text": "explain the capacity",
+          "start": 117,
+          "end": 137
+        },
+        {
+          "tag": "Condition",
+          "text": "If the number of seats requested exceeds the remaining available seats",
+          "start": 0,
+          "end": 70
+        },
+        {
+          "tag": "System_response",
+          "text": "shall prevent the reservation",
+          "start": 83,
+          "end": 112
+        },
+        {
+          "tag": "System_response",
+          "text": "explain the capacity",
+          "start": 117,
+          "end": 137
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "text": "A student shall be able to modify an existing reservation only if the new time slot satisfies booking limits and does not overlap the student's other reservations.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 37,
+          "end": 57,
+          "text": "existing reservation"
+        },
+        {
+          "tag": "Condition",
+          "text": "if the new time slot satisfies booking limits",
+          "start": 63,
+          "end": 108
+        },
+        {
+          "tag": "Condition",
+          "text": "does not overlap the student's other reservations",
+          "start": 113,
+          "end": 162
+        },
+        {
+          "tag": "Condition",
+          "start": 79,
+          "end": 108,
+          "text": "slot satisfies booking limits"
+        },
+        {
+          "tag": "Entity",
+          "start": 46,
+          "end": 57,
+          "text": "reservation"
+        },
+        {
+          "tag": "Entity",
+          "start": 130,
+          "end": 141,
+          "text": "the student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 130,
+          "end": 141,
+          "text": "the student"
+        },
+        {
+          "tag": "Precondition",
+          "start": 79,
+          "end": 108,
+          "text": "slot satisfies booking limits"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "text": "The system shall log all booking creations, modifications, cancellations, and no-show events with timestamp and user ID.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "shall log all booking creations",
+          "start": 11,
+          "end": 42
+        },
+        {
+          "tag": "Action",
+          "text": "modifications",
+          "start": 44,
+          "end": 57
+        },
+        {
+          "tag": "Action",
+          "text": "cancellations",
+          "start": 59,
+          "end": 72
+        },
+        {
+          "tag": "Action",
+          "text": "no-show events with timestamp",
+          "start": 78,
+          "end": 107
+        },
+        {
+          "tag": "Action",
+          "text": "user ID",
+          "start": 112,
+          "end": 119
+        },
+        {
+          "tag": "Action",
+          "text": "log all booking creations",
+          "start": 17,
+          "end": 42
+        },
+        {
+          "tag": "Action",
+          "text": "and",
+          "start": 74,
+          "end": 77
+        },
+        {
+          "tag": "Entity",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        },
+        {
+          "tag": "System_response",
+          "text": "shall log all booking creations",
+          "start": 11,
+          "end": 42
+        },
+        {
+          "tag": "System_response",
+          "text": "modifications",
+          "start": 44,
+          "end": 57
+        },
+        {
+          "tag": "System_response",
+          "text": "cancellations",
+          "start": 59,
+          "end": 72
+        },
+        {
+          "tag": "System_response",
+          "text": "no-show events with timestamp",
+          "start": 78,
+          "end": 107
+        },
+        {
+          "tag": "System_response",
+          "text": "user ID",
+          "start": 112,
+          "end": 119
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "text": "Administrative staff shall be able to create rooms and define their campus, opening hours, and maximum reservation length.",
+      "spans": [
+        {
+          "tag": "Entity",
+          "start": 0,
+          "end": 20,
+          "text": "Administrative staff"
+        },
+        {
+          "tag": "Entity",
+          "start": 45,
+          "end": 50,
+          "text": "rooms"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 20,
+          "text": "Administrative staff"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "text": "The system shall enforce that no reservation can exceed the maximum reservation length defined for that room.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 11,
+          "end": 109,
+          "text": "shall enforce that no reservation can exceed the maximum reservation length defined for that room."
+        },
+        {
+          "tag": "Action",
+          "start": 17,
+          "end": 59,
+          "text": "enforce that no reservation can exceed the"
+        },
+        {
+          "tag": "Entity",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        },
+        {
+          "tag": "System_response",
+          "start": 11,
+          "end": 109,
+          "text": "shall enforce that no reservation can exceed the maximum reservation length defined for that room."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "text": "If a student attempts to book outside the room opening hours, the system shall reject the request and show valid hours.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 25,
+          "end": 41,
+          "text": "book outside the"
+        },
+        {
+          "tag": "Condition",
+          "text": "If a student attempts to book outside the room opening hours",
+          "start": 0,
+          "end": 60
+        },
+        {
+          "tag": "Condition",
+          "start": 25,
+          "end": 60,
+          "text": "book outside the room opening hours"
+        },
+        {
+          "tag": "Entity",
+          "start": 5,
+          "end": 12,
+          "text": "student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 5,
+          "end": 12,
+          "text": "student"
+        },
+        {
+          "tag": "Precondition",
+          "start": 25,
+          "end": 60,
+          "text": "book outside the room opening hours"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "text": "The system shall allow staff to block a room for maintenance; during maintenance, the room shall not appear as available.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 32,
+          "end": 60,
+          "text": "block a room for maintenance"
+        },
+        {
+          "tag": "Entity",
+          "start": 23,
+          "end": 28,
+          "text": "staff"
+        },
+        {
+          "tag": "Entity",
+          "start": 40,
+          "end": 60,
+          "text": "room for maintenance"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 23,
+          "end": 28,
+          "text": "staff"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "text": "If a maintenance block overlaps existing bookings, the system shall notify affected students and offer alternative rooms of similar capacity.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "shall notify affected students",
+          "start": 62,
+          "end": 92
+        },
+        {
+          "tag": "Action",
+          "text": "offer alternative rooms of similar capacity",
+          "start": 97,
+          "end": 140
+        },
+        {
+          "tag": "Condition",
+          "text": "If a maintenance block overlaps existing bookings",
+          "start": 0,
+          "end": 49
+        },
+        {
+          "tag": "Condition",
+          "start": 5,
+          "end": 49,
+          "text": "maintenance block overlaps existing bookings"
+        },
+        {
+          "tag": "Entity",
+          "start": 51,
+          "end": 61,
+          "text": "the system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 51,
+          "end": 61,
+          "text": "the system"
+        },
+        {
+          "tag": "Precondition",
+          "start": 5,
+          "end": 49,
+          "text": "maintenance block overlaps existing bookings"
+        },
+        {
+          "tag": "System_response",
+          "text": "shall notify affected students",
+          "start": 62,
+          "end": 92
+        },
+        {
+          "tag": "System_response",
+          "text": "offer alternative rooms of similar capacity",
+          "start": 97,
+          "end": 140
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "text": "The system shall support group bookings where a student invites other students; invited students shall receive an invite and can accept or decline.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 17,
+          "end": 39,
+          "text": "support group bookings"
+        },
+        {
+          "tag": "Entity",
+          "start": 25,
+          "end": 39,
+          "text": "group bookings"
+        },
+        {
+          "tag": "Entity",
+          "start": 46,
+          "end": 55,
+          "text": "a student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 46,
+          "end": 55,
+          "text": "a student"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "text": "If fewer than 50% of invited students accept by 2 hours before the start time, the system shall prompt the organizer to confirm or cancel.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "shall prompt the organizer to confirm",
+          "start": 90,
+          "end": 127
+        },
+        {
+          "tag": "Action",
+          "text": "cancel",
+          "start": 131,
+          "end": 137
+        },
+        {
+          "tag": "Condition",
+          "text": "by 2 hours before the start time",
+          "start": 45,
+          "end": 77
+        },
+        {
+          "tag": "Condition",
+          "start": 3,
+          "end": 44,
+          "text": "fewer than 50% of invited students accept"
+        },
+        {
+          "tag": "Entity",
+          "start": 79,
+          "end": 89,
+          "text": "the system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 79,
+          "end": 89,
+          "text": "the system"
+        },
+        {
+          "tag": "Precondition",
+          "start": 3,
+          "end": 44,
+          "text": "fewer than 50% of invited students accept"
+        },
+        {
+          "tag": "System_response",
+          "text": "shall prompt the organizer to confirm",
+          "start": 90,
+          "end": 127
+        },
+        {
+          "tag": "System_response",
+          "text": "cancel",
+          "start": 131,
+          "end": 137
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "text": "The system shall allow the organizer to remove an invited student before the booking start time and notify the removed student.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 40,
+          "end": 65,
+          "text": "remove an invited student"
+        },
+        {
+          "tag": "Entity",
+          "start": 50,
+          "end": 65,
+          "text": "invited student"
+        },
+        {
+          "tag": "Entity",
+          "start": 58,
+          "end": 65,
+          "text": "student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 58,
+          "end": 65,
+          "text": "student"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "text": "The system shall provide a calendar view of a student's upcoming bookings and allow exporting as iCalendar (.ics).",
+      "spans": [
+        {
+          "tag": "Entity",
+          "start": 46,
+          "end": 53,
+          "text": "student"
+        },
+        {
+          "tag": "Entity",
+          "start": 65,
+          "end": 73,
+          "text": "bookings"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 46,
+          "end": 53,
+          "text": "student"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "text": "The system shall support single sign-on using the university identity provider; unauthenticated users shall have read-only access to availability.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 133,
+          "end": 145,
+          "text": "availability"
+        },
+        {
+          "tag": "Entity",
+          "start": 80,
+          "end": 100,
+          "text": "unauthenticated user"
+        },
+        {
+          "tag": "Entity",
+          "start": 133,
+          "end": 145,
+          "text": "availability"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 80,
+          "end": 100,
+          "text": "unauthenticated user"
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "text": "The system shall store personal data (name, email, student ID) encrypted at rest and transmit it over TLS.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "shall store personal data (name",
+          "start": 11,
+          "end": 42
+        },
+        {
+          "tag": "Action",
+          "text": "email",
+          "start": 44,
+          "end": 49
+        },
+        {
+          "tag": "Action",
+          "text": "student ID) encrypted at rest",
+          "start": 51,
+          "end": 80
+        },
+        {
+          "tag": "Action",
+          "text": "transmit it over TLS",
+          "start": 85,
+          "end": 105
+        },
+        {
+          "tag": "Action",
+          "start": 17,
+          "end": 36,
+          "text": "store personal data"
+        },
+        {
+          "tag": "Entity",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        },
+        {
+          "tag": "Entity",
+          "start": 23,
+          "end": 36,
+          "text": "personal data"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        },
+        {
+          "tag": "System_response",
+          "text": "shall store personal data (name",
+          "start": 11,
+          "end": 42
+        },
+        {
+          "tag": "System_response",
+          "text": "email",
+          "start": 44,
+          "end": 49
+        },
+        {
+          "tag": "System_response",
+          "text": "student ID) encrypted at rest",
+          "start": 51,
+          "end": 80
+        },
+        {
+          "tag": "System_response",
+          "text": "transmit it over TLS",
+          "start": 85,
+          "end": 105
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "text": "A student shall be able to report a room issue (e.g., broken equipment); the system shall create a ticket and notify staff.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 27,
+          "end": 46,
+          "text": "report a room issue"
+        },
+        {
+          "tag": "Entity",
+          "start": 2,
+          "end": 9,
+          "text": "student"
+        },
+        {
+          "tag": "Entity",
+          "start": 36,
+          "end": 46,
+          "text": "room issue"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 2,
+          "end": 9,
+          "text": "student"
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "text": "If a room issue is marked as critical by staff, the system shall automatically block the room until the issue is resolved.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 59,
+          "end": 122,
+          "text": "shall automatically block the room until the issue is resolved."
+        },
+        {
+          "tag": "Condition",
+          "text": "by staff",
+          "start": 38,
+          "end": 46
+        },
+        {
+          "tag": "Entity",
+          "start": 48,
+          "end": 58,
+          "text": "the system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 48,
+          "end": 58,
+          "text": "the system"
+        },
+        {
+          "tag": "System_response",
+          "start": 59,
+          "end": 122,
+          "text": "shall automatically block the room until the issue is resolved."
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "text": "The system shall display a fair-use policy and require explicit acceptance before the first booking.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "shall display a fair-use policy",
+          "start": 11,
+          "end": 42
+        },
+        {
+          "tag": "Action",
+          "text": "require explicit acceptance before the first booking",
+          "start": 47,
+          "end": 99
+        },
+        {
+          "tag": "Entity",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        },
+        {
+          "tag": "System_response",
+          "text": "shall display a fair-use policy",
+          "start": 11,
+          "end": 42
+        },
+        {
+          "tag": "System_response",
+          "text": "require explicit acceptance before the first booking",
+          "start": 47,
+          "end": 99
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "text": "If the student violates the fair-use policy (e.g., repeated no-shows), the system shall warn the student and escalate penalties on repeat.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 24,
+          "end": 43,
+          "text": "the fair-use policy"
+        },
+        {
+          "tag": "Action",
+          "text": "shall warn the student",
+          "start": 82,
+          "end": 104
+        },
+        {
+          "tag": "Action",
+          "text": "escalate penalties on repeat",
+          "start": 109,
+          "end": 137
+        },
+        {
+          "tag": "Condition",
+          "start": 0,
+          "end": 47,
+          "text": "If the student violates the fair-use policy (e."
+        },
+        {
+          "tag": "Condition",
+          "text": "If the student violates the fair-use policy (e.g",
+          "start": 0,
+          "end": 48
+        },
+        {
+          "tag": "Entity",
+          "start": 28,
+          "end": 43,
+          "text": "fair-use policy"
+        },
+        {
+          "tag": "Entity",
+          "start": 71,
+          "end": 81,
+          "text": "the system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 71,
+          "end": 81,
+          "text": "the system"
+        },
+        {
+          "tag": "System_response",
+          "text": "shall warn the student",
+          "start": 82,
+          "end": 104
+        },
+        {
+          "tag": "System_response",
+          "text": "escalate penalties on repeat",
+          "start": 109,
+          "end": 137
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "text": "The system shall provide administrative reports showing utilization rate per room and peak booking hours for the last 30 days.",
+      "spans": [
+        {
+          "tag": "Entity",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "text": "For any search query, the system shall return results within 2 seconds for 95% of requests under normal load.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 33,
+          "end": 109,
+          "text": "shall return results within 2 seconds for 95% of requests under normal load."
+        },
+        {
+          "tag": "Entity",
+          "start": 22,
+          "end": 32,
+          "text": "the system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 22,
+          "end": 32,
+          "text": "the system"
+        },
+        {
+          "tag": "System_response",
+          "start": 33,
+          "end": 109,
+          "text": "shall return results within 2 seconds for 95% of requests under normal load."
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "text": "If the notification service is unavailable, the system shall queue notifications and retry for up to 24 hours without losing booking data.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "shall queue notifications",
+          "start": 55,
+          "end": 80
+        },
+        {
+          "tag": "Action",
+          "text": "retry for up to 24 hours without losing booking data",
+          "start": 85,
+          "end": 137
+        },
+        {
+          "tag": "Condition",
+          "text": "If the notification service is unavailable",
+          "start": 0,
+          "end": 42
+        },
+        {
+          "tag": "Condition",
+          "start": 85,
+          "end": 109,
+          "text": "retry for up to 24 hours"
+        },
+        {
+          "tag": "Entity",
+          "start": 44,
+          "end": 54,
+          "text": "the system"
+        },
+        {
+          "tag": "Entity",
+          "text": "notifications",
+          "start": 67,
+          "end": 80
+        },
+        {
+          "tag": "Entity",
+          "text": "retry",
+          "start": 85,
+          "end": 90
+        },
+        {
+          "tag": "Main_actor",
+          "start": 44,
+          "end": 54,
+          "text": "the system"
+        },
+        {
+          "tag": "System_response",
+          "text": "shall queue notifications",
+          "start": 55,
+          "end": 80
+        },
+        {
+          "tag": "System_response",
+          "text": "retry for up to 24 hours without losing booking data",
+          "start": 85,
+          "end": 137
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "text": "The system shall support English and Italian UI languages, and the user shall be able to switch language in settings.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 89,
+          "end": 104,
+          "text": "switch language"
+        },
+        {
+          "tag": "Entity",
+          "start": 48,
+          "end": 57,
+          "text": "languages"
+        },
+        {
+          "tag": "Entity",
+          "start": 63,
+          "end": 71,
+          "text": "the user"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 63,
+          "end": 71,
+          "text": "the user"
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "text": "If two reservation requests for the same room and time slot arrive concurrently and the remaining seats are insufficient, the system shall allocate seats atomically so that capacity is never exceeded and the losing request receives a conflict error.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "shall allocate seats atomically so that capacity is never exceeded",
+          "start": 133,
+          "end": 199
+        },
+        {
+          "tag": "Action",
+          "text": "the losing request receives a conflict error",
+          "start": 204,
+          "end": 248
+        },
+        {
+          "tag": "Condition",
+          "text": "If two reservation requests for the same room",
+          "start": 0,
+          "end": 45
+        },
+        {
+          "tag": "Condition",
+          "text": "time slot arrive concurrently",
+          "start": 50,
+          "end": 79
+        },
+        {
+          "tag": "Condition",
+          "text": "the remaining seats are insufficient",
+          "start": 84,
+          "end": 120
+        },
+        {
+          "tag": "Entity",
+          "start": 122,
+          "end": 132,
+          "text": "the system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 122,
+          "end": 132,
+          "text": "the system"
+        },
+        {
+          "tag": "Purpose",
+          "text": "so that capacity is never exceeded",
+          "start": 165,
+          "end": 199
+        },
+        {
+          "tag": "Purpose",
+          "text": "the losing request receives a conflict error",
+          "start": 204,
+          "end": 248
+        },
+        {
+          "tag": "System_response",
+          "text": "shall allocate seats atomically so that capacity is never exceeded",
+          "start": 133,
+          "end": 199
+        },
+        {
+          "tag": "System_response",
+          "text": "the losing request receives a conflict error",
+          "start": 204,
+          "end": 248
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "text": "A student shall be able to create a recurring weekly seat reservation for the same room and time slot for up to 4 consecutive weeks, provided all occurrences satisfy booking limits and opening hours.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 27,
+          "end": 73,
+          "text": "create a recurring weekly seat reservation for"
+        },
+        {
+          "tag": "Condition",
+          "start": 133,
+          "end": 180,
+          "text": "provided all occurrences satisfy booking limits"
+        },
+        {
+          "tag": "Entity",
+          "start": 2,
+          "end": 9,
+          "text": "student"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 2,
+          "end": 9,
+          "text": "student"
+        },
+        {
+          "tag": "Precondition",
+          "start": 133,
+          "end": 180,
+          "text": "provided all occurrences satisfy booking limits"
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "text": "If a student checks in after the reservation start time, the system shall keep the original end time and shall not extend the reservation duration.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "shall keep the original end time",
+          "start": 68,
+          "end": 100
+        },
+        {
+          "tag": "Action",
+          "text": "shall not extend the reservation duration",
+          "start": 105,
+          "end": 146
+        },
+        {
+          "tag": "Condition",
+          "text": "If a student checks in after the reservation start time",
+          "start": 0,
+          "end": 55
+        },
+        {
+          "tag": "Entity",
+          "start": 57,
+          "end": 67,
+          "text": "the system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 57,
+          "end": 67,
+          "text": "the system"
+        },
+        {
+          "tag": "System_response",
+          "text": "shall keep the original end time",
+          "start": 68,
+          "end": 100
+        },
+        {
+          "tag": "System_response",
+          "text": "shall not extend the reservation duration",
+          "start": 105,
+          "end": 146
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "text": "The system shall display the building, floor, and a link to the room floor plan before a student confirms a booking.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "display the building",
+          "start": 17,
+          "end": 37
+        },
+        {
+          "tag": "Action",
+          "text": "floor",
+          "start": 39,
+          "end": 44
+        },
+        {
+          "tag": "Action",
+          "text": "a link",
+          "start": 50,
+          "end": 56
+        },
+        {
+          "tag": "Action",
+          "text": "a link to the room floor plan before a student confirms",
+          "start": 50,
+          "end": 105
+        },
+        {
+          "tag": "Condition",
+          "start": 17,
+          "end": 37,
+          "text": "display the building"
+        },
+        {
+          "tag": "Entity",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        },
+        {
+          "tag": "System_response",
+          "text": "display the building",
+          "start": 17,
+          "end": 37
+        },
+        {
+          "tag": "System_response",
+          "text": "floor",
+          "start": 39,
+          "end": 44
+        },
+        {
+          "tag": "System_response",
+          "text": "a link to the room floor plan before a student confirms",
+          "start": 50,
+          "end": 105
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "text": "Administrative staff shall be able to define a cleaning buffer time between bookings for each room (e.g., 10 minutes), and the system shall prevent bookings that violate the buffer.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 38,
+          "end": 67,
+          "text": "define a cleaning buffer time"
+        },
+        {
+          "tag": "Condition",
+          "start": 127,
+          "end": 180,
+          "text": "system shall prevent bookings that violate the buffer"
+        },
+        {
+          "tag": "Entity",
+          "start": 0,
+          "end": 20,
+          "text": "Administrative staff"
+        },
+        {
+          "tag": "Entity",
+          "start": 47,
+          "end": 67,
+          "text": "cleaning buffer time"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 20,
+          "text": "Administrative staff"
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "text": "When occupancy sensors are available for a room, the system shall automatically record check-in if occupancy is detected within the allowed check-in window.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 60,
+          "end": 120,
+          "text": "shall automatically record check-in if occupancy is detected"
+        },
+        {
+          "tag": "Action",
+          "start": 60,
+          "end": 156,
+          "text": "shall automatically record check-in if occupancy is detected within the allowed check-in window."
+        },
+        {
+          "tag": "Condition",
+          "start": 0,
+          "end": 47,
+          "text": "When occupancy sensors are available for a room"
+        },
+        {
+          "tag": "Condition",
+          "start": 96,
+          "end": 156,
+          "text": "if occupancy is detected within the allowed check-in window."
+        },
+        {
+          "tag": "Condition",
+          "start": 99,
+          "end": 155,
+          "text": "occupancy is detected within the allowed check-in window"
+        },
+        {
+          "tag": "Condition",
+          "start": 112,
+          "end": 155,
+          "text": "detected within the allowed check-in window"
+        },
+        {
+          "tag": "Entity",
+          "start": 49,
+          "end": 59,
+          "text": "the system"
+        },
+        {
+          "tag": "Entity",
+          "start": 80,
+          "end": 120,
+          "text": "record check-in if occupancy is detected"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 49,
+          "end": 59,
+          "text": "the system"
+        },
+        {
+          "tag": "Precondition",
+          "start": 0,
+          "end": 47,
+          "text": "When occupancy sensors are available for a room"
+        },
+        {
+          "tag": "Precondition",
+          "start": 99,
+          "end": 155,
+          "text": "occupancy is detected within the allowed check-in window"
+        },
+        {
+          "tag": "System_response",
+          "start": 60,
+          "end": 156,
+          "text": "shall automatically record check-in if occupancy is detected within the allowed check-in window."
+        },
+        {
+          "tag": "Trigger",
+          "start": 0,
+          "end": 47,
+          "text": "When occupancy sensors are available for a room"
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "text": "The system shall achieve at least 99.5% monthly uptime excluding scheduled maintenance windows announced in advance.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 11,
+          "end": 116,
+          "text": "shall achieve at least 99.5% monthly uptime excluding scheduled maintenance windows announced in advance."
+        },
+        {
+          "tag": "Condition",
+          "start": 25,
+          "end": 54,
+          "text": "at least 99.5% monthly uptime"
+        },
+        {
+          "tag": "Condition",
+          "start": 55,
+          "end": 115,
+          "text": "excluding scheduled maintenance windows announced in advance"
+        },
+        {
+          "tag": "Entity",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 10,
+          "text": "The system"
+        },
+        {
+          "tag": "System_response",
+          "start": 11,
+          "end": 116,
+          "text": "shall achieve at least 99.5% monthly uptime excluding scheduled maintenance windows announced in advance."
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "text": "All public API endpoints shall enforce rate limiting of 60 requests per minute per user; if the limit is exceeded, the system shall return an HTTP 429 error and a retry-after time.",
+      "spans": [
+        {
+          "tag": "Action",
+          "start": 25,
+          "end": 52,
+          "text": "shall enforce rate limiting"
+        },
+        {
+          "tag": "Action",
+          "text": "shall enforce rate limiting of 60 requests per minute per user",
+          "start": 25,
+          "end": 87
+        },
+        {
+          "tag": "Action",
+          "text": "if the limit is exceeded",
+          "start": 89,
+          "end": 113
+        },
+        {
+          "tag": "Action",
+          "text": "the system shall return an HTTP 429 error",
+          "start": 115,
+          "end": 156
+        },
+        {
+          "tag": "Action",
+          "text": "a retry-after time",
+          "start": 161,
+          "end": 179
+        },
+        {
+          "tag": "Condition",
+          "text": "60 requests per minute per user",
+          "start": 56,
+          "end": 87
+        },
+        {
+          "tag": "Condition",
+          "text": "if the",
+          "start": 89,
+          "end": 95
+        },
+        {
+          "tag": "Condition",
+          "text": "if the limit is exceeded",
+          "start": 89,
+          "end": 113
+        },
+        {
+          "tag": "Entity",
+          "start": 39,
+          "end": 52,
+          "text": "rate limiting"
+        },
+        {
+          "tag": "Entity",
+          "start": 115,
+          "end": 125,
+          "text": "the system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 115,
+          "end": 125,
+          "text": "the system"
+        },
+        {
+          "tag": "System_response",
+          "text": "shall enforce rate limiting of 60 requests per minute per user",
+          "start": 25,
+          "end": 87
+        },
+        {
+          "tag": "System_response",
+          "text": "if the limit is exceeded",
+          "start": 89,
+          "end": 113
+        },
+        {
+          "tag": "System_response",
+          "text": "the system shall return an HTTP 429 error",
+          "start": 115,
+          "end": 156
+        },
+        {
+          "tag": "System_response",
+          "text": "a retry-after time",
+          "start": 161,
+          "end": 179
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "text": "Unauthenticated users shall be able to view room availability and room features, but the system shall hide personal booking details and user identifiers.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "view room availability",
+          "start": 39,
+          "end": 61
+        },
+        {
+          "tag": "Action",
+          "text": "room features",
+          "start": 66,
+          "end": 79
+        },
+        {
+          "tag": "Condition",
+          "start": 96,
+          "end": 131,
+          "text": "shall hide personal booking details"
+        },
+        {
+          "tag": "Condition",
+          "start": 132,
+          "end": 152,
+          "text": "and user identifiers"
+        },
+        {
+          "tag": "Entity",
+          "start": 0,
+          "end": 20,
+          "text": "Unauthenticated user"
+        },
+        {
+          "tag": "Entity",
+          "text": "room availability",
+          "start": 44,
+          "end": 61
+        },
+        {
+          "tag": "Entity",
+          "text": "room features",
+          "start": 66,
+          "end": 79
+        },
+        {
+          "tag": "Main_actor",
+          "start": 0,
+          "end": 20,
+          "text": "Unauthenticated user"
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "text": "Staff actions that change system state (e.g., creating rooms, blocking rooms, marking issues critical) shall require role-based access control and shall be recorded in an immutable audit log.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "shall require role-based access control",
+          "start": 103,
+          "end": 142
+        },
+        {
+          "tag": "Action",
+          "text": "shall be recorded in an immutable audit log",
+          "start": 147,
+          "end": 190
+        },
+        {
+          "tag": "Entity",
+          "start": 26,
+          "end": 32,
+          "text": "system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 26,
+          "end": 32,
+          "text": "system"
+        },
+        {
+          "tag": "System_response",
+          "text": "shall require role-based access control",
+          "start": 103,
+          "end": 142
+        },
+        {
+          "tag": "System_response",
+          "text": "shall be recorded in an immutable audit log",
+          "start": 147,
+          "end": 190
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "text": "If a student reports that a booked room is occupied by others at the start time, the system shall create a priority ticket for staff and offer alternative rooms of similar capacity when available.",
+      "spans": [
+        {
+          "tag": "Action",
+          "text": "create a priority ticket for staff",
+          "start": 98,
+          "end": 132
+        },
+        {
+          "tag": "Action",
+          "text": "offer alternative rooms of similar capacity when available",
+          "start": 137,
+          "end": 195
+        },
+        {
+          "tag": "Condition",
+          "text": "by others at the start time",
+          "start": 52,
+          "end": 79
+        },
+        {
+          "tag": "Condition",
+          "start": 5,
+          "end": 79,
+          "text": "student reports that a booked room is occupied by others at the start time"
+        },
+        {
+          "tag": "Entity",
+          "start": 81,
+          "end": 91,
+          "text": "the system"
+        },
+        {
+          "tag": "Main_actor",
+          "start": 81,
+          "end": 91,
+          "text": "the system"
+        },
+        {
+          "tag": "Precondition",
+          "start": 5,
+          "end": 79,
+          "text": "student reports that a booked room is occupied by others at the start time"
+        },
+        {
+          "tag": "System_response",
+          "text": "create a priority ticket for staff",
+          "start": 98,
+          "end": 132
+        },
+        {
+          "tag": "System_response",
+          "text": "offer alternative rooms of similar capacity when available",
+          "start": 137,
+          "end": 195
+        }
+      ]
+    }
+  ]
+}

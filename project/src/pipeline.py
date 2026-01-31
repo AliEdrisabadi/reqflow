@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence
 
@@ -11,6 +12,7 @@ from .common import (
     align_offsets,
     dedupe_spans,
     enforce_consistency,
+    postprocess_spans,
     fill_template,
     load_prompt,
     normalize_tag,
@@ -87,17 +89,26 @@ def run_pipeline(
 
         segments = [full_text]
         if use_segmenter:
-            try:
-                seg_obj = _call_agent(p_segment, full_text, model=model)
-                segs = seg_obj.get("segments")
-                if isinstance(segs, list):
-                    segs2 = [s for s in segs if isinstance(s, str) and s.strip()]
-                    # keep only exact-substring segments
-                    segs2 = [s for s in segs2 if (s in full_text) or (s.lower() in full_text.lower())]
-                    if 1 <= len(segs2) <= 6:
-                        segments = segs2
-            except Exception:
-                segments = [full_text]
+            # Heuristic: most dataset items are single-sentence and short.
+            # Segmenter can inadvertently break comma-separated criteria (hurting span boundaries).
+            # So we only segment if there are 2+ sentence-like units.
+            sentence_like = len([s for s in re.split(r"[.!?]", full_text) if s.strip()])
+            if sentence_like > 1:
+                try:
+                    seg_obj = _call_agent(p_segment, full_text, model=model)
+                    segs = seg_obj.get("segments")
+                    if isinstance(segs, list):
+                        segs2 = [s for s in segs if isinstance(s, str) and s.strip()]
+                        # keep only exact-substring segments
+                        segs2 = [s for s in segs2 if (s in full_text) or (s.lower() in full_text.lower())]
+                        if 1 <= len(segs2) <= 6:
+                            segments = segs2
+                except Exception:
+                    segments = [full_text]
+
+        # Ensure segments are unique and preserve original order
+        seg_seen = set()
+        segments = [s for s in segments if not (s in seg_seen or seg_seen.add(s))]
 
         all_spans: List[Dict[str, Any]] = []
 
@@ -147,6 +158,7 @@ def run_pipeline(
                     spans_norm.append({"tag": tag, "text": txt.strip()})
 
         spans_norm = enforce_consistency(dedupe_spans(spans_norm))
+        spans_norm = postprocess_spans(full_text, spans_norm)
 
         if with_offsets:
             spans_vis = align_offsets(full_text, spans_norm)

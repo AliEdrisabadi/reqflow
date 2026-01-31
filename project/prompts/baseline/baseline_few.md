@@ -40,7 +40,11 @@ Return ONLY valid JSON (no markdown, no explanations) with this exact shape:
 ## Hard constraints
 - Each "text" MUST be an exact substring of the input (copy-paste).
 - Do NOT paraphrase, normalize, or add words not present.
-- Use the minimum span that uniquely identifies the item (avoid large spans).
+- Output spans in the same order they appear in the input.
+- Prefer spans that match clause/list boundaries used in annotation:
+  - If a leading clause starts with When/If/Upon/After/Before/Once/While and is immediately followed by a comma in the input, INCLUDE the comma.
+  - For criteria lists (e.g., "... seats by campus, date, and time range"), include the full comma-separated list as ONE span (not only "by campus").
+- Keep spans concise, but do NOT truncate right before punctuation that belongs to the span.
 - Deduplicate exact duplicates (same tag + same text).
 - If an abstraction is not explicitly present, omit it (do NOT hallucinate).
 
@@ -55,8 +59,8 @@ Input:
 "When a student submits a request, the system shall notify the administrator by email."
 Output:
 {"spans":[
-  {"tag":"Condition","text":"When a student submits a request"},
-  {"tag":"Trigger","text":"When a student submits a request"},
+  {"tag":"Condition","text":"When a student submits a request,"},
+  {"tag":"Trigger","text":"When a student submits a request,"},
   {"tag":"Entity","text":"a student"},
   {"tag":"Main_actor","text":"a student"},
   {"tag":"Entity","text":"the system"},

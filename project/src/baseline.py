@@ -12,6 +12,7 @@ from .common import (
     align_offsets,
     dedupe_spans,
     enforce_consistency,
+    postprocess_spans,
     fill_template,
     load_prompt,
     normalize_tag,
@@ -67,7 +68,10 @@ def run_baseline(
                 if tag and isinstance(seg, str) and seg.strip():
                     spans.append({"tag": tag, "text": seg.strip()})
 
+        # 1) normalize + subset consistency
         spans = enforce_consistency(dedupe_spans(spans))
+        # 2) text-bound repair (punctuation/list boundaries) + per-tag caps
+        spans = postprocess_spans(text, spans)
 
         if with_offsets:
             spans_vis = align_offsets(text, spans)
